@@ -1,0 +1,6 @@
+obj/
+AutomationSpy - Backup*.csproj
+*.csproj.user
+.vs/
+bin/
+/*.txt
