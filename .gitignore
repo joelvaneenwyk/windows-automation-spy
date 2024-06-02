@@ -4,3 +4,4 @@ AutomationSpy - Backup*.csproj
 .vs/
 bin/
 /*.txt
+*.csproj.DotSettings
