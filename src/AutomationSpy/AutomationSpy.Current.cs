@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Windows;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 using Interop.UIAutomationClient;
-using System.Collections.Generic;
 
 namespace dDeltaSolutions.Spy
 {

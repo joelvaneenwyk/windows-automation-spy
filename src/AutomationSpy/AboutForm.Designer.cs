@@ -1,4 +1,7 @@
-﻿namespace dDeltaSolutions.Spy
+﻿using System.ComponentModel;
+using System.Windows.Forms;
+
+namespace dDeltaSolutions.Spy
 {
     partial class AboutForm
     {

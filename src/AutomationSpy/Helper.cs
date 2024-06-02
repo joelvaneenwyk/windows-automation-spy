@@ -1,11 +1,13 @@
 using System;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Windows;
 using Interop.UIAutomationClient;
+using Point = System.Drawing.Point;
 
 namespace dDeltaSolutions.Spy
 {

@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Windows;
-using System.Windows.Forms;
-using System.Linq;
-using System.Drawing.Drawing2D;
-using System.Threading;
 using System.Drawing;
-using System.Globalization;
-using System.Text;
+using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using Interop.UIAutomationClient;
+using Clipboard = System.Windows.Clipboard;
+using Timer = System.Windows.Forms.Timer;
 
 namespace dDeltaSolutions.Spy
 {

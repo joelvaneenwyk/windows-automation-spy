@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows;
-using Interop.UIAutomationClient;
 using System.Windows.Threading;
+using Interop.UIAutomationClient;
 
 namespace dDeltaSolutions.Spy
 {

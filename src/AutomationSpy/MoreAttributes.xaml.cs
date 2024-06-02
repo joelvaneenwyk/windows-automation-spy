@@ -1,8 +1,7 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
+using System.Drawing;
 using System.Windows;
 using Interop.UIAutomationClient;
-using System.Drawing;
-using System.Collections.ObjectModel;
 
 namespace dDeltaSolutions.Spy
 {

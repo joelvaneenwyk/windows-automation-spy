@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows;
 using System.Diagnostics;
 using Interop.UIAutomationClient;
 

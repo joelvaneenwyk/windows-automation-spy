@@ -1,26 +1,31 @@
-﻿using AutomationSpy;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing.Drawing2D;
+using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Xml;
 using Interop.UIAutomationClient;
+using Clipboard = System.Windows.Forms.Clipboard;
+using Image = System.Windows.Controls.Image;
+using IWin32Window = System.Windows.Forms.IWin32Window;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using MessageBox = System.Windows.MessageBox;
+using Point = System.Drawing.Point;
+using SaveFileDialog = Microsoft.Win32.SaveFileDialog;
+using Size = System.Drawing.Size;
+using Timer = System.Windows.Forms.Timer;
 
 namespace dDeltaSolutions.Spy
 {

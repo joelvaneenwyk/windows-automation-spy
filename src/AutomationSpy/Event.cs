@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using AutomationSpy;
-using System.Diagnostics;
-using System.Xml;
-using System.Threading;
-using System.Threading.Tasks;
 using Interop.UIAutomationClient;
 
 namespace dDeltaSolutions.Spy
