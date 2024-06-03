@@ -7,29 +7,29 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Interop.UIAutomationClient;
+using JetBrains.Annotations;
 
 namespace dDeltaSolutions.Spy
 {
+    [PublicAPI]
     public class Event
     {
-        private int eventId;
-        private string eventIdString = "";
-        private IUIAutomationElement element = null;
-        private string tooltip = null;
+        private IUIAutomationElement element;
+        private string tooltip;
         private string details = "";
 		private string elementString = "";
 
         public Event(int eventId, IUIAutomationElement element)
         {
-            this.eventId = eventId;
+            this.EventId = eventId;
             this.element = element;
             
             try
             {
-            	eventIdString = GetEventName(eventId); //ProgrammaticName;
+            	EventIdString = GetEventName(eventId); //ProgrammaticName;
             }
             catch { }
-            tooltip = eventIdString;
+            tooltip = EventIdString;
 			
 			try
 			{
@@ -41,7 +41,7 @@ namespace dDeltaSolutions.Spy
 		public Event(string eventIdString, IUIAutomationElement element)
 		{
 			this.element = element;
-			this.eventIdString = eventIdString;
+			this.EventIdString = eventIdString;
 			tooltip = eventIdString;
 			
 			try
@@ -57,119 +57,126 @@ namespace dDeltaSolutions.Spy
             {
                 return "UIA_ToolTipOpenedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_ToolTipClosedEventId)
+
+            if (eventId == UIA_EventIds.UIA_ToolTipClosedEventId)
             {
                 return "UIA_ToolTipClosedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_StructureChangedEventId)
+
+            if (eventId == UIA_EventIds.UIA_StructureChangedEventId)
             {
                 return "UIA_StructureChangedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_MenuOpenedEventId)
+
+            if (eventId == UIA_EventIds.UIA_MenuOpenedEventId)
             {
                 return "UIA_MenuOpenedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_AutomationPropertyChangedEventId)
+
+            if (eventId == UIA_EventIds.UIA_AutomationPropertyChangedEventId)
             {
                 return "UIA_AutomationPropertyChangedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_AutomationFocusChangedEventId)
+
+            if (eventId == UIA_EventIds.UIA_AutomationFocusChangedEventId)
             {
                 return "UIA_AutomationFocusChangedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_AsyncContentLoadedEventId)
+
+            if (eventId == UIA_EventIds.UIA_AsyncContentLoadedEventId)
             {
                 return "UIA_AsyncContentLoadedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_MenuClosedEventId)
+
+            if (eventId == UIA_EventIds.UIA_MenuClosedEventId)
             {
                 return "UIA_MenuClosedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_LayoutInvalidatedEventId)
+
+            if (eventId == UIA_EventIds.UIA_LayoutInvalidatedEventId)
             {
                 return "UIA_LayoutInvalidatedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Invoke_InvokedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Invoke_InvokedEventId)
             {
                 return "UIA_Invoke_InvokedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId)
+
+            if (eventId == UIA_EventIds.UIA_SelectionItem_ElementAddedToSelectionEventId)
             {
                 return "UIA_SelectionItem_ElementAddedToSelectionEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId)
+
+            if (eventId == UIA_EventIds.UIA_SelectionItem_ElementRemovedFromSelectionEventId)
             {
                 return "UIA_SelectionItem_ElementRemovedFromSelectionEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId)
+
+            if (eventId == UIA_EventIds.UIA_SelectionItem_ElementSelectedEventId)
             {
                 return "UIA_SelectionItem_ElementSelectedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Selection_InvalidatedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Selection_InvalidatedEventId)
             {
                 return "UIA_Selection_InvalidatedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Text_TextSelectionChangedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Text_TextSelectionChangedEventId)
             {
                 return "UIA_Text_TextSelectionChangedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Text_TextChangedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Text_TextChangedEventId)
             {
                 return "UIA_Text_TextChangedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Window_WindowOpenedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Window_WindowOpenedEventId)
             {
                 return "UIA_Window_WindowOpenedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_Window_WindowClosedEventId)
+
+            if (eventId == UIA_EventIds.UIA_Window_WindowClosedEventId)
             {
                 return "UIA_Window_WindowClosedEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_MenuModeStartEventId)
+
+            if (eventId == UIA_EventIds.UIA_MenuModeStartEventId)
             {
                 return "UIA_MenuModeStartEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_MenuModeEndEventId)
+
+            if (eventId == UIA_EventIds.UIA_MenuModeEndEventId)
             {
                 return "UIA_MenuModeEndEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_InputReachedTargetEventId)
+
+            if (eventId == UIA_EventIds.UIA_InputReachedTargetEventId)
             {
                 return "UIA_InputReachedTargetEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_InputReachedOtherElementEventId)
+
+            if (eventId == UIA_EventIds.UIA_InputReachedOtherElementEventId)
             {
                 return "UIA_InputReachedOtherElementEvent";
             }
-            else if (eventId == UIA_EventIds.UIA_InputDiscardedEventId)
-            {
-                return "UIA_InputDiscardedEvent";
-            }
-            return eventId.ToString();
 
+            return eventId == UIA_EventIds.UIA_InputDiscardedEventId 
+                ? "UIA_InputDiscardedEvent" 
+                : eventId.ToString();
         }
 
-        public int EventId
-        {
-            get
-            {
-                return this.eventId;
-            }
-        }
+        public int EventId { get; }
 
-        public string EventIdString
-        {
-            get
-            {
-                return eventIdString;
-            }
-        }
+        public string EventIdString { get; } = "";
 
         public IUIAutomationElement Element
         {
             get
             {
-                return this.element;
+                return element;
             }
         }
 
@@ -177,7 +184,7 @@ namespace dDeltaSolutions.Spy
         {
             get
             {
-                return this.elementString;
+                return elementString;
             }
         }
 
@@ -251,8 +258,8 @@ namespace dDeltaSolutions.Spy
             return name;
         }
 		
-		private static System.Collections.Concurrent.ConcurrentDictionary<int, string> cacheTypeNames = 
-			new System.Collections.Concurrent.ConcurrentDictionary<int, string>();
+		private static ConcurrentDictionary<int, string> cacheTypeNames = 
+			new ConcurrentDictionary<int, string>();
 		
 		private static string GetFirstText(IUIAutomationElement el)
 		{
@@ -319,7 +326,7 @@ namespace dDeltaSolutions.Spy
             TreeViewItem selectedItem = tvElements.SelectedItem as TreeViewItem;
             TreeNode node = null;
 
-            if (this.eventsPropButton.IsEnabled == true)
+            if (eventsPropButton.IsEnabled)
             {
                 if (selectedItem == null)
                 {
@@ -368,32 +375,32 @@ namespace dDeltaSolutions.Spy
                 return;
             }
 
-            this.eventsListView.ItemsSource = eventsCollection;
+            eventsListView.ItemsSource = eventsCollection;
 
             // install watchers
-            TabItem selectedTab = this.tabCtrl.SelectedItem as TabItem;
+            TabItem selectedTab = tabCtrl.SelectedItem as TabItem;
             if (selectedTab == null)
             {
                 return;
             }
 
-			if (selectedTab != this.tabEvents && this.eventsPropButton.IsEnabled == true)
+			if (selectedTab != tabEvents && eventsPropButton.IsEnabled)
             {
-                this.tabCtrl.SelectedItem = tabEvents;
+                tabCtrl.SelectedItem = tabEvents;
             }
 
-            this.eventsPropButton.IsEnabled = !this.eventsPropButton.IsEnabled;
-			menuEventsSettings.IsEnabled = this.eventsPropButton.IsEnabled;
+            eventsPropButton.IsEnabled = !eventsPropButton.IsEnabled;
+			menuEventsSettings.IsEnabled = eventsPropButton.IsEnabled;
 
             if (selectButton.IsChecked == true)
             {
                 selectButton.IsChecked = false;
                 OnSelectElement(selectButton, null);
             }
-            this.selectButton.IsEnabled = this.eventsPropButton.IsEnabled;
-			this.menuItemPick.IsEnabled = this.eventsPropButton.IsEnabled;
+            selectButton.IsEnabled = eventsPropButton.IsEnabled;
+			menuItemPick.IsEnabled = eventsPropButton.IsEnabled;
 			
-			if (menuItemTrack.IsChecked == true)
+			if (menuItemTrack.IsChecked)
 			{
 				menuItemTrack.IsChecked = false;
 				if (timerTrack != null)
@@ -401,9 +408,9 @@ namespace dDeltaSolutions.Spy
 					timerTrack.Stop();
 				}
 			}
-			this.menuItemTrack.IsEnabled = this.eventsPropButton.IsEnabled;
+			menuItemTrack.IsEnabled = eventsPropButton.IsEnabled;
 
-            StackPanel panel = this.eventsButton.Content as StackPanel;
+            StackPanel panel = eventsButton.Content as StackPanel;
             Image img = null;
 
             if ((panel != null) && (panel.Children.Count > 0))
@@ -411,13 +418,13 @@ namespace dDeltaSolutions.Spy
                 img = panel.Children[0] as Image;
             }
 
-            if (this.eventsPropButton.IsEnabled == false)
+            if (eventsPropButton.IsEnabled == false)
             {
                 // Capturing
                 //Task.Run(() => InstallListener(node.Element));
 				InstallListener(node.Element);
 
-                this.eventsButton.ToolTip = "Stop capturing UI Automation events";
+                eventsButton.ToolTip = "Stop capturing UI Automation events";
 				eventsMenu.Header = "Stop Capturing Events";
 				menuStartCapturing.Header = "Stop Capturing Events";
 				menuStartCapturing.ToolTip = "Stop capturing UI Automation events for the selected element";
@@ -434,7 +441,7 @@ namespace dDeltaSolutions.Spy
                 // Not capturing
                 Task.Run(() => UninstallListener());
 
-                this.eventsButton.ToolTip = "Start capturing UI Automation events for the selected element";
+                eventsButton.ToolTip = "Start capturing UI Automation events for the selected element";
 				eventsMenu.Header = "Start Capturing Events";
 				menuStartCapturing.Header = "Start Capturing Events";
 				menuStartCapturing.ToolTip = "Start capturing UI Automation events for the selected element";
@@ -450,7 +457,7 @@ namespace dDeltaSolutions.Spy
         
         internal class UIA_AutomationEventHandler: IUIAutomationEventHandler
         {
-            private MainWindow mainWindow = null;
+            private MainWindow mainWindow;
             
             public UIA_AutomationEventHandler(MainWindow mainWindow)
             {
@@ -461,7 +468,7 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    if (sender != null && sender.CurrentProcessId == MainWindow.crtProcessId)
+                    if (sender != null && sender.CurrentProcessId == crtProcessId)
                     {
                         return;
                     }
@@ -469,17 +476,17 @@ namespace dDeltaSolutions.Spy
                 catch {}
                 
                 Event ev = new Event(eventId, sender);
-                mainWindow.Dispatcher.Invoke(new Action(() =>
-                    {
-                        mainWindow.eventsCollection.Add(ev);
-						mainWindow.eventsListView.ScrollIntoView(ev);
-                    }));
+                mainWindow.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.eventsCollection.Add(ev);
+                    mainWindow.eventsListView.ScrollIntoView(ev);
+                });
             }
         }
         
         internal class UIA_AutomationFocusChangedEventHandler: IUIAutomationFocusChangedEventHandler
         {
-            private MainWindow mainWindow = null;
+            private MainWindow mainWindow;
             
             public UIA_AutomationFocusChangedEventHandler(MainWindow mainWindow)
             {
@@ -490,7 +497,7 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    if (sender != null && sender.CurrentProcessId == MainWindow.crtProcessId)
+                    if (sender != null && sender.CurrentProcessId == crtProcessId)
                     {
                         return;
                     }
@@ -498,17 +505,17 @@ namespace dDeltaSolutions.Spy
                 catch {}
                 
                 Event ev = new Event(UIA_EventIds.UIA_AutomationFocusChangedEventId, sender);
-                mainWindow.Dispatcher.Invoke(new Action(() =>
-                    {
-                        mainWindow.eventsCollection.Add(ev);
-						mainWindow.eventsListView.ScrollIntoView(ev);
-                    }));
+                mainWindow.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.eventsCollection.Add(ev);
+                    mainWindow.eventsListView.ScrollIntoView(ev);
+                });
             }
         }
         
         internal class UIA_AutomationStructureChangedEventHandler: IUIAutomationStructureChangedEventHandler
         {
-            private MainWindow mainWindow = null;
+            private MainWindow mainWindow;
             
             public UIA_AutomationStructureChangedEventHandler(MainWindow mainWindow)
             {
@@ -519,28 +526,30 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    if (sender != null && sender.CurrentProcessId == MainWindow.crtProcessId)
+                    if (sender != null && sender.CurrentProcessId == crtProcessId)
                     {
                         return;
                     }
                 }
                 catch {}
                 
-                Event ev = new Event(UIA_EventIds.UIA_StructureChangedEventId, sender);
-                ev.Details = "StructureChangeType: " + changeType.ToString() + ", RuntimeId: [" +
-                    GetStringFromArray(runtimeId) + "]";
+                Event ev = new Event(UIA_EventIds.UIA_StructureChangedEventId, sender)
+                {
+                    Details = "StructureChangeType: " + changeType + ", RuntimeId: [" +
+                              GetStringFromArray(runtimeId) + "]"
+                };
 
-                mainWindow.Dispatcher.Invoke(new Action(() =>
-                    {
-                        mainWindow.eventsCollection.Add(ev);
-                        mainWindow.eventsListView.ScrollIntoView(ev);
-                    }));
+                mainWindow.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.eventsCollection.Add(ev);
+                    mainWindow.eventsListView.ScrollIntoView(ev);
+                });
             }
         }
         
         internal class UIA_AutomationPropertyChangedEventHandler: IUIAutomationPropertyChangedEventHandler
         {
-            private MainWindow mainWindow = null;
+            private MainWindow mainWindow;
             
             public UIA_AutomationPropertyChangedEventHandler(MainWindow mainWindow)
             {
@@ -551,7 +560,7 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    if (sender != null && sender.CurrentProcessId == MainWindow.crtProcessId)
+                    if (sender != null && sender.CurrentProcessId == crtProcessId)
                     {
                         return;
                     }
@@ -584,7 +593,7 @@ namespace dDeltaSolutions.Spy
                         double[] doubleArr = (double[])newValue;
                         if (doubleArr.Length == 4)
                         {
-                            newValueStr = "{Left: " + doubleArr[0].ToString() + ", Top: " + doubleArr[1] +
+                            newValueStr = "{Left: " + doubleArr[0] + ", Top: " + doubleArr[1] +
                                 ", Width: " + doubleArr[2] + ", Height: " + doubleArr[3] + "}";
                         }
                     }
@@ -684,7 +693,7 @@ namespace dDeltaSolutions.Spy
 							}
 							else
 							{
-								newValueStr = "\"" + newValue.ToString() + "\"";
+								newValueStr = "\"" + newValue + "\"";
 							}
                         }
                         /*else if (type == typeof(double))
@@ -704,34 +713,34 @@ namespace dDeltaSolutions.Spy
                 
                 ev.Details = "Property: " + propertyName + ", New Value: " + newValueStr;
 
-                mainWindow.Dispatcher.Invoke(new Action(() =>
-                    {
-                        mainWindow.eventsCollection.Add(ev);
-                        mainWindow.eventsListView.ScrollIntoView(ev);
-                    }));
+                mainWindow.Dispatcher.Invoke(() =>
+                {
+                    mainWindow.eventsCollection.Add(ev);
+                    mainWindow.eventsListView.ScrollIntoView(ev);
+                });
             }
         }
 
-        private UIA_AutomationEventHandler UIAeventHandler = null;
-        private UIA_AutomationFocusChangedEventHandler UIAFocusChangedEventHandler = null;
-        private UIA_AutomationPropertyChangedEventHandler UIAPropChangedEventHandler = null;
-        private UIA_AutomationStructureChangedEventHandler UIAStructureChangedEventHandler = null;
-        private bool listenerInstalled = false;
+        private UIA_AutomationEventHandler UIAeventHandler;
+        private UIA_AutomationFocusChangedEventHandler UIAFocusChangedEventHandler;
+        private UIA_AutomationPropertyChangedEventHandler UIAPropChangedEventHandler;
+        private UIA_AutomationStructureChangedEventHandler UIAStructureChangedEventHandler;
+        private bool listenerInstalled;
 
         private void InstallListener(IUIAutomationElement element)
         {
 			crtProcessId = Process.GetCurrentProcess().Id;
 
-            if ((hasInvokedEvent == true) || (hasMenuOpenedEvent == true) ||
-                (hasMenuClosedEvent == true) || (hasElementAddedToSelectionEvent == true) ||
-                (hasElementRemovedFromSelectionEvent == true) || (hasElementSelectedEvent == true) ||
-                (hasInvalidatedEvent == true) || (hasLayoutInvalidatedEvent == true) ||
-                (hasTextChangedEvent == true) || (hasTextSelectionChangedEvent == true) ||
-                (hasToolTipClosedEvent == true) || (hasToolTipOpenedEvent == true) ||
-                (hasWindowOpenedEvent == true) || (hasAsyncContentLoadedEvent == true) || 
-                (hasWindowClosedEvent == true) || (hasInputReachedTargetEvent == true) ||
-                (hasInputReachedOtherElementEvent == true) || (hasInputDiscardedEvent == true) ||
-                (hasMenuModeStartEvent == true) || (hasMenuModeEndEvent == true))
+            if (hasInvokedEvent || hasMenuOpenedEvent ||
+                hasMenuClosedEvent || hasElementAddedToSelectionEvent ||
+                hasElementRemovedFromSelectionEvent || hasElementSelectedEvent ||
+                hasInvalidatedEvent || hasLayoutInvalidatedEvent ||
+                hasTextChangedEvent || hasTextSelectionChangedEvent ||
+                hasToolTipClosedEvent || hasToolTipOpenedEvent ||
+                hasWindowOpenedEvent || hasAsyncContentLoadedEvent || 
+                hasWindowClosedEvent || hasInputReachedTargetEvent ||
+                hasInputReachedOtherElementEvent || hasInputDiscardedEvent ||
+                hasMenuModeStartEvent || hasMenuModeEndEvent)
             {
                 UIAeventHandler = new UIA_AutomationEventHandler(this);
             }
@@ -1032,10 +1041,9 @@ namespace dDeltaSolutions.Spy
             	uiAutomation.RemoveAllEventHandlers();
             }
             catch { }
-            return;
         }
         
-		public static int crtProcessId = 0;
+		public static int crtProcessId;
 
         private static string GetStringFromArray(Array array)
         {
@@ -1067,7 +1075,7 @@ namespace dDeltaSolutions.Spy
 	
 	public class UIAutomationTextEditTextChangedEventHandler: IUIAutomationTextEditTextChangedEventHandler
 	{
-		private MainWindow mainWindow = null;
+		private MainWindow mainWindow;
 		public UIAutomationTextEditTextChangedEventHandler(MainWindow mainWindow)
 		{
 			this.mainWindow = mainWindow;
@@ -1087,18 +1095,18 @@ namespace dDeltaSolutions.Spy
 			}
 			ev.Details = "TextEditChangeType: " + TextEditChangeType + ", eventStrings: [" + eventStringsConcat + "]";
 		
-			mainWindow.Dispatcher.Invoke(new Action(() =>
-			{
-				//MessageBox.Show("HandleTextEditTextChangedEvent");
-				mainWindow.eventsCollection.Add(ev);
-				mainWindow.eventsListView.ScrollIntoView(ev);
-			}));
+			mainWindow.Dispatcher.Invoke(() =>
+            {
+                //MessageBox.Show("HandleTextEditTextChangedEvent");
+                mainWindow.eventsCollection.Add(ev);
+                mainWindow.eventsListView.ScrollIntoView(ev);
+            });
 		}
 	}
 	
 	public class UIAutomationChangesEventHandler: IUIAutomationChangesEventHandler
 	{
-		private MainWindow mainWindow = null;
+		private MainWindow mainWindow;
 		public UIAutomationChangesEventHandler(MainWindow mainWindow)
 		{
 			this.mainWindow = mainWindow;
@@ -1106,21 +1114,23 @@ namespace dDeltaSolutions.Spy
 	
 		public void HandleChangesEvent(IUIAutomationElement sender, ref UiaChangeInfo uiaChanges, int changesCount)
 		{
-			Event ev = new Event("ChangesEvent", sender);
-			ev.Details = "UiaChangeInfo.uiaId: " + uiaChanges.uiaId + ", UiaChangeInfo.payload: " + uiaChanges.payload +
-				", UiaChangeInfo.extraInfo: " + uiaChanges.extraInfo + ", changesCount: " + changesCount;
-			
-			mainWindow.Dispatcher.Invoke(new Action(() =>
-			{
-				mainWindow.eventsCollection.Add(ev);
-				mainWindow.eventsListView.ScrollIntoView(ev);
-			}));
+			Event ev = new Event("ChangesEvent", sender)
+            {
+                Details = "UiaChangeInfo.uiaId: " + uiaChanges.uiaId + ", UiaChangeInfo.payload: " + uiaChanges.payload +
+                          ", UiaChangeInfo.extraInfo: " + uiaChanges.extraInfo + ", changesCount: " + changesCount
+            };
+
+            mainWindow.Dispatcher.Invoke(() =>
+            {
+                mainWindow.eventsCollection.Add(ev);
+                mainWindow.eventsListView.ScrollIntoView(ev);
+            });
 		}
 	}
 	
 	public class UIAutomationNotificationEventHandler: IUIAutomationNotificationEventHandler
 	{
-		private MainWindow mainWindow = null;
+		private MainWindow mainWindow;
 		public UIAutomationNotificationEventHandler(MainWindow mainWindow)
 		{
 			this.mainWindow = mainWindow;
@@ -1129,21 +1139,23 @@ namespace dDeltaSolutions.Spy
 		public void HandleNotificationEvent(IUIAutomationElement sender, NotificationKind NotificationKind, 
 			NotificationProcessing NotificationProcessing, string displayString, string activityId)
 		{
-			Event ev = new Event("NotificationEvent", sender);
-			ev.Details = "NotificationKind: " + NotificationKind + ", NotificationProcessing: " + NotificationProcessing +
-				", displayString: \"" + displayString + "\", activityId: \"" + activityId + "\"";
-		
-			mainWindow.Dispatcher.Invoke(new Action(() =>
-			{
-				mainWindow.eventsCollection.Add(ev);
-				mainWindow.eventsListView.ScrollIntoView(ev);
-			}));
+			Event ev = new Event("NotificationEvent", sender)
+            {
+                Details = "NotificationKind: " + NotificationKind + ", NotificationProcessing: " + NotificationProcessing +
+                          ", displayString: \"" + displayString + "\", activityId: \"" + activityId + "\""
+            };
+
+            mainWindow.Dispatcher.Invoke(() =>
+            {
+                mainWindow.eventsCollection.Add(ev);
+                mainWindow.eventsListView.ScrollIntoView(ev);
+            });
 		}
 	}
 	
 	public class UIAutomationActiveTextPositionChangedEventHandler: IUIAutomationActiveTextPositionChangedEventHandler
 	{
-		private MainWindow mainWindow = null;
+		private MainWindow mainWindow;
 		public UIAutomationActiveTextPositionChangedEventHandler(MainWindow mainWindow)
 		{
 			this.mainWindow = mainWindow;
@@ -1153,11 +1165,11 @@ namespace dDeltaSolutions.Spy
 		{
 			Event ev = new Event("ActiveTextPositionChangedEvent", sender);
 			
-			mainWindow.Dispatcher.Invoke(new Action(() =>
-			{
-				mainWindow.eventsCollection.Add(ev);
-				mainWindow.eventsListView.ScrollIntoView(ev);
-			}));
+			mainWindow.Dispatcher.Invoke(() =>
+            {
+                mainWindow.eventsCollection.Add(ev);
+                mainWindow.eventsListView.ScrollIntoView(ev);
+            });
 		}
 	}
 }

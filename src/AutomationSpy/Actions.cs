@@ -1,4 +1,3 @@
-
 using System.Windows;
 using System.Windows.Controls;
 
@@ -8,10 +7,10 @@ namespace dDeltaSolutions.Spy
     {
 		private void OnActions(object sender, RoutedEventArgs e)
 		{
-			TreeViewItem treeviewItem = this.tvElements.SelectedItem as TreeViewItem;
+			TreeViewItem treeviewItem = tvElements.SelectedItem as TreeViewItem;
             if (treeviewItem == null)
             {
-				System.Windows.MessageBox.Show("Select an element in the tree");
+				MessageBox.Show("Select an element in the tree");
                 return;
             }
 			
@@ -23,34 +22,36 @@ namespace dDeltaSolutions.Spy
 			
 			if (node.IsAlive == false)
 			{
-				System.Windows.MessageBox.Show("The selected element is not available anymore");
+				MessageBox.Show("The selected element is not available anymore");
 				return;
 			}
 			
 			bool timerStopped = false;
-			if (timer != null && timer.Enabled == true)
+			if (timer != null && timer.Enabled)
             {
                 timer.Enabled = false;
 				timerStopped = true;
             }
 			
 			bool timerTrackStopped = false;
-			if (timerTrack != null && timerTrack.Enabled == true)
+			if (timerTrack != null && timerTrack.Enabled)
             {
                 timerTrack.Enabled = false;
 				timerTrackStopped = true;
             }
 			
-			WindowActions wndActions = new WindowActions(node);
-            wndActions.Owner = this;
-			wndActions.ShowDialog();
+			WindowActions wndActions = new WindowActions(node)
+            {
+                Owner = this
+            };
+            wndActions.ShowDialog();
 			
-			if (timerStopped == true)
+			if (timerStopped)
 			{
 				timer.Enabled = true;
 			}
 			
-			if (timerTrackStopped == true)
+			if (timerTrackStopped)
 			{
 				timerTrack.Enabled = true;
 			}

@@ -77,7 +77,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((AnimationStyle)value).ToString() + " (" + value + ")";
+					strValue = ((AnimationStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -104,8 +104,8 @@ namespace dDeltaSolutions.Spy
 
 					if (color.IsNamedColor == false)
 					{
-						attributes.Add(new InternalAttribute("BackgroundColor: ", "ARGB = (" + color.A.ToString() + ", " + 
-							color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")"));
+						attributes.Add(new InternalAttribute("BackgroundColor: ", "ARGB = (" + color.A + ", " + 
+							color.R + ", " + color.G + ", " + color.B + ")"));
 					}
 					else
 					{
@@ -132,7 +132,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((BulletStyle)value).ToString() + " (" + value + ")";
+					strValue = ((BulletStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -154,7 +154,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((CapStyle)value).ToString() + " (" + value + ")";
+					strValue = ((CapStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -248,9 +248,7 @@ namespace dDeltaSolutions.Spy
 						case 900:
 							valueDesc = "Heavy";
 							break;
-						default:
-							break;
-					}
+                    }
 					
 					string sValue = value.ToString();
 					if (valueDesc != null)
@@ -283,8 +281,8 @@ namespace dDeltaSolutions.Spy
 
 					if (color.IsNamedColor == false)
 					{
-						attributes.Add(new InternalAttribute("ForegroundColor: ", "ARGB = (" + color.A.ToString() + ", " +
-							color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")"));
+						attributes.Add(new InternalAttribute("ForegroundColor: ", "ARGB = (" + color.A + ", " +
+							color.R + ", " + color.G + ", " + color.B + ")"));
 					}
 					else
 					{
@@ -311,7 +309,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((HorizontalTextAlignmentEnum)value).ToString() + " (" + value + ")";
+					strValue = ((HorizontalTextAlignmentEnum)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -490,7 +488,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((OutlineStyles)value).ToString() + " (" + value + ")";
+					strValue = ((OutlineStyles)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -516,8 +514,8 @@ namespace dDeltaSolutions.Spy
 
 					if (color.IsNamedColor == false)
 					{
-						attributes.Add(new InternalAttribute("OverlineColor: ", "ARGB = (" + color.A.ToString() + ", " +
-							color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")"));
+						attributes.Add(new InternalAttribute("OverlineColor: ", "ARGB = (" + color.A + ", " +
+							color.R + ", " + color.G + ", " + color.B + ")"));
 					}
 					else
 					{
@@ -544,7 +542,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((TextDecorationLineStyle)value).ToString() + " (" + value + ")";
+					strValue = ((TextDecorationLineStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -570,8 +568,8 @@ namespace dDeltaSolutions.Spy
 
 					if (color.IsNamedColor == false)
 					{
-						attributes.Add(new InternalAttribute("StrikethroughColor: ", "ARGB = (" + color.A.ToString() + ", " +
-							color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")"));
+						attributes.Add(new InternalAttribute("StrikethroughColor: ", "ARGB = (" + color.A + ", " +
+							color.R + ", " + color.G + ", " + color.B + ")"));
 					}
 					else
 					{
@@ -598,7 +596,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((TextDecorationLineStyle)value).ToString() + " (" + value + ")";
+					strValue = ((TextDecorationLineStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -647,7 +645,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((FlowDirections)value).ToString() + " (" + value + ")";
+					strValue = ((FlowDirections)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -673,8 +671,8 @@ namespace dDeltaSolutions.Spy
 
 					if (color.IsNamedColor == false)
 					{
-						attributes.Add(new InternalAttribute("UnderlineColor: ", "ARGB = (" + color.A.ToString() + ", " +
-							color.R.ToString() + ", " + color.G.ToString() + ", " + color.B.ToString() + ")"));
+						attributes.Add(new InternalAttribute("UnderlineColor: ", "ARGB = (" + color.A + ", " +
+							color.R + ", " + color.G + ", " + color.B + ")"));
 					}
 					else
 					{
@@ -701,7 +699,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((TextDecorationLineStyle)value).ToString() + " (" + value + ")";
+					strValue = ((TextDecorationLineStyle)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -758,7 +756,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((StyleId)value).ToString() + " (" + value + ")";
+					strValue = ((StyleId)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -803,7 +801,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((ActiveEnd)value).ToString() + " (" + value + ")";
+					strValue = ((ActiveEnd)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -825,7 +823,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((CaretPosition)value).ToString() + " (" + value + ")";
+					strValue = ((CaretPosition)value) + " (" + value + ")";
 				}
 				catch
 				{
@@ -846,7 +844,7 @@ namespace dDeltaSolutions.Spy
 				string strValue = null;
 				try
 				{
-					strValue = ((CaretBidiMode)value).ToString() + " (" + value + ")";
+					strValue = ((CaretBidiMode)value) + " (" + value + ")";
 				}
 				catch
 				{

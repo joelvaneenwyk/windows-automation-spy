@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -19,166 +20,204 @@ namespace dDeltaSolutions.Spy
             {
                 return "UIA_ButtonControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_CalendarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_CalendarControlTypeId)
             {
                 return "UIA_CalendarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_CheckBoxControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_CheckBoxControlTypeId)
             {
                 return "UIA_CheckBoxControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ComboBoxControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ComboBoxControlTypeId)
             {
                 return "UIA_ComboBoxControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_EditControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_EditControlTypeId)
             {
                 return "UIA_EditControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_HyperlinkControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_HyperlinkControlTypeId)
             {
                 return "UIA_HyperlinkControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ImageControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ImageControlTypeId)
             {
                 return "UIA_ImageControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ListItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ListItemControlTypeId)
             {
                 return "UIA_ListItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ListControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ListControlTypeId)
             {
                 return "UIA_ListControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_MenuControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_MenuControlTypeId)
             {
                 return "UIA_MenuControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_MenuBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_MenuBarControlTypeId)
             {
                 return "UIA_MenuBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_MenuItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_MenuItemControlTypeId)
             {
                 return "UIA_MenuItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ProgressBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ProgressBarControlTypeId)
             {
                 return "UIA_ProgressBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_RadioButtonControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_RadioButtonControlTypeId)
             {
                 return "UIA_RadioButtonControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ScrollBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ScrollBarControlTypeId)
             {
                 return "UIA_ScrollBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_SliderControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_SliderControlTypeId)
             {
                 return "UIA_SliderControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_SpinnerControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_SpinnerControlTypeId)
             {
                 return "UIA_SpinnerControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_StatusBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_StatusBarControlTypeId)
             {
                 return "UIA_StatusBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TabControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TabControlTypeId)
             {
                 return "UIA_TabControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TabItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TabItemControlTypeId)
             {
                 return "UIA_TabItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TextControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TextControlTypeId)
             {
                 return "UIA_TextControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ToolBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ToolBarControlTypeId)
             {
                 return "UIA_ToolBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ToolTipControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ToolTipControlTypeId)
             {
                 return "UIA_ToolTipControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TreeControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TreeControlTypeId)
             {
                 return "UIA_TreeControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TreeItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TreeItemControlTypeId)
             {
                 return "UIA_TreeItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_CustomControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_CustomControlTypeId)
             {
                 return "UIA_CustomControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_GroupControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_GroupControlTypeId)
             {
                 return "UIA_GroupControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_ThumbControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_ThumbControlTypeId)
             {
                 return "UIA_ThumbControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_DataGridControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_DataGridControlTypeId)
             {
                 return "UIA_DataGridControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_DataItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_DataItemControlTypeId)
             {
                 return "UIA_DataItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_DocumentControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_DocumentControlTypeId)
             {
                 return "UIA_DocumentControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_SplitButtonControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_SplitButtonControlTypeId)
             {
                 return "UIA_SplitButtonControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_WindowControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_WindowControlTypeId)
             {
                 return "UIA_WindowControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_PaneControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_PaneControlTypeId)
             {
                 return "UIA_PaneControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_HeaderControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_HeaderControlTypeId)
             {
                 return "UIA_HeaderControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_HeaderItemControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_HeaderItemControlTypeId)
             {
                 return "UIA_HeaderItemControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TableControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TableControlTypeId)
             {
                 return "UIA_TableControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_TitleBarControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_TitleBarControlTypeId)
             {
                 return "UIA_TitleBarControlTypeId";
             }
-            else if (id == UIA_ControlTypeIds.UIA_SeparatorControlTypeId)
+
+            if (id == UIA_ControlTypeIds.UIA_SeparatorControlTypeId)
             {
                 return "UIA_SeparatorControlTypeId";
             }
-            
+
             return "";
         }
         
         [DllImport("oleacc.dll")]
         public static extern uint GetStateText(uint dwStateBit, [Out] StringBuilder lpszStateBit, uint cchStateBitMax);
         
-        public static Dictionary<uint, string> statesDict = null;
+        public static Dictionary<uint, string> statesDict;
         
         public static string GetStatesAsText(uint state)
         {
@@ -330,18 +369,18 @@ namespace dDeltaSolutions.Spy
 
             public POINT(int x, int y)
             {
-                this.X = x;
-                this.Y = y;
+                X = x;
+                Y = y;
             }
 
-            public POINT(System.Drawing.Point pt) : this(pt.X, pt.Y) { }
+            public POINT(Point pt) : this(pt.X, pt.Y) { }
 
-            public static implicit operator System.Drawing.Point(POINT p)
+            public static implicit operator Point(POINT p)
             {
-                return new System.Drawing.Point(p.X, p.Y);
+                return new Point(p.X, p.Y);
             }
 
-            public static implicit operator POINT(System.Drawing.Point p)
+            public static implicit operator POINT(Point p)
             {
                 return new POINT(p.X, p.Y);
             }
@@ -474,7 +513,7 @@ namespace dDeltaSolutions.Spy
 
             //PBITMAPINFO pInfo = CreateBitmapInfoStruct(hWnd, hbmp);
             //CreateBMPFile(hWnd, (TCHAR*)_T("capture.bmp"), pInfo, hbmp, hdcMem);
-            Bitmap bitmap = System.Drawing.Image.FromHbitmap(hbmp);
+            Bitmap bitmap = Image.FromHbitmap(hbmp);
 
             DeleteObject(hbmp);
             DeleteDC(hdcMem);
@@ -703,7 +742,7 @@ namespace dDeltaSolutions.Spy
             try
             {
                 ImageFormat format = ImageFormat.Bmp;
-                string extension = System.IO.Path.GetExtension(fileName).ToLower();
+                string extension = Path.GetExtension(fileName).ToLower();
                 if (extension == "jpg" || extension == "jpeg")
                 {
                     format = ImageFormat.Jpeg;
@@ -717,7 +756,7 @@ namespace dDeltaSolutions.Spy
             }
             catch 
             {
-                System.Windows.MessageBox.Show("Cannot save image");
+                MessageBox.Show("Cannot save image");
             }
             bitmap.Dispose();
         }
@@ -736,61 +775,53 @@ namespace dDeltaSolutions.Spy
 
         private static bool enableTrace = true;
 
+        [Conditional("DEBUG")]
         public static void Trace(string message)
         {
-#if DEBUG
-            if (false == Traces.enableTrace)
+            if (false == enableTrace)
             {
                 return;
             }
 
-            string line = DateTime.Now.ToString(/*"G"*/) + ": " + message + Environment.NewLine;
+            string line = DateTime.Now + ": " + message + Environment.NewLine;
 
             try
             {
-                File.AppendAllText(Traces.traceFile, line);
+                File.AppendAllText(traceFile, line);
             }
             catch { }
-#endif
         }
 
-        public static string TraceFile
-        {
-            get
-            {
-                return Traces.traceFile;
-            }
-        }
+        public static string TraceFile => traceFile;
 
+        [Conditional("DEBUG")]
         public static void ClearTrace()
         {
-#if DEBUG
-            if (false == Traces.enableTrace)
+            if (false == enableTrace)
             {
                 return;
             }
 
             try
             {
-                if (File.Exists(Traces.traceFile))
+                if (File.Exists(traceFile))
                 {
-                    File.Delete(Traces.traceFile);
+                    File.Delete(traceFile);
                 }
             }
             catch { }
-#endif
         }
     }
 
     public class TreeNode
     {
-        private IUIAutomationElement internalElement = null;
-        private bool isRootElement = false;
+        private IUIAutomationElement internalElement;
+        private bool isRootElement;
 
         public TreeNode(IUIAutomationElement el, bool isRoot = false)
         {
-            this.internalElement = el;
-            this.isRootElement = isRoot;
+            internalElement = el;
+            isRootElement = isRoot;
         }
         
         public bool IsRoot
@@ -808,7 +839,7 @@ namespace dDeltaSolutions.Spy
                 int processId = 0;
                 try
                 {
-                    processId = this.internalElement.CurrentProcessId;
+                    processId = internalElement.CurrentProcessId;
                 }
                 catch
                 {}
@@ -821,7 +852,7 @@ namespace dDeltaSolutions.Spy
         {
             string returnString = string.Empty;
             
-            if (this.internalElement == null)
+            if (internalElement == null)
             {
                 return "";
             }
@@ -838,7 +869,7 @@ namespace dDeltaSolutions.Spy
                     {
                         System.Windows.MessageBox.Show("null element");
                     }*/
-                    string name = this.internalElement.CurrentName;
+                    string name = internalElement.CurrentName;
 
                     if (name == null)
                     {
@@ -852,7 +883,7 @@ namespace dDeltaSolutions.Spy
                     
                     //string localizedControlType = this.internalElement.CurrentLocalizedControlType;
 					string localizedControlType = null;
-					int controlType = this.internalElement.CurrentControlType;
+					int controlType = internalElement.CurrentControlType;
                     //if (string.IsNullOrEmpty(localizedControlType))
                     //{
 					if (cacheTypes.ContainsKey(controlType))
@@ -882,7 +913,7 @@ namespace dDeltaSolutions.Spy
                     returnString = name + " (" + localizedControlType + ")";
                 //}
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             { 
                 //System.Windows.MessageBox.Show(ex.Message);
             }
@@ -896,7 +927,7 @@ namespace dDeltaSolutions.Spy
         {
             get
             {
-                return this.internalElement;
+                return internalElement;
             }
         }
 
@@ -905,7 +936,7 @@ namespace dDeltaSolutions.Spy
             get
             {
                 List<TreeNode> childrenList = new List<TreeNode>();
-                List<IUIAutomationElement> children = MainWindow.FindChildren(this.internalElement);
+                List<IUIAutomationElement> children = MainWindow.FindChildren(internalElement);
 
                 foreach (IUIAutomationElement element in children)
                 {

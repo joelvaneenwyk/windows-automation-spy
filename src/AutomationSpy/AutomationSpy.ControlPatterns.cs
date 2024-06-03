@@ -12,6 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Forms;
 using Interop.UIAutomationClient;
 using Clipboard = System.Windows.Clipboard;
+using MenuItem = System.Windows.Controls.MenuItem;
 using Timer = System.Windows.Forms.Timer;
 
 namespace dDeltaSolutions.Spy
@@ -24,7 +25,7 @@ namespace dDeltaSolutions.Spy
 		public class PatternInfo
 		{
 			public string Name;
-			public bool IsSupported = false;
+			public bool IsSupported;
 			
 			public PatternInfo(string name)
 			{
@@ -37,7 +38,7 @@ namespace dDeltaSolutions.Spy
 			}
 		}
         
-        private Dictionary<int, PatternInfo> patternsIds = null;
+        private Dictionary<int, PatternInfo> patternsIds;
         
         private void FillPatternsDictionary()
         {
@@ -104,16 +105,16 @@ namespace dDeltaSolutions.Spy
         {
             if (!isAlive)
             {
-                this.attributesListView.Tag = node;
-                this.patternsListView.Tag = null;
-                this.listAttributes.Clear();
-                this.listPatterns.Clear();
+                attributesListView.Tag = node;
+                patternsListView.Tag = null;
+                listAttributes.Clear();
+                listPatterns.Clear();
 				GetCachedInformation(node);
             }
 			else
 			{
-				this.attributesListView.Tag = node;
-				this.listAttributes.Clear();
+				attributesListView.Tag = node;
+				listAttributes.Clear();
 				GetCurrentInformation(node);
 			}
 
@@ -156,12 +157,12 @@ namespace dDeltaSolutions.Spy
 
         private void RefreshPatterns(TreeNode node)
         {
-            this.patternsListView.Tag = node;
-            this.listPatterns.Clear();
+            patternsListView.Tag = node;
+            listPatterns.Clear();
 
-            if (MainWindow.rangeFromPointTimer != null)
+            if (rangeFromPointTimer != null)
             {
-                MainWindow.rangeFromPointTimer.Stop();
+                rangeFromPointTimer.Stop();
             }
 			
 			Attribute attribute = null;
@@ -175,9 +176,11 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string dockPositionString = dockPattern.CurrentDockPosition.ToString();
-						attribute = new Attribute("DockPosition:", dockPositionString, "UIA_DockPattern");
-						attribute.Tooltip = "The DockPosition of an Automation Element within a docking container";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("DockPosition:", dockPositionString, "UIA_DockPattern")
+                            {
+                                Tooltip = "The DockPosition of an Automation Element within a docking container"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -193,9 +196,11 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string expandCollapseState = expandCollapsePattern.CurrentExpandCollapseState.ToString();
-						attribute = new Attribute("ExpandCollapseState:", expandCollapseState, "UIA_ExpandCollapsePattern");
-						attribute.Tooltip = "The ExpandCollapseState of the Automation Element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ExpandCollapseState:", expandCollapseState, "UIA_ExpandCollapsePattern")
+                            {
+                                Tooltip = "The ExpandCollapseState of the Automation Element"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -211,54 +216,66 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string canMaximizeString = windowPattern.CurrentCanMaximize.ToString();
-						attribute = new Attribute("CanMaximize:", canMaximizeString, "UIA_WindowPattern");
-						attribute.Tooltip = "A value that specifies whether the AutomationElement can be maximized";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanMaximize:", canMaximizeString, "UIA_WindowPattern")
+                            {
+                                Tooltip = "A value that specifies whether the AutomationElement can be maximized"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 						
 					try
 					{
 						string canMinimizeString = windowPattern.CurrentCanMinimize.ToString();
-						attribute = new Attribute("CanMinimize:", canMinimizeString, "UIA_WindowPattern");
-						attribute.Tooltip = "A value that specifies whether the current AutomationElement can be minimized";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanMinimize:", canMinimizeString, "UIA_WindowPattern")
+                            {
+                                Tooltip = "A value that specifies whether the current AutomationElement can be minimized"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string isModalString = windowPattern.CurrentIsModal.ToString();
-						attribute = new Attribute("IsModal:", isModalString, "UIA_WindowPattern");
-						attribute.Tooltip = "A value that specifies whether the AutomationElement is modal.";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsModal:", isModalString, "UIA_WindowPattern")
+                        {
+                            Tooltip = "A value that specifies whether the AutomationElement is modal."
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 						
 					try
 					{
 						string isTopmostString = windowPattern.CurrentIsTopmost.ToString();
-						attribute = new Attribute("IsTopmost:", isTopmostString, "UIA_WindowPattern");
-						attribute.Tooltip = "A value that specifies whether the AutomationElement is the topmost element in the z-order.";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsTopmost:", isTopmostString, "UIA_WindowPattern")
+                        {
+                            Tooltip = "A value that specifies whether the AutomationElement is the topmost element in the z-order."
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 						
 					try
 					{
 						string windowInteractionState = windowPattern.CurrentWindowInteractionState.ToString();
-						attribute = new Attribute("WindowInteraction:", windowInteractionState, "UIA_WindowPattern");
-						attribute.Tooltip = "The WindowInteractionState of the AutomationElement";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("WindowInteraction:", windowInteractionState, "UIA_WindowPattern")
+                            {
+                                Tooltip = "The WindowInteractionState of the AutomationElement"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string windowVisualState = windowPattern.CurrentWindowVisualState.ToString();
-						attribute = new Attribute("WindowVisualState:", windowVisualState, "UIA_WindowPattern");
-						attribute.Tooltip = "The WindowVisualState of the AutomationElement";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("WindowVisualState:", windowVisualState, "UIA_WindowPattern")
+                            {
+                                Tooltip = "The WindowVisualState of the AutomationElement"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -274,27 +291,33 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string canMove = transformPattern.CurrentCanMove.ToString();
-						attribute = new Attribute("CanMove:", canMove, "UIA_TransformPattern");
-						attribute.Tooltip = "A value that specifies whether the UI Automation element can be moved";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanMove:", canMove, "UIA_TransformPattern")
+                        {
+                            Tooltip = "A value that specifies whether the UI Automation element can be moved"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string canResize = transformPattern.CurrentCanResize.ToString();
-						attribute = new Attribute("CanResize:", canResize, "UIA_TransformPattern");
-						attribute.Tooltip = "A value that specifies whether the UI Automation element can be resized";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanResize:", canResize, "UIA_TransformPattern")
+                        {
+                            Tooltip = "A value that specifies whether the UI Automation element can be resized"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string canRotate = transformPattern.CurrentCanRotate.ToString();
-						attribute = new Attribute("CanRotate:", canRotate, "UIA_TransformPattern");
-						attribute.Tooltip = "A value that specifies whether the UI Automation element can be rotated";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanRotate:", canRotate, "UIA_TransformPattern")
+                        {
+                            Tooltip = "A value that specifies whether the UI Automation element can be rotated"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -310,18 +333,22 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string columnCount = gridPattern.CurrentColumnCount.ToString();
-						attribute = new Attribute("ColumnCount:", columnCount, "UIA_GridPattern");
-						attribute.Tooltip = "The number of columns in a grid";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ColumnCount:", columnCount, "UIA_GridPattern")
+                        {
+                            Tooltip = "The number of columns in a grid"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string rowCount = gridPattern.CurrentRowCount.ToString();
-						attribute = new Attribute("RowCount:", rowCount, "UIA_GridPattern");
-						attribute.Tooltip = "Total number of rows in a grid";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("RowCount:", rowCount, "UIA_GridPattern")
+                        {
+                            Tooltip = "Total number of rows in a grid"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -337,46 +364,56 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string column = gridItemPattern.CurrentColumn.ToString();
-						attribute = new Attribute("Column:", column, "UIA_GridItemPattern");
-						attribute.Tooltip = "Ordinal number of the column that contains the cell or item";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Column:", column, "UIA_GridItemPattern")
+                        {
+                            Tooltip = "Ordinal number of the column that contains the cell or item"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string columnSpan = gridItemPattern.CurrentColumnSpan.ToString();
-						attribute = new Attribute("ColumnSpan:", columnSpan, "UIA_GridItemPattern");
-						attribute.Tooltip = "The number of columns spanned by a cell or item";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ColumnSpan:", columnSpan, "UIA_GridItemPattern")
+                        {
+                            Tooltip = "The number of columns spanned by a cell or item"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						TreeNode tempNode = new TreeNode(gridItemPattern.CurrentContainingGrid);
-						attribute = new Attribute("ContainingGrid:", tempNode.ToString(), "UIA_GridItemPattern");
-						attribute.UnderneathElement = gridItemPattern.CurrentContainingGrid;
-						attribute.Tooltip = "UI Automation element that supports GridPattern and represents the container of the cell or item";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ContainingGrid:", tempNode.ToString(), "UIA_GridItemPattern")
+                            {
+                                UnderneathElement = gridItemPattern.CurrentContainingGrid,
+                                Tooltip = "UI Automation element that supports GridPattern and represents the container of the cell or item"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string row = gridItemPattern.CurrentRow.ToString();
-						attribute = new Attribute("Row:", row, "UIA_GridItemPattern");
-						attribute.Tooltip = "Ordinal number of the row that contains the cell or item";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Row:", row, "UIA_GridItemPattern")
+                        {
+                            Tooltip = "Ordinal number of the row that contains the cell or item"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string rowSpan = gridItemPattern.CurrentRowSpan.ToString();
-						attribute = new Attribute("RowSpan:", rowSpan, "UIA_GridItemPattern");
-						attribute.Tooltip = "The number of rows spanned by a cell or item";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("RowSpan:", rowSpan, "UIA_GridItemPattern")
+                        {
+                            Tooltip = "The number of rows spanned by a cell or item"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -392,9 +429,11 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string isReadOnly = valuePattern.CurrentIsReadOnly.ToString();
-						attribute = new Attribute("IsReadOnly:", isReadOnly, "UIA_ValuePattern");
-						attribute.Tooltip = "A value that specifies whether the value of an UI Automation element is read-only";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsReadOnly:", isReadOnly, "UIA_ValuePattern")
+                        {
+                            Tooltip = "A value that specifies whether the value of an UI Automation element is read-only"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -413,13 +452,16 @@ namespace dDeltaSolutions.Spy
 						{
 							value += " -> (Double-click to see all text)";
 						}
-						attribute = new Attribute("Value:", value, "UIA_ValuePattern") { Pattern = valuePattern };
-						attribute.Tooltip = "The value of the UI Automation element";
-						if (truncated)
+						attribute = new Attribute("Value:", value, "UIA_ValuePattern")
+                        {
+                            Pattern = valuePattern,
+                            Tooltip = "The value of the UI Automation element"
+                        };
+                        if (truncated)
 						{
 							attribute.Tooltip += " (Double-click to see all text)";
 						}
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -436,9 +478,11 @@ namespace dDeltaSolutions.Spy
 					{
 						int currentViewId = multipleViewPattern.CurrentCurrentView;
 						string currentViewString = "\"" + multipleViewPattern.GetViewName(currentViewId) + "\"";
-						attribute = new Attribute("CurrentView:", currentViewString, "UIA_MultipleViewPattern");
-						attribute.Tooltip = "Current control-specific view";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CurrentView:", currentViewString, "UIA_MultipleViewPattern")
+                            {
+                                Tooltip = "Current control-specific view"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -450,9 +494,9 @@ namespace dDeltaSolutions.Spy
 						foreach (int viewId in viewIds)
 						{
 							string viewName = "\"" + multipleViewPattern.GetViewName(viewId) + "\"";
-							attribute = new Attribute("SupportedViews[" + index.ToString() + "]:",
+							attribute = new Attribute("SupportedViews[" + index + "]:",
 								viewName, "UIA_MultipleViewPattern");
-							this.listPatterns.Add(attribute);
+							listPatterns.Add(attribute);
 
 							index++;
 						}
@@ -471,54 +515,66 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string isReadOnlyString = rangeValuePattern.CurrentIsReadOnly.ToString();
-						attribute = new Attribute("IsReadOnly:", isReadOnlyString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "A value that specifies whether the value of an UI Automation element is read-only";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsReadOnly:", isReadOnlyString, "UIA_RangeValuePattern")
+                            {
+                                Tooltip = "A value that specifies whether the value of an UI Automation element is read-only"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string largeChangeString = rangeValuePattern.CurrentLargeChange.ToString();
-						attribute = new Attribute("LargeChange:", largeChangeString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "Control specific large-change value";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("LargeChange:", largeChangeString, "UIA_RangeValuePattern")
+                            {
+                                Tooltip = "Control specific large-change value"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string smallChangeString = rangeValuePattern.CurrentSmallChange.ToString();
-						attribute = new Attribute("SmallChange:", smallChangeString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "The small-change value";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("SmallChange:", smallChangeString, "UIA_RangeValuePattern")
+                            {
+                                Tooltip = "The small-change value"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string maximumString = rangeValuePattern.CurrentMaximum.ToString();
-						attribute = new Attribute("Maximum:", maximumString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "The maximum range value supported by the UI Automation element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Maximum:", maximumString, "UIA_RangeValuePattern")
+                        {
+                            Tooltip = "The maximum range value supported by the UI Automation element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string minimumString = rangeValuePattern.CurrentMinimum.ToString();
-						attribute = new Attribute("Minimum:", minimumString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "The minimum range value supported by the UI Automation element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Minimum:", minimumString, "UIA_RangeValuePattern")
+                        {
+                            Tooltip = "The minimum range value supported by the UI Automation element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string valueString = rangeValuePattern.CurrentValue.ToString();
-						attribute = new Attribute("Value:", valueString, "UIA_RangeValuePattern");
-						attribute.Tooltip = "The current value of the UI Automation element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Value:", valueString, "UIA_RangeValuePattern")
+                        {
+                            Tooltip = "The current value of the UI Automation element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -534,54 +590,66 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string horizontallyScrollable = scrollPattern.CurrentHorizontallyScrollable.ToString();
-						attribute = new Attribute("HorizontallyScrollable:", horizontallyScrollable, "UIA_ScrollPattern");
-						attribute.Tooltip = "A value that indicates whether the UI Automation element can scroll horizontally";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("HorizontallyScrollable:", horizontallyScrollable, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "A value that indicates whether the UI Automation element can scroll horizontally"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string horizontalScrollPercent = scrollPattern.CurrentHorizontalScrollPercent.ToString();
-						attribute = new Attribute("HorizontalScrollPercent:", horizontalScrollPercent, "UIA_ScrollPattern");
-						attribute.Tooltip = "The current horizontal scroll position";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("HorizontalScrollPercent:", horizontalScrollPercent, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "The current horizontal scroll position"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string horizontalViewSize = scrollPattern.CurrentHorizontalViewSize.ToString();
-						attribute = new Attribute("HorizontalViewSize:", horizontalViewSize, "UIA_ScrollPattern");
-						attribute.Tooltip = "Current horizontal view size";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("HorizontalViewSize:", horizontalViewSize, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "Current horizontal view size"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						string verticallyScrollable = scrollPattern.CurrentVerticallyScrollable.ToString();
-						attribute = new Attribute("VerticallyScrollable:", verticallyScrollable, "UIA_ScrollPattern");
-						attribute.Tooltip = "A value that indicates whether the UI Automation element can scroll vertically";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("VerticallyScrollable:", verticallyScrollable, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "A value that indicates whether the UI Automation element can scroll vertically"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string verticalScrollPercent = scrollPattern.CurrentVerticalScrollPercent.ToString();
-						attribute = new Attribute("VerticalScrollPercent:", verticalScrollPercent, "UIA_ScrollPattern");
-						attribute.Tooltip = "Current vertical scroll position";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("VerticalScrollPercent:", verticalScrollPercent, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "Current vertical scroll position"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string verticalViewSize = scrollPattern.CurrentVerticalViewSize.ToString();
-						attribute = new Attribute("VerticalViewSize:", verticalViewSize, "UIA_ScrollPattern");
-						attribute.Tooltip = "Current vertical view size";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("VerticalViewSize:", verticalViewSize, "UIA_ScrollPattern")
+                            {
+                                Tooltip = "Current vertical view size"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -597,10 +665,12 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string canSelectMultiple = selectionPattern.CurrentCanSelectMultiple.ToString();
-						attribute = new Attribute("CanSelectMultiple:", canSelectMultiple, "UIA_SelectionPattern");
-						attribute.Tooltip = "A value that specifies whether the container allows " +
-							"more than one child element to be selected concurrently";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CanSelectMultiple:", canSelectMultiple, "UIA_SelectionPattern")
+                            {
+                                Tooltip = "A value that specifies whether the container allows " +
+                                          "more than one child element to be selected concurrently"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -612,11 +682,13 @@ namespace dDeltaSolutions.Spy
 							IUIAutomationElement selectedElement = selectedElements.GetElement(i);
 							TreeNode tempNode = new TreeNode(selectedElement);
 
-							attribute = new Attribute("Selection[" + i.ToString() + "]:",
-								tempNode.ToString(), "UIA_SelectionPattern");
-							attribute.UnderneathElement = selectedElement;
-							
-							this.listPatterns.Add(attribute);
+							attribute = new Attribute("Selection[" + i + "]:",
+								tempNode.ToString(), "UIA_SelectionPattern")
+                            {
+                                UnderneathElement = selectedElement
+                            };
+
+                            listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -624,10 +696,12 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string isSelectionRequired = selectionPattern.CurrentIsSelectionRequired.ToString();
-						attribute = new Attribute("IsSelectionRequired:", isSelectionRequired, "UIA_SelectionPattern");
-						attribute.Tooltip = "A value that specifies whether the container " + 
-							"requires at least one child item to be selected";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsSelectionRequired:", isSelectionRequired, "UIA_SelectionPattern")
+                            {
+                                Tooltip = "A value that specifies whether the container " + 
+                                          "requires at least one child item to be selected"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -643,20 +717,24 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string isSelected = selectionItemPattern.CurrentIsSelected.ToString();
-						attribute = new Attribute("IsSelected:", isSelected, "UIA_SelectionItemPattern");
-						attribute.Tooltip = "A value that indicates whether an item is selected";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("IsSelected:", isSelected, "UIA_SelectionItemPattern")
+                            {
+                                Tooltip = "A value that indicates whether an item is selected"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
 					try
 					{
 						TreeNode tempNode = new TreeNode(selectionItemPattern.CurrentSelectionContainer);
-						attribute = new Attribute("SelectionContainer:", tempNode.ToString(), "UIA_SelectionItemPattern");
-						attribute.UnderneathElement = selectionItemPattern.CurrentSelectionContainer;
-						attribute.Tooltip = "The AutomationElement that supports the SelectionPattern " +
-							"control pattern and acts as the container for the calling object";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("SelectionContainer:", tempNode.ToString(), "UIA_SelectionItemPattern")
+                            {
+                                UnderneathElement = selectionItemPattern.CurrentSelectionContainer,
+                                Tooltip = "The AutomationElement that supports the SelectionPattern " +
+                                          "control pattern and acts as the container for the calling object"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -672,9 +750,11 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string rowOrColumnMajor = tablePattern.CurrentRowOrColumnMajor.ToString();
-						attribute = new Attribute("RowOrColumnMajor:", rowOrColumnMajor, "UIA_TablePattern");
-						attribute.Tooltip = "The primary direction of traversal for the table";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("RowOrColumnMajor:", rowOrColumnMajor, "UIA_TablePattern")
+                            {
+                                Tooltip = "The primary direction of traversal for the table"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -698,9 +778,11 @@ namespace dDeltaSolutions.Spy
 							TreeNode tempNode = new TreeNode(columnHeader);
 
 							attribute = new Attribute("ColumnHeader[" + i + "]:", tempNode.ToString(),
-								"UIA_TablePattern");
-							attribute.UnderneathElement = columnHeader;
-							this.listPatterns.Add(attribute);
+								"UIA_TablePattern")
+                            {
+                                UnderneathElement = columnHeader
+                            };
+                            listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -714,9 +796,11 @@ namespace dDeltaSolutions.Spy
 							TreeNode tempNode = new TreeNode(rowHeader);
 
 							attribute = new Attribute("RowHeader[" + i + "]:", tempNode.ToString(),
-								"UIA_TablePattern");
-							attribute.UnderneathElement = rowHeader;
-							this.listPatterns.Add(attribute);
+								"UIA_TablePattern")
+                            {
+                                UnderneathElement = rowHeader
+                            };
+                            listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -759,9 +843,11 @@ namespace dDeltaSolutions.Spy
 							IUIAutomationElement header = headerItems.GetElement(i);
 							tempNode = new TreeNode(header);
 							attribute = new Attribute("ColumnHeaderItems[" + i + "]:",
-								tempNode.ToString(), "UIA_TableItemPattern");
-							attribute.UnderneathElement = header;
-							this.listPatterns.Add(attribute);
+								tempNode.ToString(), "UIA_TableItemPattern")
+                            {
+                                UnderneathElement = header
+                            };
+                            listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -774,9 +860,11 @@ namespace dDeltaSolutions.Spy
 							IUIAutomationElement header = headerItems.GetElement(i);
 							tempNode = new TreeNode(header);
 							attribute = new Attribute("RowHeaderItems[" + i + "]:",
-								tempNode.ToString(), "UIA_TableItemPattern");
-							attribute.UnderneathElement = header;
-							this.listPatterns.Add(attribute);
+								tempNode.ToString(), "UIA_TableItemPattern")
+                            {
+                                UnderneathElement = header
+                            };
+                            listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -803,9 +891,11 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string toggleState = togglePattern.CurrentToggleState.ToString();
-						attribute = new Attribute("ToggleState:", toggleState, "UIA_TogglePattern");
-						attribute.Tooltip = "The toggle state of the AutomationElement";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ToggleState:", toggleState, "UIA_TogglePattern")
+                        {
+                            Tooltip = "The toggle state of the AutomationElement"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -822,10 +912,12 @@ namespace dDeltaSolutions.Spy
 					{
 						string supportedTextSelection = textPattern.SupportedTextSelection.ToString();
 						attribute = new Attribute("SupportedTextSelection:", supportedTextSelection,
-							"UIA_TextPattern");
-						attribute.Tooltip = "A value that specifies whether a text provider supports selection " + 
-							"and, if so, the type of selection supported";
-						this.listPatterns.Add(attribute);
+							"UIA_TextPattern")
+                        {
+                            Tooltip = "A value that specifies whether a text provider supports selection " + 
+                                      "and, if so, the type of selection supported"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -881,18 +973,22 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string childId = legacyIAccessiblePattern.CurrentChildId.ToString();
-						attribute = new Attribute("ChildId:", childId, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility child identifier for the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("ChildId:", childId, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Tooltip = "Microsoft Active Accessibility child identifier for the element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string name = "\"" + legacyIAccessiblePattern.CurrentName + "\"";
-						attribute = new Attribute("Name:", name, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility name property of the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Name:", name, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Tooltip = "Microsoft Active Accessibility name property of the element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -910,32 +1006,39 @@ namespace dDeltaSolutions.Spy
 						{
 							value += " -> (Double-click to see all text)";
 						}
-						attribute = new Attribute("Value:", value, "UIA_LegacyIAccessiblePattern") { Pattern = legacyIAccessiblePattern };
-						attribute.Tooltip = "Microsoft Active Accessibility value property";
-						if (truncated)
+						attribute = new Attribute("Value:", value, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Pattern = legacyIAccessiblePattern,
+                            Tooltip = "Microsoft Active Accessibility value property"
+                        };
+                        if (truncated)
 						{
 							attribute.Tooltip += " (Double-click to see all text)";
 						}
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string description = "\"" + legacyIAccessiblePattern.CurrentDescription + "\"";
-						attribute = new Attribute("Description:", description, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility description of the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Description:", description, "UIA_LegacyIAccessiblePattern")
+                            {
+                                Tooltip = "Microsoft Active Accessibility description of the element"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						uint role = legacyIAccessiblePattern.CurrentRole;
-						string roleStr = role.ToString() + " (" + ((AccRoles)role).ToString() + ")";
-						attribute = new Attribute("Role:", roleStr, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility role identifier of the element";
-						this.listPatterns.Add(attribute);
+						string roleStr = role + " (" + ((AccRoles)role) + ")";
+						attribute = new Attribute("Role:", roleStr, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Tooltip = "Microsoft Active Accessibility role identifier of the element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -945,36 +1048,44 @@ namespace dDeltaSolutions.Spy
 						//StringBuilder stateText = new StringBuilder(1024);
 						//Helper.GetStateText(state, stateText, 1024);
 						string stateStr = "0x" + state.ToString("X") + " (" + Helper.GetStatesAsText(state) + ")";
-						attribute = new Attribute("State:", stateStr, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility state identifier for the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("State:", stateStr, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Tooltip = "Microsoft Active Accessibility state identifier for the element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string help = "\"" + legacyIAccessiblePattern.CurrentHelp + "\"";
-						attribute = new Attribute("Help:", help, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility help string for the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Help:", help, "UIA_LegacyIAccessiblePattern")
+                        {
+                            Tooltip = "Microsoft Active Accessibility help string for the element"
+                        };
+                        listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string keyboardShortcut = "\"" + legacyIAccessiblePattern.CurrentKeyboardShortcut + "\"";
-						attribute = new Attribute("KeyboardShortcut:", keyboardShortcut, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility keyboard shortcut property for the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("KeyboardShortcut:", keyboardShortcut, "UIA_LegacyIAccessiblePattern")
+                            {
+                                Tooltip = "Microsoft Active Accessibility keyboard shortcut property for the element"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						string defaultAction = "\"" + legacyIAccessiblePattern.CurrentDefaultAction + "\"";
-						attribute = new Attribute("DefaultAction:", defaultAction, "UIA_LegacyIAccessiblePattern");
-						attribute.Tooltip = "Microsoft Active Accessibility current default action for the element";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("DefaultAction:", defaultAction, "UIA_LegacyIAccessiblePattern")
+                            {
+                                Tooltip = "Microsoft Active Accessibility current default action for the element"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1006,7 +1117,7 @@ namespace dDeltaSolutions.Spy
 					{
 						string annotationTypeId = annotationPattern.CurrentAnnotationTypeId.ToString();
 						attribute = new Attribute("AnnotationTypeId:", annotationTypeId, "UIA_AnnotationPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1014,7 +1125,7 @@ namespace dDeltaSolutions.Spy
 					{
 						string annotationTypeName = annotationPattern.CurrentAnnotationTypeName;
 						attribute = new Attribute("AnnotationTypeName:", annotationTypeName, "UIA_AnnotationPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1022,7 +1133,7 @@ namespace dDeltaSolutions.Spy
 					{
 						string author = annotationPattern.CurrentAuthor;
 						attribute = new Attribute("Author:", author, "UIA_AnnotationPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1030,7 +1141,7 @@ namespace dDeltaSolutions.Spy
 					{
 						string dateTime = annotationPattern.CurrentDateTime;
 						attribute = new Attribute("DateTime:", dateTime, "UIA_AnnotationPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1038,9 +1149,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement target = annotationPattern.CurrentTarget;
 						TreeNode tempNode = new TreeNode(target);
-						attribute = new Attribute("Target:", tempNode.ToString(), "UIA_AnnotationPattern");
-						attribute.UnderneathElement = target;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Target:", tempNode.ToString(), "UIA_AnnotationPattern")
+                            {
+                                UnderneathElement = target
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -1054,10 +1167,12 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string supportedTextSelection = textPattern2.SupportedTextSelection.ToString();
-						attribute = new Attribute("SupportedTextSelection:", supportedTextSelection, "UIA_TextPattern2");
-						attribute.Tooltip = "A value that specifies whether a text provider supports selection " + 
-							"and, if so, the type of selection supported";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("SupportedTextSelection:", supportedTextSelection, "UIA_TextPattern2")
+                            {
+                                Tooltip = "A value that specifies whether a text provider supports selection " + 
+                                          "and, if so, the type of selection supported"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -1103,7 +1218,7 @@ namespace dDeltaSolutions.Spy
 						AddTextPatternRangeAttributes(caretRange, "UIA_TextPattern2.GetCaretRange");
 						attribute = new Attribute("isActive:", isActive.ToString(), "UIA_TextPattern2.GetCaretRange");
 						//attribute.Tooltip = "";
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -1117,49 +1232,49 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("StyleId:", stylesPattern.CurrentStyleId.ToString(), "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("StyleName:", stylesPattern.CurrentStyleName, "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("FillColor:", stylesPattern.CurrentFillColor.ToString(), "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("FillPatternStyle:", stylesPattern.CurrentFillPatternStyle, "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("Shape:", stylesPattern.CurrentShape, "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("FillPatternColor:", stylesPattern.CurrentFillPatternColor.ToString(), "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("ExtendedProperties:", stylesPattern.CurrentExtendedProperties, "UIA_StylesPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -1173,7 +1288,7 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("Formula:", spreadsheetItemPattern.CurrentFormula, "UIA_SpreadsheetItemPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1184,9 +1299,11 @@ namespace dDeltaSolutions.Spy
 						{
 							IUIAutomationElement annObject = annObjects.GetElement(i);
 							TreeNode tempNode = new TreeNode(annObject);
-							attribute = new Attribute("AnnotationObjects[" + i + "]:", tempNode.ToString(), "UIA_SpreadsheetItemPattern");
-							attribute.UnderneathElement = annObject;
-							this.listPatterns.Add(attribute);
+							attribute = new Attribute("AnnotationObjects[" + i + "]:", tempNode.ToString(), "UIA_SpreadsheetItemPattern")
+                                {
+                                    UnderneathElement = annObject
+                                };
+                                listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -1230,7 +1347,7 @@ namespace dDeltaSolutions.Spy
 							{
 								int annType = (int)annTypeObj;
 								attribute = new Attribute("AnnotationTypes[" + i + "]:", annotationTypesDict[annType], "UIA_SpreadsheetItemPattern");
-								this.listPatterns.Add(attribute);
+								listPatterns.Add(attribute);
 							}
 						}
 					}
@@ -1246,49 +1363,49 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("CanMove:", transformPattern2.CurrentCanMove.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("CanResize:", transformPattern2.CurrentCanResize.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("CanRotate:", transformPattern2.CurrentCanRotate.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("CanZoom:", transformPattern2.CurrentCanZoom.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("ZoomLevel:", transformPattern2.CurrentZoomLevel.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("ZoomMinimum:", transformPattern2.CurrentZoomMinimum.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("ZoomMaximum:", transformPattern2.CurrentZoomMaximum.ToString(), "UIA_TransformPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -1303,9 +1420,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement textContainer = textChildPattern.TextContainer;
 						TreeNode tempNode = new TreeNode(textContainer);
-						attribute = new Attribute("TextContainer:", tempNode.ToString(), "UIA_TextChildPattern");
-						attribute.UnderneathElement = textContainer;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("TextContainer:", tempNode.ToString(), "UIA_TextChildPattern")
+                            {
+                                UnderneathElement = textContainer
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1326,14 +1445,14 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("IsGrabbed:", dragPattern.CurrentIsGrabbed.ToString(), "UIA_DragPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("DropEffect:", dragPattern.CurrentDropEffect, "UIA_DragPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1343,7 +1462,7 @@ namespace dDeltaSolutions.Spy
 						for (int i = 0; i < dropEffects.Length; i++)
 						{
 							attribute = new Attribute("DropEffects[" + i + "]:", dropEffects.GetValue(i).ToString(), "UIA_DragPattern");
-							this.listPatterns.Add(attribute);
+							listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -1355,9 +1474,11 @@ namespace dDeltaSolutions.Spy
 						{
 							IUIAutomationElement grabbedItem = grabbedItems.GetElement(i);
 							TreeNode tempNode = new TreeNode(grabbedItem);
-							attribute = new Attribute("GrabbedItems[" + i + "]:", tempNode.ToString(), "UIA_DragPattern");
-							attribute.UnderneathElement = grabbedItem;
-							this.listPatterns.Add(attribute);
+							attribute = new Attribute("GrabbedItems[" + i + "]:", tempNode.ToString(), "UIA_DragPattern")
+                                {
+                                    UnderneathElement = grabbedItem
+                                };
+                                listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -1372,7 +1493,7 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("DropTargetEffect:", dropTargetPattern.CurrentDropTargetEffect, "UIA_DropTargetPattern");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1382,7 +1503,7 @@ namespace dDeltaSolutions.Spy
 						for (int i = 0; i < dropTargetEffects.Length; i++)
 						{
 							attribute = new Attribute("DropTargetEffects[" + i + "]:", dropTargetEffects.GetValue(i).ToString(), "UIA_DropTargetPattern");
-							this.listPatterns.Add(attribute);
+							listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -1397,10 +1518,12 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						string supportedTextSelection = textEditPattern.SupportedTextSelection.ToString();
-						attribute = new Attribute("SupportedTextSelection:", supportedTextSelection, "UIA_TextEditPattern");
-						attribute.Tooltip = "A value that specifies whether a text provider supports selection " + 
-							"and, if so, the type of selection supported";
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("SupportedTextSelection:", supportedTextSelection, "UIA_TextEditPattern")
+                            {
+                                Tooltip = "A value that specifies whether a text provider supports selection " + 
+                                          "and, if so, the type of selection supported"
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 
@@ -1464,9 +1587,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement parent = custNavPattern.Navigate(NavigateDirection.NavigateDirection_Parent);
 						TreeNode tempNode = new TreeNode(parent);
-						attribute = new Attribute("Navigate(NavigateDirection_Parent)", tempNode.ToString(), "UIA_CustomNavigationPatternId");
-						attribute.UnderneathElement = parent;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Navigate(NavigateDirection_Parent)", tempNode.ToString(), "UIA_CustomNavigationPatternId")
+                            {
+                                UnderneathElement = parent
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1474,9 +1599,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement nextSibling = custNavPattern.Navigate(NavigateDirection.NavigateDirection_NextSibling);
 						TreeNode tempNode = new TreeNode(nextSibling);
-						attribute = new Attribute("Navigate(NavigateDirection_NextSibling)", tempNode.ToString(), "UIA_CustomNavigationPatternId");
-						attribute.UnderneathElement = nextSibling;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Navigate(NavigateDirection_NextSibling)", tempNode.ToString(), "UIA_CustomNavigationPatternId")
+                            {
+                                UnderneathElement = nextSibling
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1484,9 +1611,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement prevSibling = custNavPattern.Navigate(NavigateDirection.NavigateDirection_PreviousSibling);
 						TreeNode tempNode = new TreeNode(prevSibling);
-						attribute = new Attribute("Navigate(NavigateDirection_PreviousSibling)", tempNode.ToString(), "UIA_CustomNavigationPatternId");
-						attribute.UnderneathElement = prevSibling;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Navigate(NavigateDirection_PreviousSibling)", tempNode.ToString(), "UIA_CustomNavigationPatternId")
+                            {
+                                UnderneathElement = prevSibling
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1494,9 +1623,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement firstChild = custNavPattern.Navigate(NavigateDirection.NavigateDirection_FirstChild);
 						TreeNode tempNode = new TreeNode(firstChild);
-						attribute = new Attribute("Navigate(NavigateDirection_FirstChild)", tempNode.ToString(), "UIA_CustomNavigationPatternId");
-						attribute.UnderneathElement = firstChild;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Navigate(NavigateDirection_FirstChild)", tempNode.ToString(), "UIA_CustomNavigationPatternId")
+                            {
+                                UnderneathElement = firstChild
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1504,9 +1635,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement lastChild = custNavPattern.Navigate(NavigateDirection.NavigateDirection_LastChild);
 						TreeNode tempNode = new TreeNode(lastChild);
-						attribute = new Attribute("Navigate(NavigateDirection_LastChild)", tempNode.ToString(), "UIA_CustomNavigationPatternId");
-						attribute.UnderneathElement = lastChild;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Navigate(NavigateDirection_LastChild)", tempNode.ToString(), "UIA_CustomNavigationPatternId")
+                            {
+                                UnderneathElement = lastChild
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 				}
@@ -1520,14 +1653,14 @@ namespace dDeltaSolutions.Spy
 					try
 					{
 						attribute = new Attribute("CanSelectMultiple:", selectionPattern2.CurrentCanSelectMultiple.ToString(), "UIA_SelectionPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("IsSelectionRequired:", selectionPattern2.CurrentIsSelectionRequired.ToString(), "UIA_SelectionPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1535,9 +1668,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement firstSelectedItem = selectionPattern2.CurrentFirstSelectedItem;
 						TreeNode tempNode = new TreeNode(firstSelectedItem);
-						attribute = new Attribute("FirstSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2");
-						attribute.UnderneathElement = firstSelectedItem;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("FirstSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2")
+                            {
+                                UnderneathElement = firstSelectedItem
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1545,9 +1680,11 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement lastSelectedItem = selectionPattern2.CurrentLastSelectedItem;
 						TreeNode tempNode = new TreeNode(lastSelectedItem);
-						attribute = new Attribute("LastSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2");
-						attribute.UnderneathElement = lastSelectedItem;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("LastSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2")
+                            {
+                                UnderneathElement = lastSelectedItem
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1555,16 +1692,18 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement currentSelectedItem = selectionPattern2.CurrentCurrentSelectedItem;
 						TreeNode tempNode = new TreeNode(currentSelectedItem);
-						attribute = new Attribute("CurrentSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2");
-						attribute.UnderneathElement = currentSelectedItem;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("CurrentSelectedItem:", tempNode.ToString(), "UIA_SelectionPattern2")
+                            {
+                                UnderneathElement = currentSelectedItem
+                            };
+                            listPatterns.Add(attribute);
 					}
 					catch {}
 					
 					try
 					{
 						attribute = new Attribute("ItemCount:", selectionPattern2.CurrentItemCount.ToString(), "UIA_SelectionPattern2");
-						this.listPatterns.Add(attribute);
+						listPatterns.Add(attribute);
 					}
 					catch {}
 					
@@ -1575,9 +1714,11 @@ namespace dDeltaSolutions.Spy
 						{
 							IUIAutomationElement selectedItem = selection.GetElement(i);
 							TreeNode tempNode = new TreeNode(selectedItem);
-							attribute = new Attribute("GetCurrentSelection()[" + i + "]:", tempNode.ToString(), "UIA_SelectionPattern2");
-							attribute.UnderneathElement = selectedItem;
-							this.listPatterns.Add(attribute);
+							attribute = new Attribute("GetCurrentSelection()[" + i + "]:", tempNode.ToString(), "UIA_SelectionPattern2")
+                                {
+                                    UnderneathElement = selectedItem
+                                };
+                                listPatterns.Add(attribute);
 						}
 					}
 					catch {}
@@ -1585,14 +1726,13 @@ namespace dDeltaSolutions.Spy
 			}
         }
 		
-		private Dictionary<int, string> annotationTypesDict = null;
+		private Dictionary<int, string> annotationTypesDict;
 
-        private static System.Windows.Forms.Timer rangeFromPointTimer = null;
+        private static Timer rangeFromPointTimer;
         private static List<Attribute> rangeFromPointAttributes = new List<Attribute>();
 
         void rangeFromPointTimer_Tick(object sender, EventArgs e)
         {
-            return;
         }
 
         private void AddTextPatternRangeAttributes(IUIAutomationTextRange textPatternRange, string rangeName)
@@ -1606,14 +1746,14 @@ namespace dDeltaSolutions.Spy
             bool isRangeFromPoint = (rangeName == "TextPattern.RangeFromPoint");
             if (isRangeFromPoint)
             {
-                if (MainWindow.rangeFromPointTimer == null)
+                if (rangeFromPointTimer == null)
                 {
-                    MainWindow.rangeFromPointTimer = new System.Windows.Forms.Timer();
+                    rangeFromPointTimer = new Timer();
 
-                    MainWindow.rangeFromPointTimer.Interval = 100;
-                    MainWindow.rangeFromPointTimer.Tick += rangeFromPointTimer_Tick;
+                    rangeFromPointTimer.Interval = 100;
+                    rangeFromPointTimer.Tick += rangeFromPointTimer_Tick;
 
-                    MainWindow.rangeFromPointAttributes.Clear();
+                    rangeFromPointAttributes.Clear();
                 }
             }
             /////////
@@ -1635,17 +1775,19 @@ namespace dDeltaSolutions.Spy
 				}
 				//documentRangeText = (documentRangeText == null ? "null" : "\"" + documentRangeText + "\"");
 
-				attribute = new Attribute("Text:", documentRangeText, rangeName);
-				attribute.TextPatternRange = textPatternRange;
-				attribute.Tooltip = "The plain text of the text range";
-				if (truncated)
+				attribute = new Attribute("Text:", documentRangeText, rangeName)
+                {
+                    TextPatternRange = textPatternRange,
+                    Tooltip = "The plain text of the text range"
+                };
+                if (truncated)
 				{
 					attribute.Tooltip += " (Double-click to see all text)";
 				}
-				this.listPatterns.Add(attribute);
+				listPatterns.Add(attribute);
 				if (isRangeFromPoint)
 				{
-					MainWindow.rangeFromPointAttributes.Add(attribute);
+					rangeFromPointAttributes.Add(attribute);
 				}
 			}
 			catch {}
@@ -1660,13 +1802,15 @@ namespace dDeltaSolutions.Spy
 					{
 						IUIAutomationElement child = children.GetElement(i);
 						tempNode = new TreeNode(child);
-						attribute = new Attribute("Children[" + i + "]:", tempNode.ToString(), rangeName);
-						attribute.UnderneathElement = child;
-						this.listPatterns.Add(attribute);
+						attribute = new Attribute("Children[" + i + "]:", tempNode.ToString(), rangeName)
+                            {
+                                UnderneathElement = child
+                            };
+                            listPatterns.Add(attribute);
 
 						if (isRangeFromPoint)
 						{
-							MainWindow.rangeFromPointAttributes.Add(attribute);
+							rangeFromPointAttributes.Add(attribute);
 						}
 					}
 				}
@@ -1679,13 +1823,15 @@ namespace dDeltaSolutions.Spy
 				if (enclosingElement != null)
 				{
 					tempNode = new TreeNode(enclosingElement);
-					attribute = new Attribute("EnclosingElement:", tempNode.ToString(), rangeName);
-					attribute.UnderneathElement = enclosingElement;
-					attribute.Tooltip = "The innermost Automation Element that encloses the text range";
-					this.listPatterns.Add(attribute);
+					attribute = new Attribute("EnclosingElement:", tempNode.ToString(), rangeName)
+                        {
+                            UnderneathElement = enclosingElement,
+                            Tooltip = "The innermost Automation Element that encloses the text range"
+                        };
+                        listPatterns.Add(attribute);
 					if (isRangeFromPoint)
 					{
-						MainWindow.rangeFromPointAttributes.Add(attribute);
+						rangeFromPointAttributes.Add(attribute);
 					}
 				}
 			}
@@ -1715,13 +1861,15 @@ namespace dDeltaSolutions.Spy
 							
 							string boundingRectangleString = RectangleToString(boundingRectangle);
 							attribute = new Attribute("BoundingRectangles[" + i + "]:",
-								boundingRectangleString, rangeName);
-							attribute.BoundingRectangle = boundingRectangle;
-							this.listPatterns.Add(attribute);
+								boundingRectangleString, rangeName)
+                            {
+                                BoundingRectangle = boundingRectangle
+                            };
+                            listPatterns.Add(attribute);
 
 							if (isRangeFromPoint)
 							{
-								MainWindow.rangeFromPointAttributes.Add(attribute);
+								rangeFromPointAttributes.Add(attribute);
 							}
 						}
 					}
@@ -1731,14 +1879,16 @@ namespace dDeltaSolutions.Spy
 			catch {}
 
             //attribute = new Attribute("Mouse over for...", "more attributes", rangeName);
-			attribute = new Attribute("Double click here...", "for TextRange attributes", rangeName);
-            attribute.TextPatternRange = textPatternRange;
-            this.listPatterns.Add(attribute);
+			attribute = new Attribute("Double click here...", "for TextRange attributes", rangeName)
+                {
+                    TextPatternRange = textPatternRange
+                };
+                listPatterns.Add(attribute);
 
             //start timer
             if (isRangeFromPoint)
             {
-                MainWindow.rangeFromPointTimer.Start();
+                rangeFromPointTimer.Start();
             }
         }
 
@@ -1787,11 +1937,11 @@ namespace dDeltaSolutions.Spy
             private string name = string.Empty;
             private string value = string.Empty;
             private string group = string.Empty;
-            private string tooltip = null;
+            private string tooltip;
 
-            private IUIAutomationTextRange textPatternRange = null;
-            private IUIAutomationElement underneathElement = null;
-            private tagRECT? boundingRectangle = null;
+            private IUIAutomationTextRange textPatternRange;
+            private IUIAutomationElement underneathElement;
+            private tagRECT? boundingRectangle;
 
             public Attribute(string name, string value)
             {
@@ -1810,11 +1960,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.name;
+                    return name;
                 }
                 set
                 {
-                    this.name = value;
+                    name = value;
                 }
             }
 
@@ -1822,7 +1972,7 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.value;
+                    return value;
                 }
                 set
                 {
@@ -1834,11 +1984,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.group;
+                    return group;
                 }
                 set
                 {
-                    this.group = value;
+                    group = value;
                 }
             }
 
@@ -1852,11 +2002,11 @@ namespace dDeltaSolutions.Spy
                         this.tooltip = moreAttributes;
                     }*/
 
-                    return this.tooltip;
+                    return tooltip;
                 }
                 set
                 {
-                    this.tooltip = value;
+                    tooltip = value;
                 }
             }
 
@@ -1864,11 +2014,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.textPatternRange;
+                    return textPatternRange;
                 }
                 set
                 {
-                    this.textPatternRange = value;
+                    textPatternRange = value;
                 }
             }
 
@@ -1876,11 +2026,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.underneathElement;
+                    return underneathElement;
                 }
                 set
                 {
-                    this.underneathElement = value;
+                    underneathElement = value;
                 }
             }
 
@@ -1888,11 +2038,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.boundingRectangle;
+                    return boundingRectangle;
                 }
                 set
                 {
-                    this.boundingRectangle = value;
+                    boundingRectangle = value;
                 }
             }
 			
@@ -1946,14 +2096,14 @@ namespace dDeltaSolutions.Spy
 
         private void OnClickCopyValue(object sender, RoutedEventArgs e)
         {
-            Attribute attribute = this.attributesListView.SelectedItem as Attribute;
+            Attribute attribute = attributesListView.SelectedItem as Attribute;
             if (attribute == null)
             {
                 return;
             }
 
             string attrString = GetAttributeString(attribute);
-            System.Windows.Clipboard.SetText(attrString);
+            Clipboard.SetText(attrString);
         }
 
         private void OnClickCopyAllAttributes(object sender, RoutedEventArgs e)
@@ -1969,7 +2119,7 @@ namespace dDeltaSolutions.Spy
                 }
             }
 
-            System.Windows.Clipboard.SetText(text);
+            Clipboard.SetText(text);
         }
 
         private string GetAttributeString(Attribute attribute)
@@ -1978,7 +2128,7 @@ namespace dDeltaSolutions.Spy
             {
                 if (attribute.Name == "Name:")
                 {
-                    TreeNode node = this.attributesListView.Tag as TreeNode;
+                    TreeNode node = attributesListView.Tag as TreeNode;
 
                     if (node != null)
                     {
@@ -2012,7 +2162,7 @@ namespace dDeltaSolutions.Spy
 
         private void OnClickCopyValuePattern(object sender, RoutedEventArgs e)
         {
-            Attribute attribute = this.patternsListView.SelectedItem as Attribute;
+            Attribute attribute = patternsListView.SelectedItem as Attribute;
             if (attribute == null)
             {
                 return;
@@ -2022,13 +2172,13 @@ namespace dDeltaSolutions.Spy
             {
                 if ((attribute.Name == "Value:") && (attribute.Group == "UIA_ValuePattern"))
                 {
-                    TreeNode node = this.patternsListView.Tag as TreeNode;
+                    TreeNode node = patternsListView.Tag as TreeNode;
                     
                     if (node != null)
                     {
                         IUIAutomationValuePattern valuePattern = node.Element.GetCurrentPattern(UIA_PatternIds.UIA_ValuePatternId) as IUIAutomationValuePattern;
                         string value = valuePattern.CurrentValue;
-                        System.Windows.Clipboard.SetText(value);
+                        Clipboard.SetText(value);
                         return;
                     }
                 }
@@ -2040,19 +2190,19 @@ namespace dDeltaSolutions.Spy
                     if (textPatternRange != null)
                     {
                         string text = textPatternRange.GetText(-1);
-                        System.Windows.Clipboard.SetText(text);
+                        Clipboard.SetText(text);
                         return;
                     }
                 }
                 if ((attribute.Name == "Value:") && (attribute.Group == "UIA_LegacyIAccessiblePattern"))
                 {
-                    TreeNode node = this.patternsListView.Tag as TreeNode;
+                    TreeNode node = patternsListView.Tag as TreeNode;
                     
                     if (node != null)
                     {
                         var legacyPattern = node.Element.GetCurrentPattern(UIA_PatternIds.UIA_LegacyIAccessiblePatternId) as IUIAutomationLegacyIAccessiblePattern;
                         string value = legacyPattern.CurrentValue;
-                        System.Windows.Clipboard.SetText(value);
+                        Clipboard.SetText(value);
                         return;
                     }
                 }
@@ -2061,7 +2211,7 @@ namespace dDeltaSolutions.Spy
 
             try
             {
-                System.Windows.Clipboard.SetText(attribute.Value);
+                Clipboard.SetText(attribute.Value);
             }
             catch { }
         }
@@ -2072,7 +2222,7 @@ namespace dDeltaSolutions.Spy
 			{
 				return;
 			}*/
-            AboutForm aboutForm = new AboutForm() { TopMost = this.Topmost };
+            AboutForm aboutForm = new AboutForm { TopMost = Topmost };
             aboutForm.ShowDialog();
         }
 
@@ -2084,12 +2234,11 @@ namespace dDeltaSolutions.Spy
 
         private void OnPatternsContextOpened(object sender, RoutedEventArgs e)
         {
-            return;
         }
 
         private void OnPatternsContextLoaded(object sender, RoutedEventArgs e)
         {
-            Attribute attribute = this.patternsListView.SelectedItem as Attribute;
+            Attribute attribute = patternsListView.SelectedItem as Attribute;
             if (attribute == null)
             {
                 return;
@@ -2099,39 +2248,42 @@ namespace dDeltaSolutions.Spy
             {
                 if (attribute.BoundingRectangle.HasValue)
                 {
-                    System.Windows.Controls.MenuItem highlightMenuItem = new System.Windows.Controls.MenuItem();
-                    highlightMenuItem.Header = "Highlight";
+                    MenuItem highlightMenuItem = new MenuItem
+                        {
+                            Header = "Highlight"
+                        };
                     highlightMenuItem.Click += highlightMenuItem_Click;
                     highlightMenuItem.Tag = attribute.BoundingRectangle.Value;
-                    this.patternsListView.ContextMenu.Items.Add(highlightMenuItem);
-                    
+                    patternsListView.ContextMenu?.Items.Add(highlightMenuItem);
+
                     return;
                 }
-                else if (attribute.UnderneathElement != null)
+
+                if (attribute.UnderneathElement != null)
                 {
-                    System.Windows.Controls.MenuItem gotoMenuItem = new System.Windows.Controls.MenuItem();
-                    gotoMenuItem.Header = "Jump to";
+                    MenuItem gotoMenuItem = new MenuItem
+                    {
+                        Header = "Jump to"
+                    };
                     gotoMenuItem.Click += gotoMenuItem_Click;
                     gotoMenuItem.Tag = attribute.UnderneathElement;
-                    this.patternsListView.ContextMenu.Items.Add(gotoMenuItem);
+                    patternsListView.ContextMenu.Items.Add(gotoMenuItem);
 
-                    System.Windows.Controls.MenuItem highlightMenuItem = new System.Windows.Controls.MenuItem();
-                    highlightMenuItem.Header = "Highlight";
+                    MenuItem highlightMenuItem = new MenuItem
+                    {
+                        Header = "Highlight"
+                    };
                     highlightMenuItem.Click += highlightMenuItem_Click;
                     highlightMenuItem.Tag = attribute.UnderneathElement;
-                    this.patternsListView.ContextMenu.Items.Add(highlightMenuItem);
-
-                    return;
+                    patternsListView.ContextMenu.Items.Add(highlightMenuItem);
                 }
             }
             catch { }
-
-            return;
         }
 
         private void OnAttributesContextLoaded(object sender, RoutedEventArgs e)
         {
-            Attribute attribute = this.attributesListView.SelectedItem as Attribute;
+            Attribute attribute = attributesListView.SelectedItem as Attribute;
             if (attribute == null)
             {
                 return;
@@ -2141,33 +2293,33 @@ namespace dDeltaSolutions.Spy
             {
                 if (attribute.UnderneathElement != null)
                 {
-                    System.Windows.Controls.MenuItem gotoMenuItem = new System.Windows.Controls.MenuItem();
-                    gotoMenuItem.Header = "Jump to";
+                    MenuItem gotoMenuItem = new MenuItem
+                        {
+                            Header = "Jump to"
+                        };
                     gotoMenuItem.Click += gotoMenuItem_Click;
                     gotoMenuItem.Tag = attribute.UnderneathElement;
-                    this.attributesListView.ContextMenu.Items.Add(gotoMenuItem);
+                    attributesListView.ContextMenu.Items.Add(gotoMenuItem);
                     
-                    System.Windows.Controls.MenuItem highlightMenuItem = new System.Windows.Controls.MenuItem();
-                    highlightMenuItem.Header = "Highlight";
+                    MenuItem highlightMenuItem = new MenuItem
+                        {
+                            Header = "Highlight"
+                        };
                     highlightMenuItem.Click += highlightMenuItem_Click;
                     highlightMenuItem.Tag = attribute.UnderneathElement;
-                    this.attributesListView.ContextMenu.Items.Add(highlightMenuItem);
-                    
-                    return;
+                    attributesListView.ContextMenu.Items.Add(highlightMenuItem);
                 }
             }
             catch { }
-
-            return;
         }
 
         private void OnAttributesContextUnloaded(object sender, RoutedEventArgs e)
         {
-            List<System.Windows.Controls.MenuItem> itemsToDelete =
-                new List<System.Windows.Controls.MenuItem>();
+            List<MenuItem> itemsToDelete =
+                new List<MenuItem>();
 
-            foreach (System.Windows.Controls.MenuItem menuitem in
-                this.attributesListView.ContextMenu.Items)
+            foreach (MenuItem menuitem in
+                attributesListView.ContextMenu.Items)
             {
                 string header = menuitem.Header.ToString();
                 if (header == "Jump to" || header == "Highlight")
@@ -2176,19 +2328,19 @@ namespace dDeltaSolutions.Spy
                 }
             }
 
-            foreach (System.Windows.Controls.MenuItem menuItem in itemsToDelete)
+            foreach (MenuItem menuItem in itemsToDelete)
             {
-                this.attributesListView.ContextMenu.Items.Remove(menuItem);
+                attributesListView.ContextMenu.Items.Remove(menuItem);
             }
         }
 
         private void OnPatternsContextUnloaded(object sender, RoutedEventArgs e)
         {
-            List<System.Windows.Controls.MenuItem> itemsToDelete =
-                new List<System.Windows.Controls.MenuItem>();
+            List<MenuItem> itemsToDelete =
+                new List<MenuItem>();
 
-            foreach (System.Windows.Controls.MenuItem menuitem in 
-                this.patternsListView.ContextMenu.Items)
+            foreach (MenuItem menuitem in 
+                patternsListView.ContextMenu.Items)
             {
                 if (menuitem.Header.ToString() == "Highlight")
                 {
@@ -2200,16 +2352,16 @@ namespace dDeltaSolutions.Spy
                 }
             }
 
-            foreach (System.Windows.Controls.MenuItem menuItem in itemsToDelete)
+            foreach (MenuItem menuItem in itemsToDelete)
             {
-                this.patternsListView.ContextMenu.Items.Remove(menuItem);
+                patternsListView.ContextMenu.Items.Remove(menuItem);
             }
         }
 
         void gotoMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.MenuItem menuItem = 
-                (e.OriginalSource as System.Windows.Controls.MenuItem);
+            MenuItem menuItem = 
+                (e.OriginalSource as MenuItem);
             if (menuItem == null)
             {
                 return;
@@ -2222,13 +2374,13 @@ namespace dDeltaSolutions.Spy
             }
 
             SelectAutomationElementInTree(element);
-            this.tvElements.Focus();
+            tvElements.Focus();
         }
 
         void highlightMenuItem_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Controls.MenuItem menuItem = 
-                (e.OriginalSource as System.Windows.Controls.MenuItem);
+            MenuItem menuItem = 
+                (e.OriginalSource as MenuItem);
             if (menuItem == null)
             {
                 return;
@@ -2291,20 +2443,20 @@ namespace dDeltaSolutions.Spy
 
             GraphicsPath path = new GraphicsPath();
 
-            path.AddRectangle(new System.Drawing.Rectangle(0, 0, thickness, 
+            path.AddRectangle(new Rectangle(0, 0, thickness, 
                 height)); //add left
-            path.AddRectangle(new System.Drawing.Rectangle(thickness, 
+            path.AddRectangle(new Rectangle(thickness, 
                 height - thickness, width - 2 * thickness, thickness)); //add bottom
-            path.AddRectangle(new System.Drawing.Rectangle(width - thickness, 0,
+            path.AddRectangle(new Rectangle(width - thickness, 0,
                 thickness, height)); //add right
-            path.AddRectangle(new System.Drawing.Rectangle(thickness, 0,
+            path.AddRectangle(new Rectangle(thickness, 0,
                 width - 2 * thickness, thickness)); //add top
 
-            System.Drawing.Region region = new System.Drawing.Region(path);
+            Region region = new Region(path);
             Form tempForm = new Form();
 
-            tempForm.ForeColor = System.Drawing.Color.Green;
-            tempForm.BackColor = System.Drawing.Color.Green;
+            tempForm.ForeColor = Color.Green;
+            tempForm.BackColor = Color.Green;
 
             tempForm.FormBorderStyle = FormBorderStyle.None;
             tempForm.StartPosition = FormStartPosition.Manual;

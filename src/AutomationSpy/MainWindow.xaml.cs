@@ -32,7 +32,7 @@ namespace dDeltaSolutions.Spy
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, System.Windows.Forms.IWin32Window
+    public partial class MainWindow : Window, IWin32Window
     {
         public MainWindow()
         {
@@ -68,13 +68,13 @@ namespace dDeltaSolutions.Spy
             {
                 if (window_left > -10000 && window_top > -10000)
                 {
-                    this.Left = window_left;
-                    this.Top = window_top;
+                    Left = window_left;
+                    Top = window_top;
                 }
                 if (window_width != 0 && window_height != 0)
                 {
-                    this.Width = window_width;
-                    this.Height = window_height;
+                    Width = window_width;
+                    Height = window_height;
                 }
                 /*if (col_width1 > 0 && col_width2 > 0)
                 {
@@ -84,21 +84,21 @@ namespace dDeltaSolutions.Spy
             }
             catch {}
 			
-			this.Title = MainWindow.AppName;
+			Title = AppName;
         }
 
         public static string Version = "4.3.0.0";
 		public static string AppName = "Automation Spy";
-        public static CUIAutomation8 uiAutomation = null;
+        public static CUIAutomation8 uiAutomation;
 
         //private static string UpdateUrl = @"file:\\\C:\Projects\update";
         //private static string UpdateUrl = @"http://www.automationspy.com/update";
 
-        private string prefFileName = System.IO.Path.GetTempPath() + "\\AutomationSpy_A5674D6E.xml";
+        private string prefFileName = Path.GetTempPath() + "\\AutomationSpy_A5674D6E.xml";
 
-		private static IUIAutomationCacheRequest cacheRequest = null;
-		private Dictionary<int, string> properties = null;
-        private double window_width = 0, window_height = 0, window_left = -10000, window_top = -10000;
+		private static IUIAutomationCacheRequest cacheRequest;
+		private Dictionary<int, string> properties;
+        private double window_width, window_height, window_left = -10000, window_top = -10000;
 
         private void LoadPreferences()
         {
@@ -330,7 +330,7 @@ namespace dDeltaSolutions.Spy
                     if (nodeList[0].InnerText == "True")
                     {
                         menuAlwaysOnTop.IsChecked = true;
-						this.Topmost = true;
+						Topmost = true;
                     }
                 }
             }
@@ -445,10 +445,10 @@ namespace dDeltaSolutions.Spy
             Traces.ClearTrace();
             RefreshTree();
 
-            this.attributesListView.ItemsSource = this.listAttributes;
-            this.patternsListView.ItemsSource = this.listPatterns;
+            attributesListView.ItemsSource = listAttributes;
+            patternsListView.ItemsSource = listPatterns;
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(this.patternsListView.ItemsSource);
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(patternsListView.ItemsSource);
             PropertyGroupDescription groupDescription = new PropertyGroupDescription("Group");
             view.GroupDescriptions.Add(groupDescription);
             
@@ -493,7 +493,7 @@ namespace dDeltaSolutions.Spy
         {
             // keep the currently selected element
             IUIAutomationElement selectedElement = null;
-            TreeViewItem selectedTreeViewItem = this.tvElements.SelectedItem as TreeViewItem;
+            TreeViewItem selectedTreeViewItem = tvElements.SelectedItem as TreeViewItem;
             if (selectedTreeViewItem != null)
             {
                 TreeNode selectedNode = selectedTreeViewItem.Tag as TreeNode;
@@ -503,7 +503,7 @@ namespace dDeltaSolutions.Spy
                 }
             }
             
-            MainWindow.lastAutomationElement = null;
+            lastAutomationElement = null;
 
             if (tvElements.Items.Count > 0)
             {
@@ -521,7 +521,7 @@ namespace dDeltaSolutions.Spy
 
             tvElements.Items.Add(rootItem);
 
-            List<IUIAutomationElement> childrenElements = MainWindow.FindChildren(root);
+            List<IUIAutomationElement> childrenElements = FindChildren(root);
 
             foreach (IUIAutomationElement element in childrenElements)
             {
@@ -549,7 +549,7 @@ namespace dDeltaSolutions.Spy
             
             if (selectedElement != null)
             {
-                if (CompareElements(selectedElement, uiAutomation.GetRootElement()) == true)
+                if (CompareElements(selectedElement, uiAutomation.GetRootElement()))
                 {
                     rootItem.IsSelected = true;
                 }
@@ -561,10 +561,10 @@ namespace dDeltaSolutions.Spy
             }
             else 
             {
-                this.attributesListView.Tag = null;
-                this.patternsListView.Tag = null;
-                this.listAttributes.Clear();
-                this.listPatterns.Clear();
+                attributesListView.Tag = null;
+                patternsListView.Tag = null;
+                listAttributes.Clear();
+                listPatterns.Clear();
                 
                 if (buttonHighlight.IsChecked == true)
                 {
@@ -574,7 +574,7 @@ namespace dDeltaSolutions.Spy
                     }
                     catch { }
                 }
-                if (showCPMenuItem.IsChecked == true)
+                if (showCPMenuItem.IsChecked)
                 {
                     try
                     {
@@ -613,10 +613,10 @@ namespace dDeltaSolutions.Spy
             treeviewItem.Header = node.ToString();
             treeviewItem.Items.Clear();
 
-            List<IUIAutomationElement> children = MainWindow.FindChildren(node.Element);
+            List<IUIAutomationElement> children = FindChildren(node.Element);
             foreach (IUIAutomationElement element in children)
             {
-                if (node.IsRoot == true)
+                if (node.IsRoot)
                 {
                     try
                     {
@@ -643,7 +643,7 @@ namespace dDeltaSolutions.Spy
         
         void RefreshControlPatterns(object sender, RoutedEventArgs e)
         {
-            TreeViewItem treeviewItem = this.tvElements.SelectedItem as TreeViewItem;
+            TreeViewItem treeviewItem = tvElements.SelectedItem as TreeViewItem;
 			if (treeviewItem == null)
             {
                 return;
@@ -667,7 +667,7 @@ namespace dDeltaSolutions.Spy
 		
 		private void TryRefreshItem()
         {
-            TreeViewItem treeviewItem = this.tvElements.SelectedItem as TreeViewItem;
+            TreeViewItem treeviewItem = tvElements.SelectedItem as TreeViewItem;
             if (treeviewItem == null)
             {
                 return;
@@ -675,7 +675,7 @@ namespace dDeltaSolutions.Spy
 
             RefreshTreeViewItem(treeviewItem);
 
-			treeviewItem = this.tvElements.SelectedItem as TreeViewItem;
+			treeviewItem = tvElements.SelectedItem as TreeViewItem;
 			if (treeviewItem == null)
             {
                 return;
@@ -688,7 +688,7 @@ namespace dDeltaSolutions.Spy
             }
 			
 			bool isAlive = node.IsAlive;
-			if ((buttonHighlight.IsChecked.HasValue) && (buttonHighlight.IsChecked.Value == true))
+			if ((buttonHighlight.IsChecked.HasValue) && buttonHighlight.IsChecked.Value)
             {
                 if (isAlive == false)
                 {
@@ -696,7 +696,7 @@ namespace dDeltaSolutions.Spy
                 }
 				else
 				{
-					this.Highlight(node.Element);
+					Highlight(node.Element);
 				}
             }
 			
@@ -724,7 +724,7 @@ namespace dDeltaSolutions.Spy
 
         void HighlightItem(object sender, RoutedEventArgs e)
         {
-            TreeViewItem tvItem = this.tvElements.SelectedItem as TreeViewItem;
+            TreeViewItem tvItem = tvElements.SelectedItem as TreeViewItem;
             if (tvItem == null)
             {
                 return;
@@ -757,7 +757,7 @@ namespace dDeltaSolutions.Spy
 		
 		void OnCopyText(object sender, RoutedEventArgs e)
 		{ 
-			TreeViewItem tvItem = this.tvElements.SelectedItem as TreeViewItem;
+			TreeViewItem tvItem = tvElements.SelectedItem as TreeViewItem;
             if (tvItem == null)
             {
                 return;
@@ -787,7 +787,7 @@ namespace dDeltaSolutions.Spy
 			{
 				try
 				{
-					System.Windows.Forms.Clipboard.SetText(name);
+					Clipboard.SetText(name);
 				}
 				catch { }
 			}
@@ -795,7 +795,7 @@ namespace dDeltaSolutions.Spy
 		
 		void OnSetFocus(object sender, RoutedEventArgs e)
 		{
-			TreeViewItem tvItem = this.tvElements.SelectedItem as TreeViewItem;
+			TreeViewItem tvItem = tvElements.SelectedItem as TreeViewItem;
             if (tvItem == null)
             {
                 return;
@@ -813,7 +813,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -858,29 +858,31 @@ namespace dDeltaSolutions.Spy
 			}
             foreach (TreeNode currentNode in children)
             {
-                TreeViewItem currentItem = new TreeViewItem();
-                currentItem.Header = currentNode.ToString();
-                currentItem.Tag = currentNode;
+                TreeViewItem currentItem = new TreeViewItem
+                {
+                    Header = currentNode.ToString(),
+                    Tag = currentNode
+                };
                 treeviewItem.Items.Add(currentItem);
             }
         }
 
-		private Form frmHighlightTop = null;
-		private Form frmHighlightLeft = null;
-		private Form frmHighlightBottom = null;
-		private Form frmHighlightRight = null;
-		private int width = 0;
-        private int height = 0;
+		private Form frmHighlightTop;
+		private Form frmHighlightLeft;
+		private Form frmHighlightBottom;
+		private Form frmHighlightRight;
+		private int width;
+        private int height;
 		private int thickness = 5;
 
         private void Highlight(IUIAutomationElement element)
         {
-            if (this.buttonHighlight.IsChecked.HasValue == false)
+            if (buttonHighlight.IsChecked.HasValue == false)
             {
                 return;
             }
                 
-            if (this.buttonHighlight.IsChecked.Value == false)
+            if (buttonHighlight.IsChecked.Value == false)
             {
                 return;
             }
@@ -933,13 +935,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightTop.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightTop.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightTop.Location = new System.Drawing.Point(left, top);
-				frmHighlightTop.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightTop.Size = new System.Drawing.Size(0, 0);
+				frmHighlightTop.Location = new Point(left, top);
+				frmHighlightTop.MinimumSize = new Size(0, 0);
+				frmHighlightTop.Size = new Size(0, 0);
 				frmHighlightTop.ShowInTaskbar = false;
 				frmHighlightTop.TopMost = true;
-				frmHighlightTop.ForeColor = System.Drawing.Color.Red;
-				frmHighlightTop.BackColor = System.Drawing.Color.Red;
+				frmHighlightTop.ForeColor = Color.Red;
+				frmHighlightTop.BackColor = Color.Red;
 				
 				frmHighlightTop.Load += highlightTop_Loaded;
 				frmHighlightTop.Show();
@@ -948,8 +950,8 @@ namespace dDeltaSolutions.Spy
 			}
 			else
 			{
-				frmHighlightTop.Location = new System.Drawing.Point(left, top);
-				frmHighlightTop.Size = new System.Drawing.Size(width + 2 * thickness, thickness);
+				frmHighlightTop.Location = new Point(left, top);
+				frmHighlightTop.Size = new Size(width + 2 * thickness, thickness);
 			}
             
 			if (frmHighlightLeft == null)
@@ -959,13 +961,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightLeft.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightLeft.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightLeft.Location = new System.Drawing.Point(left, top);
-				frmHighlightLeft.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightLeft.Size = new System.Drawing.Size(0, 0);
+				frmHighlightLeft.Location = new Point(left, top);
+				frmHighlightLeft.MinimumSize = new Size(0, 0);
+				frmHighlightLeft.Size = new Size(0, 0);
 				frmHighlightLeft.ShowInTaskbar = false;
 				frmHighlightLeft.TopMost = true;
-				frmHighlightLeft.ForeColor = System.Drawing.Color.Red;
-				frmHighlightLeft.BackColor = System.Drawing.Color.Red;
+				frmHighlightLeft.ForeColor = Color.Red;
+				frmHighlightLeft.BackColor = Color.Red;
 				
 				frmHighlightLeft.Load += highlightLeft_Loaded;
 				frmHighlightLeft.Show();
@@ -974,8 +976,8 @@ namespace dDeltaSolutions.Spy
 			}
 			else
 			{
-				frmHighlightLeft.Location = new System.Drawing.Point(left, top);
-				frmHighlightLeft.Size = new System.Drawing.Size(thickness, height + 2 * thickness);
+				frmHighlightLeft.Location = new Point(left, top);
+				frmHighlightLeft.Size = new Size(thickness, height + 2 * thickness);
 			}
 			
 			if (frmHighlightBottom == null)
@@ -985,13 +987,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightBottom.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightBottom.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightBottom.Location = new System.Drawing.Point(left, top + height + thickness);
-				frmHighlightBottom.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightBottom.Size = new System.Drawing.Size(0, 0);
+				frmHighlightBottom.Location = new Point(left, top + height + thickness);
+				frmHighlightBottom.MinimumSize = new Size(0, 0);
+				frmHighlightBottom.Size = new Size(0, 0);
 				frmHighlightBottom.ShowInTaskbar = false;
 				frmHighlightBottom.TopMost = true;
-				frmHighlightBottom.ForeColor = System.Drawing.Color.Red;
-				frmHighlightBottom.BackColor = System.Drawing.Color.Red;
+				frmHighlightBottom.ForeColor = Color.Red;
+				frmHighlightBottom.BackColor = Color.Red;
 				
 				frmHighlightBottom.Load += highlightBottom_Loaded;
 				frmHighlightBottom.Show();
@@ -1000,8 +1002,8 @@ namespace dDeltaSolutions.Spy
 			}
 			else
 			{
-				frmHighlightBottom.Location = new System.Drawing.Point(left, top + height + thickness);
-				frmHighlightBottom.Size = new System.Drawing.Size(width + 2 * thickness, thickness);
+				frmHighlightBottom.Location = new Point(left, top + height + thickness);
+				frmHighlightBottom.Size = new Size(width + 2 * thickness, thickness);
 			}
 			
 			if (frmHighlightRight == null)
@@ -1011,13 +1013,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightRight.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightRight.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightRight.Location = new System.Drawing.Point(left + thickness + width, top);
-				frmHighlightRight.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightRight.Size = new System.Drawing.Size(0, 0);
+				frmHighlightRight.Location = new Point(left + thickness + width, top);
+				frmHighlightRight.MinimumSize = new Size(0, 0);
+				frmHighlightRight.Size = new Size(0, 0);
 				frmHighlightRight.ShowInTaskbar = false;
 				frmHighlightRight.TopMost = true;
-				frmHighlightRight.ForeColor = System.Drawing.Color.Red;
-				frmHighlightRight.BackColor = System.Drawing.Color.Red;
+				frmHighlightRight.ForeColor = Color.Red;
+				frmHighlightRight.BackColor = Color.Red;
 				
 				frmHighlightRight.Load += highlightRight_Loaded;
 				frmHighlightRight.Show();
@@ -1026,34 +1028,34 @@ namespace dDeltaSolutions.Spy
 			}
 			else
 			{
-				frmHighlightRight.Location = new System.Drawing.Point(left + thickness + width, top);
-				frmHighlightRight.Size = new System.Drawing.Size(thickness, height + 2 * thickness);
+				frmHighlightRight.Location = new Point(left + thickness + width, top);
+				frmHighlightRight.Size = new Size(thickness, height + 2 * thickness);
 			}
 
-			if (firstHighlight == true)
+			if (firstHighlight)
 			{
-				this.Focus();
+				Focus();
 			}
         }
 		
-		private void highlightTop_Loaded(object sender, System.EventArgs e)
+		private void highlightTop_Loaded(object sender, EventArgs e)
 		{
-			frmHighlightTop.Size = new System.Drawing.Size(width + 2 * thickness, thickness);
+			frmHighlightTop.Size = new Size(width + 2 * thickness, thickness);
 		}
 		
-		private void highlightLeft_Loaded(object sender, System.EventArgs e)
+		private void highlightLeft_Loaded(object sender, EventArgs e)
 		{
-			frmHighlightLeft.Size = new System.Drawing.Size(thickness, height + 2 * thickness);
+			frmHighlightLeft.Size = new Size(thickness, height + 2 * thickness);
 		}
 		
-		private void highlightBottom_Loaded(object sender, System.EventArgs e)
+		private void highlightBottom_Loaded(object sender, EventArgs e)
 		{
-			frmHighlightBottom.Size = new System.Drawing.Size(width + 2 * thickness, thickness);
+			frmHighlightBottom.Size = new Size(width + 2 * thickness, thickness);
 		}
 		
-		private void highlightRight_Loaded(object sender, System.EventArgs e)
+		private void highlightRight_Loaded(object sender, EventArgs e)
 		{
-			frmHighlightRight.Size = new System.Drawing.Size(thickness, height + 2 * thickness);
+			frmHighlightRight.Size = new Size(thickness, height + 2 * thickness);
 		}
 
         [DllImport("User32.dll")]
@@ -1085,7 +1087,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
 			
@@ -1175,7 +1177,7 @@ namespace dDeltaSolutions.Spy
 				catch { }
 			}
 
-            if ((buttonHighlight.IsChecked.HasValue) && (buttonHighlight.IsChecked.Value == true))
+            if ((buttonHighlight.IsChecked.HasValue) && buttonHighlight.IsChecked.Value)
             {
                 if (isAlive == false)
                 {
@@ -1215,7 +1217,7 @@ namespace dDeltaSolutions.Spy
 			
 			if (frmHighlightTop != null)
 			{
-				frmHighlightTop.Location = new System.Drawing.Point(-10000, -10000);
+				frmHighlightTop.Location = new Point(-10000, -10000);
 			}
 			else
 			{
@@ -1224,13 +1226,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightTop.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightTop.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightTop.Location = new System.Drawing.Point(-10000, -10000);
-				frmHighlightTop.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightTop.Size = new System.Drawing.Size(0, 0);
+				frmHighlightTop.Location = new Point(-10000, -10000);
+				frmHighlightTop.MinimumSize = new Size(0, 0);
+				frmHighlightTop.Size = new Size(0, 0);
 				frmHighlightTop.ShowInTaskbar = false;
 				frmHighlightTop.TopMost = true;
-				frmHighlightTop.ForeColor = System.Drawing.Color.Red;
-				frmHighlightTop.BackColor = System.Drawing.Color.Red;
+				frmHighlightTop.ForeColor = Color.Red;
+				frmHighlightTop.BackColor = Color.Red;
 				
 				frmHighlightTop.Load += highlightTop_Loaded;
 				frmHighlightTop.Show();
@@ -1240,7 +1242,7 @@ namespace dDeltaSolutions.Spy
 			
 			if (frmHighlightLeft != null)
 			{
-				frmHighlightLeft.Location = new System.Drawing.Point(-10000, -10000);
+				frmHighlightLeft.Location = new Point(-10000, -10000);
 			}
 			else
 			{
@@ -1249,13 +1251,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightLeft.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightLeft.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightLeft.Location = new System.Drawing.Point(-10000, -10000);
-				frmHighlightLeft.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightLeft.Size = new System.Drawing.Size(0, 0);
+				frmHighlightLeft.Location = new Point(-10000, -10000);
+				frmHighlightLeft.MinimumSize = new Size(0, 0);
+				frmHighlightLeft.Size = new Size(0, 0);
 				frmHighlightLeft.ShowInTaskbar = false;
 				frmHighlightLeft.TopMost = true;
-				frmHighlightLeft.ForeColor = System.Drawing.Color.Red;
-				frmHighlightLeft.BackColor = System.Drawing.Color.Red;
+				frmHighlightLeft.ForeColor = Color.Red;
+				frmHighlightLeft.BackColor = Color.Red;
 				
 				frmHighlightLeft.Load += highlightLeft_Loaded;
 				frmHighlightLeft.Show();
@@ -1265,7 +1267,7 @@ namespace dDeltaSolutions.Spy
 			
 			if (frmHighlightBottom != null)
 			{
-				frmHighlightBottom.Location = new System.Drawing.Point(-10000, -10000);
+				frmHighlightBottom.Location = new Point(-10000, -10000);
 			}
 			else
 			{
@@ -1274,13 +1276,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightBottom.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightBottom.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightBottom.Location = new System.Drawing.Point(-10000, -10000);
-				frmHighlightBottom.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightBottom.Size = new System.Drawing.Size(0, 0);
+				frmHighlightBottom.Location = new Point(-10000, -10000);
+				frmHighlightBottom.MinimumSize = new Size(0, 0);
+				frmHighlightBottom.Size = new Size(0, 0);
 				frmHighlightBottom.ShowInTaskbar = false;
 				frmHighlightBottom.TopMost = true;
-				frmHighlightBottom.ForeColor = System.Drawing.Color.Red;
-				frmHighlightBottom.BackColor = System.Drawing.Color.Red;
+				frmHighlightBottom.ForeColor = Color.Red;
+				frmHighlightBottom.BackColor = Color.Red;
 				
 				frmHighlightBottom.Load += highlightBottom_Loaded;
 				frmHighlightBottom.Show();
@@ -1290,7 +1292,7 @@ namespace dDeltaSolutions.Spy
 			
 			if (frmHighlightRight != null)
 			{
-				frmHighlightRight.Location = new System.Drawing.Point(-10000, -10000);
+				frmHighlightRight.Location = new Point(-10000, -10000);
 			}
 			else
 			{
@@ -1299,13 +1301,13 @@ namespace dDeltaSolutions.Spy
 				frmHighlightRight.FormBorderStyle = FormBorderStyle.None;
 				frmHighlightRight.StartPosition = FormStartPosition.Manual;
 				
-				frmHighlightRight.Location = new System.Drawing.Point(-10000, -10000);
-				frmHighlightRight.MinimumSize = new System.Drawing.Size(0, 0);
-				frmHighlightRight.Size = new System.Drawing.Size(0, 0);
+				frmHighlightRight.Location = new Point(-10000, -10000);
+				frmHighlightRight.MinimumSize = new Size(0, 0);
+				frmHighlightRight.Size = new Size(0, 0);
 				frmHighlightRight.ShowInTaskbar = false;
 				frmHighlightRight.TopMost = true;
-				frmHighlightRight.ForeColor = System.Drawing.Color.Red;
-				frmHighlightRight.BackColor = System.Drawing.Color.Red;
+				frmHighlightRight.ForeColor = Color.Red;
+				frmHighlightRight.BackColor = Color.Red;
 				
 				frmHighlightRight.Load += highlightRight_Loaded;
 				frmHighlightRight.Show();
@@ -1313,9 +1315,9 @@ namespace dDeltaSolutions.Spy
 				firstHighlight = true;
 			}
 			
-			if (firstHighlight == true)
+			if (firstHighlight)
 			{
-				this.Focus();
+				Focus();
 			}
         }
 
@@ -1324,7 +1326,7 @@ namespace dDeltaSolutions.Spy
             RefreshTree();
         }
 
-        private void tvElements_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        private void tvElements_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.F5)
             {
@@ -1369,7 +1371,7 @@ namespace dDeltaSolutions.Spy
 		
 		private void TryButtonHighlightClick()
 		{
-            if (!this.buttonHighlight.IsChecked.HasValue)
+            if (!buttonHighlight.IsChecked.HasValue)
             {
                 return;
             }
@@ -1384,7 +1386,7 @@ namespace dDeltaSolutions.Spy
                 img = panel.Children[0] as Image;
             }
 
-            if (this.buttonHighlight.IsChecked.Value == false)
+            if (buttonHighlight.IsChecked.Value == false)
             {
 				UnHighlight();
 
@@ -1419,21 +1421,21 @@ namespace dDeltaSolutions.Spy
                     return;
                 }
 
-                this.Highlight(selectedNode.Element);
+                Highlight(selectedNode.Element);
             }
         }
 
-        private Timer timer = null;
+        private Timer timer;
 
         private void OnSelectElement(object sender, RoutedEventArgs e)
 		{
 			try
 			{
-				if (!this.selectButton.IsChecked.HasValue)
+				if (!selectButton.IsChecked.HasValue)
 				{
 					return;
 				}
-				menuItemPick.IsChecked = this.selectButton.IsChecked.Value;
+				menuItemPick.IsChecked = selectButton.IsChecked.Value;
 			
 				TryOnSelectElement();
 			}
@@ -1442,7 +1444,7 @@ namespace dDeltaSolutions.Spy
 		
 		private void TryOnSelectElement()
         {
-			if (menuItemPick.IsChecked == true && menuItemTrack.IsChecked == true)
+			if (menuItemPick.IsChecked && menuItemTrack.IsChecked)
 			{
 				menuItemTrack.IsChecked = false;
 				if (timerTrack != null)
@@ -1451,7 +1453,7 @@ namespace dDeltaSolutions.Spy
 				}
 			}
 		
-            StackPanel panel = this.selectButton.Content as StackPanel;
+            StackPanel panel = selectButton.Content as StackPanel;
             Image img = null;
 
             if ((panel != null) && (panel.Children.Count > 0))
@@ -1459,7 +1461,7 @@ namespace dDeltaSolutions.Spy
                 img = panel.Children[0] as Image;
             }
 
-            if (this.selectButton.IsChecked.Value == false)
+            if (selectButton.IsChecked.Value == false)
             {
                 //Pointer button is released
                 if (img != null)
@@ -1495,7 +1497,7 @@ namespace dDeltaSolutions.Spy
             }
         }
 
-        private static AutomationInfo lastAutomationElement = null;
+        private static AutomationInfo lastAutomationElement;
         private static int currentProcessId = Process.GetCurrentProcess().Id;
 
         void timer_Tick(object sender, EventArgs e)
@@ -1532,32 +1534,32 @@ namespace dDeltaSolutions.Spy
         {
             try
             {
-                if ((MainWindow.lastAutomationElement != null) &&
-                    (MainWindow.lastAutomationElement.IsIdentic(element)))
+                if ((lastAutomationElement != null) &&
+                    (lastAutomationElement.IsIdentic(element)))
                 {
                     return false;
                 }
 
-                if (element.CurrentProcessId == MainWindow.currentProcessId && includeSpy == false)
+                if (element.CurrentProcessId == currentProcessId && includeSpy == false)
                 {
                     return false;
                 }
             }
             catch { }
 
-            if ((MainWindow.lastAutomationElement != null) &&
-                (MainWindow.lastAutomationElement.IsSameElement(element)))
+            if ((lastAutomationElement != null) &&
+                (lastAutomationElement.IsSameElement(element)))
             {
-                MainWindow.lastAutomationElement.UpdateBoundingRect(element);
+                lastAutomationElement.UpdateBoundingRect(element);
                 Highlight(element);
             }
             else
             {
-                MainWindow.lastAutomationElement = new AutomationInfo(element);
+                lastAutomationElement = new AutomationInfo(element);
 
-                if (SelectAutomationElementInTree(element) == true)
+                if (SelectAutomationElementInTree(element))
                 {
-                    MainWindow.lastAutomationElement.UpdateBoundingRect(element);
+                    lastAutomationElement.UpdateBoundingRect(element);
                     Highlight(element);
                 }
             }
@@ -1576,11 +1578,11 @@ namespace dDeltaSolutions.Spy
             IUIAutomationElement parent = element;
 
             IUIAutomationTreeWalker tw = uiAutomation.ControlViewWalker;
-            if (MainWindow.mode == Modes.Control)
+            if (mode == Modes.Control)
             {
                 //tw = uiAutomation.ControlViewWalker;
             }
-            else if (MainWindow.mode == Modes.Raw)
+            else if (mode == Modes.Raw)
             {
                 tw = uiAutomation.RawViewWalker;
             }
@@ -1616,7 +1618,7 @@ namespace dDeltaSolutions.Spy
 
                 if (i == (parentsList.Count - 1))
                 {
-					if (currentChildItem.IsSelected == true)
+					if (currentChildItem.IsSelected)
                     {
                         alreadySelected = true;
                     }
@@ -1720,7 +1722,7 @@ namespace dDeltaSolutions.Spy
                         //int[] currentRuntimeIdArray = ArrayToIntArray(node.Element.GetRuntimeId());
                         //(int[])node.Element.GetCurrentPropertyValue(AutomationElement.RuntimeIdProperty);
 
-                        if (ArraysEqual<int>(runtimeIdArray, currentRuntimeIdArray))
+                        if (ArraysEqual(runtimeIdArray, currentRuntimeIdArray))
                         {
                             resultTreeViewItem = childTvItem;
                             break;
@@ -1747,7 +1749,6 @@ namespace dDeltaSolutions.Spy
                 }
                 catch
                 {
-                    continue;
                 }
             }
 
@@ -1759,7 +1760,7 @@ namespace dDeltaSolutions.Spy
 			try
 			{
 				menuAlwaysOnTop.IsChecked = !menuAlwaysOnTop.IsChecked;
-				this.Topmost = menuAlwaysOnTop.IsChecked;
+				Topmost = menuAlwaysOnTop.IsChecked;
 			}
 			catch {}
 		}
@@ -1810,9 +1811,9 @@ namespace dDeltaSolutions.Spy
 
 			try
 			{
-				runtimeId1 = MainWindow.ArrayToIntArray(element1.GetRuntimeId());
-				runtimeId2 = MainWindow.ArrayToIntArray(element2.GetRuntimeId());
-				return MainWindow.ArraysEqual<int>(runtimeId1, runtimeId2);
+				runtimeId1 = ArrayToIntArray(element1.GetRuntimeId());
+				runtimeId2 = ArrayToIntArray(element2.GetRuntimeId());
+				return ArraysEqual(runtimeId1, runtimeId2);
 			}
 			catch
 			{
@@ -1822,15 +1823,15 @@ namespace dDeltaSolutions.Spy
 
         internal class AutomationInfo
         {
-            public int[] runtimeId = null;
+            public int[] runtimeId;
             public tagRECT boundingRectangle;
 
             public AutomationInfo(IUIAutomationElement element)
             {
                 try
                 {
-                    this.runtimeId = MainWindow.ArrayToIntArray(element.GetRuntimeId());
-                    this.boundingRectangle = element.CurrentBoundingRectangle;
+                    runtimeId = ArrayToIntArray(element.GetRuntimeId());
+                    boundingRectangle = element.CurrentBoundingRectangle;
                 }
                 catch { }
             }
@@ -1839,7 +1840,7 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.runtimeId;
+                    return runtimeId;
                 }
             }
 
@@ -1847,11 +1848,11 @@ namespace dDeltaSolutions.Spy
             {
                 get
                 {
-                    return this.boundingRectangle;
+                    return boundingRectangle;
                 }
                 set
                 {
-                    this.boundingRectangle = value;
+                    boundingRectangle = value;
                 }
             }
 
@@ -1869,7 +1870,7 @@ namespace dDeltaSolutions.Spy
                     return false;
                 }
 
-                if ((this.runtimeId == null) || (this.runtimeId.Length == 0))
+                if ((runtimeId == null) || (runtimeId.Length == 0))
                 {
                     return false;
                 }
@@ -1878,11 +1879,11 @@ namespace dDeltaSolutions.Spy
 
                 try
                 {
-                    currentRuntimeId = MainWindow.ArrayToIntArray(element.GetRuntimeId());
+                    currentRuntimeId = ArrayToIntArray(element.GetRuntimeId());
                     tagRECT currentBoundingRectangle = element.CurrentBoundingRectangle;
 
-                    return (MainWindow.ArraysEqual<int>(this.runtimeId, currentRuntimeId) &&
-                        AutomationInfo.CompareRectangles(this.boundingRectangle, currentBoundingRectangle));
+                    return (ArraysEqual(runtimeId, currentRuntimeId) &&
+                        CompareRectangles(boundingRectangle, currentBoundingRectangle));
                 }
                 catch
                 {
@@ -1898,7 +1899,7 @@ namespace dDeltaSolutions.Spy
                     return false;
                 }
 
-                if ((this.runtimeId == null) || (this.runtimeId.Length == 0))
+                if ((runtimeId == null) || (runtimeId.Length == 0))
                 {
                     return false;
                 }
@@ -1907,8 +1908,8 @@ namespace dDeltaSolutions.Spy
 
                 try
                 {
-                    currentRuntimeId = MainWindow.ArrayToIntArray(element.GetRuntimeId());
-                    return MainWindow.ArraysEqual<int>(this.runtimeId, currentRuntimeId);
+                    currentRuntimeId = ArrayToIntArray(element.GetRuntimeId());
+                    return ArraysEqual(runtimeId, currentRuntimeId);
                 }
                 catch
                 {
@@ -1920,7 +1921,7 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    this.boundingRectangle = element.CurrentBoundingRectangle;
+                    boundingRectangle = element.CurrentBoundingRectangle;
                 }
                 catch { }
             }
@@ -1930,7 +1931,7 @@ namespace dDeltaSolutions.Spy
         {
             List<IUIAutomationElement> results = new List<IUIAutomationElement>();
 
-            if (MainWindow.mode == Modes.Control)
+            if (mode == Modes.Control)
             {
                 IUIAutomationElementArray children = automationElement.FindAllBuildCache(
                     TreeScope.TreeScope_Children, uiAutomation.CreateTrueCondition(), cacheRequest);
@@ -1946,25 +1947,23 @@ namespace dDeltaSolutions.Spy
                 }
                 return results;
             }
+
+            IUIAutomationTreeWalker tw = uiAutomation.ControlViewWalker;
+            if (mode == Modes.Content)
+            {
+                tw = uiAutomation.ContentViewWalker;
+            }
             else
             {
-                IUIAutomationTreeWalker tw = uiAutomation.ControlViewWalker;
-                if (MainWindow.mode == Modes.Content)
-                {
-                    tw = uiAutomation.ContentViewWalker;
-                }
-                else
-                {
-                    //Raw
-                    tw = uiAutomation.RawViewWalker;
-                }
+                //Raw
+                tw = uiAutomation.RawViewWalker;
+            }
 
-                IUIAutomationElement child = tw.GetFirstChildElementBuildCache(automationElement, cacheRequest);
-                while (child != null)
-                {
-                    results.Add(child);
-                    child = tw.GetNextSiblingElementBuildCache(child, cacheRequest);
-                }
+            IUIAutomationElement child = tw.GetFirstChildElementBuildCache(automationElement, cacheRequest);
+            while (child != null)
+            {
+                results.Add(child);
+                child = tw.GetNextSiblingElementBuildCache(child, cacheRequest);
             }
 
             return results;
@@ -1981,7 +1980,7 @@ namespace dDeltaSolutions.Spy
         
         private void Capture()
         {
-            TreeViewItem selectedItem = this.tvElements.SelectedItem as TreeViewItem;
+            TreeViewItem selectedItem = tvElements.SelectedItem as TreeViewItem;
             if (selectedItem == null)
             {
                 return;
@@ -2008,11 +2007,13 @@ namespace dDeltaSolutions.Spy
                 defaultName = defaultName.Replace("UIA_", "").Replace("ControlTypeId", "");
             }
             defaultName = defaultName.Replace("<", "").Replace(">", "").Replace(":", "").Replace("\"", "").Replace("/", "").Replace("\\", "").Replace("|", "").Replace("?", "").Replace("*", "").Replace(".", "");
-            Microsoft.Win32.SaveFileDialog dlg = new Microsoft.Win32.SaveFileDialog();
-            dlg.FileName = defaultName;
-            dlg.DefaultExt = ".bmp";
-            dlg.Filter = "Jpeg picture (.jpg)|*.jpg|Bitmap picture (.bmp)|*.bmp|PNG picture (.png)|*.png";
-            
+            SaveFileDialog dlg = new SaveFileDialog
+            {
+                FileName = defaultName,
+                DefaultExt = ".bmp",
+                Filter = "Jpeg picture (.jpg)|*.jpg|Bitmap picture (.bmp)|*.bmp|PNG picture (.png)|*.png"
+            };
+
             // Show save file dialog box
             bool? result = dlg.ShowDialog();
             if (result != true)
@@ -2024,11 +2025,11 @@ namespace dDeltaSolutions.Spy
 			
 			// Make the capture into a bitmap
 			BringToForeground(selectedNode.Element);
-			System.Threading.Thread.Sleep(500);
-            System.Drawing.Bitmap bitmap = Helper.CaptureElementToBitmap(selectedNode.Element);
+			Thread.Sleep(500);
+            Bitmap bitmap = Helper.CaptureElementToBitmap(selectedNode.Element);
             if (bitmap == null)
             {
-                System.Windows.MessageBox.Show("Cannot capture element");
+                MessageBox.Show("Cannot capture element");
                 return;
             }
             
@@ -2049,7 +2050,7 @@ namespace dDeltaSolutions.Spy
 		
 		private IntPtr GetWindow(IUIAutomationElement element)
         {
-            IUIAutomationTreeWalker tw = MainWindow.uiAutomation.ControlViewWalker;
+            IUIAutomationTreeWalker tw = uiAutomation.ControlViewWalker;
 
             IntPtr hwnd = IntPtr.Zero;
             IUIAutomationElement currentElement = element;
@@ -2101,15 +2102,15 @@ namespace dDeltaSolutions.Spy
         private bool hasToolTipClosedEvent = true;
         private bool hasToolTipOpenedEvent = true;
         private bool hasWindowOpenedEvent = true;
-        private bool hasAutomationFocusChangedEvent = false; //true;
+        private bool hasAutomationFocusChangedEvent; //true;
         private bool hasAutomationPropertyChangedEvent = true;
         private bool hasStructureChangedEvent = true;
         private bool hasWindowClosedEvent = true;
 		
-		private bool hasTextEditTextChangedEvent = false;
-		private bool hasChangesEvent = false;
-		private bool hasNotificationEvent = false;
-		private bool hasActiveTextPositionChangedEvent = false;
+		private bool hasTextEditTextChangedEvent;
+		private bool hasChangesEvent;
+		private bool hasNotificationEvent;
+		private bool hasActiveTextPositionChangedEvent;
 
         private TreeScope eventsScope = TreeScope.TreeScope_Subtree;
 		private TextEditChangeType TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
@@ -2117,41 +2118,40 @@ namespace dDeltaSolutions.Spy
 
         private void OnEventsSettings(object sender, RoutedEventArgs e)
         {
-            WindowEventsOptions wndEventsOptions = new WindowEventsOptions();
-            wndEventsOptions.Owner = this;
-
-            wndEventsOptions.hasAsyncContentLoadedEvent = hasAsyncContentLoadedEvent;
-            wndEventsOptions.hasElementAddedToSelectionEvent = hasElementAddedToSelectionEvent;
-            wndEventsOptions.hasElementRemovedFromSelectionEvent = hasElementRemovedFromSelectionEvent;
-            wndEventsOptions.hasElementSelectedEvent = hasElementSelectedEvent;
-            wndEventsOptions.hasInvalidatedEvent = hasInvalidatedEvent;
-            wndEventsOptions.hasInvokedEvent = hasInvokedEvent;
-            wndEventsOptions.hasInputReachedTargetEvent = hasInputReachedTargetEvent;
-            wndEventsOptions.hasInputReachedOtherElementEvent = hasInputReachedOtherElementEvent;
-            wndEventsOptions.hasInputDiscardedEvent = hasInputDiscardedEvent;
-            wndEventsOptions.hasLayoutInvalidatedEvent = hasLayoutInvalidatedEvent;
-            wndEventsOptions.hasMenuOpenedEvent = hasMenuOpenedEvent;
-            wndEventsOptions.hasMenuClosedEvent = hasMenuClosedEvent;
-            wndEventsOptions.hasMenuModeStartEvent = hasMenuModeStartEvent;
-            wndEventsOptions.hasMenuModeEndEvent = hasMenuModeEndEvent;
-            wndEventsOptions.hasTextChangedEvent = hasTextChangedEvent;
-            wndEventsOptions.hasTextSelectionChangedEvent = hasTextSelectionChangedEvent;
-            wndEventsOptions.hasToolTipClosedEvent = hasToolTipClosedEvent;
-            wndEventsOptions.hasToolTipOpenedEvent = hasToolTipOpenedEvent;
-            wndEventsOptions.hasWindowOpenedEvent = hasWindowOpenedEvent;
-            wndEventsOptions.hasAutomationFocusChangedEvent = hasAutomationFocusChangedEvent;
-            wndEventsOptions.hasAutomationPropertyChangedEvent = hasAutomationPropertyChangedEvent;
-            wndEventsOptions.hasStructureChangedEvent = hasStructureChangedEvent;
-            wndEventsOptions.hasWindowClosedEvent = hasWindowClosedEvent;
-			
-			wndEventsOptions.hasTextEditTextChangedEvent = hasTextEditTextChangedEvent;
-			wndEventsOptions.hasChangesEvent = hasChangesEvent;
-			wndEventsOptions.hasNotificationEvent = hasNotificationEvent;
-			wndEventsOptions.hasActiveTextPositionChangedEvent = hasActiveTextPositionChangedEvent;
-            wndEventsOptions.eventsScope = eventsScope;
-			
-			wndEventsOptions.TextEditChangeType = TextEditChangeType;
-			wndEventsOptions.ChangesCount = ChangesCount;
+            WindowEventsOptions wndEventsOptions = new WindowEventsOptions
+            {
+                Owner = this,
+                hasAsyncContentLoadedEvent = hasAsyncContentLoadedEvent,
+                hasElementAddedToSelectionEvent = hasElementAddedToSelectionEvent,
+                hasElementRemovedFromSelectionEvent = hasElementRemovedFromSelectionEvent,
+                hasElementSelectedEvent = hasElementSelectedEvent,
+                hasInvalidatedEvent = hasInvalidatedEvent,
+                hasInvokedEvent = hasInvokedEvent,
+                hasInputReachedTargetEvent = hasInputReachedTargetEvent,
+                hasInputReachedOtherElementEvent = hasInputReachedOtherElementEvent,
+                hasInputDiscardedEvent = hasInputDiscardedEvent,
+                hasLayoutInvalidatedEvent = hasLayoutInvalidatedEvent,
+                hasMenuOpenedEvent = hasMenuOpenedEvent,
+                hasMenuClosedEvent = hasMenuClosedEvent,
+                hasMenuModeStartEvent = hasMenuModeStartEvent,
+                hasMenuModeEndEvent = hasMenuModeEndEvent,
+                hasTextChangedEvent = hasTextChangedEvent,
+                hasTextSelectionChangedEvent = hasTextSelectionChangedEvent,
+                hasToolTipClosedEvent = hasToolTipClosedEvent,
+                hasToolTipOpenedEvent = hasToolTipOpenedEvent,
+                hasWindowOpenedEvent = hasWindowOpenedEvent,
+                hasAutomationFocusChangedEvent = hasAutomationFocusChangedEvent,
+                hasAutomationPropertyChangedEvent = hasAutomationPropertyChangedEvent,
+                hasStructureChangedEvent = hasStructureChangedEvent,
+                hasWindowClosedEvent = hasWindowClosedEvent,
+                hasTextEditTextChangedEvent = hasTextEditTextChangedEvent,
+                hasChangesEvent = hasChangesEvent,
+                hasNotificationEvent = hasNotificationEvent,
+                hasActiveTextPositionChangedEvent = hasActiveTextPositionChangedEvent,
+                eventsScope = eventsScope,
+                TextEditChangeType = TextEditChangeType,
+                ChangesCount = ChangesCount
+            };
 
             if (wndEventsOptions.ShowDialog() == true)
             {
@@ -2229,11 +2229,11 @@ namespace dDeltaSolutions.Spy
             if ((new TreeNode(ev.Element)).IsAlive)
             {
                 SelectAutomationElementInTree(ev.Element);
-                this.tvElements.Focus();
+                tvElements.Focus();
             }
             else
             {
-                System.Windows.MessageBox.Show("Element not available anymore");
+                MessageBox.Show("Element not available anymore");
             }
         }
         
@@ -2257,15 +2257,15 @@ namespace dDeltaSolutions.Spy
         {
             if (cmbViewMode.SelectedIndex == 0)
             {
-                MainWindow.mode = Modes.Control;
+                mode = Modes.Control;
             }
             else if (cmbViewMode.SelectedIndex == 1)
             {
-                MainWindow.mode = Modes.Raw;
+                mode = Modes.Raw;
             }
             else
             {
-                MainWindow.mode = Modes.Content;
+                mode = Modes.Content;
             }
 
             //try
@@ -2313,17 +2313,17 @@ namespace dDeltaSolutions.Spy
 			}
 		}
 		
-		private Form frmCP1 = null;
-		private Form frmCP2 = null;
-		private System.Drawing.Color cpColor = System.Drawing.Color.DodgerBlue;
+		private Form frmCP1;
+		private Form frmCP2;
+		private Color cpColor = Color.DodgerBlue;
 		int cpLen = 5;
 		
 		private void UnHighlightCP()
 		{	
 			if (frmCP1 != null && frmCP2 != null)
 			{
-				frmCP1.Location = new System.Drawing.Point(-100, -100);
-				frmCP2.Location = new System.Drawing.Point(-100, -100);
+				frmCP1.Location = new Point(-100, -100);
+				frmCP2.Location = new Point(-100, -100);
 			}
 			else
 			{
@@ -2333,9 +2333,9 @@ namespace dDeltaSolutions.Spy
 				frmCP1.FormBorderStyle = FormBorderStyle.None;
 				frmCP1.StartPosition = FormStartPosition.Manual;
 				
-				frmCP1.Location = new System.Drawing.Point(-100, -100);
-				frmCP1.MinimumSize = new System.Drawing.Size(0, 0);
-				frmCP1.Size = new System.Drawing.Size(0, 0);
+				frmCP1.Location = new Point(-100, -100);
+				frmCP1.MinimumSize = new Size(0, 0);
+				frmCP1.Size = new Size(0, 0);
 				frmCP1.ShowInTaskbar = false;
 				frmCP1.TopMost = true;
 				frmCP1.ForeColor = cpColor;
@@ -2350,9 +2350,9 @@ namespace dDeltaSolutions.Spy
 				frmCP2.FormBorderStyle = FormBorderStyle.None;
 				frmCP2.StartPosition = FormStartPosition.Manual;
 				
-				frmCP2.Location = new System.Drawing.Point(-100, -100);
-				frmCP2.MinimumSize = new System.Drawing.Size(0, 0);
-				frmCP2.Size = new System.Drawing.Size(0, 0);
+				frmCP2.Location = new Point(-100, -100);
+				frmCP2.MinimumSize = new Size(0, 0);
+				frmCP2.Size = new Size(0, 0);
 				frmCP2.ShowInTaskbar = false;
 				frmCP2.TopMost = true;
 				frmCP2.ForeColor = cpColor;
@@ -2361,7 +2361,7 @@ namespace dDeltaSolutions.Spy
 				frmCP2.Load += window2_Loaded;
 				frmCP2.Show();
 				
-				this.Focus();
+				Focus();
 			}
 		}
 		
@@ -2374,7 +2374,7 @@ namespace dDeltaSolutions.Spy
                 return;
             }*/
 			
-			if (CompareElements(element, uiAutomation.GetRootElement()) == true)
+			if (CompareElements(element, uiAutomation.GetRootElement()))
 			{
 				return;
 			}
@@ -2388,7 +2388,7 @@ namespace dDeltaSolutions.Spy
             int top = pt.y - cpLen;
             if (frmCP1 != null)
             {
-                frmCP1.Location = new System.Drawing.Point(left, top);
+                frmCP1.Location = new Point(left, top);
                 frmCP1.BringToFront();
             }
             else
@@ -2398,9 +2398,9 @@ namespace dDeltaSolutions.Spy
                 frmCP1.FormBorderStyle = FormBorderStyle.None;
                 frmCP1.StartPosition = FormStartPosition.Manual;
                 
-                frmCP1.Location = new System.Drawing.Point(left, top);
-                frmCP1.MinimumSize = new System.Drawing.Size(0, 0);
-                frmCP1.Size = new System.Drawing.Size(0, 0);
+                frmCP1.Location = new Point(left, top);
+                frmCP1.MinimumSize = new Size(0, 0);
+                frmCP1.Size = new Size(0, 0);
                 frmCP1.ShowInTaskbar = false;
                 frmCP1.TopMost = true;
                 frmCP1.ForeColor = cpColor;
@@ -2414,7 +2414,7 @@ namespace dDeltaSolutions.Spy
             top = pt.y - 1;
             if (frmCP2 != null)
             {
-                frmCP2.Location = new System.Drawing.Point(left, top);
+                frmCP2.Location = new Point(left, top);
                 frmCP2.BringToFront();
             }
             else
@@ -2424,9 +2424,9 @@ namespace dDeltaSolutions.Spy
                 frmCP2.FormBorderStyle = FormBorderStyle.None;
                 frmCP2.StartPosition = FormStartPosition.Manual;
                 
-                frmCP2.Location = new System.Drawing.Point(left, top);
-                frmCP2.MinimumSize = new System.Drawing.Size(0, 0);
-                frmCP2.Size = new System.Drawing.Size(0, 0);
+                frmCP2.Location = new Point(left, top);
+                frmCP2.MinimumSize = new Size(0, 0);
+                frmCP2.Size = new Size(0, 0);
                 frmCP2.ShowInTaskbar = false;
                 frmCP2.TopMost = true;
                 frmCP2.ForeColor = cpColor;
@@ -2436,17 +2436,17 @@ namespace dDeltaSolutions.Spy
                 frmCP2.Show();
             }
             
-            this.Focus();
+            Focus();
 		}
 		
-		private void window1_Loaded(object sender, System.EventArgs e)
+		private void window1_Loaded(object sender, EventArgs e)
 		{
-			frmCP1.Size = new System.Drawing.Size(3, 2 * cpLen + 1);
+			frmCP1.Size = new Size(3, 2 * cpLen + 1);
 		}
 		
-		private void window2_Loaded(object sender, System.EventArgs e)
+		private void window2_Loaded(object sender, EventArgs e)
 		{
-			frmCP2.Size = new System.Drawing.Size(2 * cpLen + 1, 3);
+			frmCP2.Size = new Size(2 * cpLen + 1, 3);
 		}
         
         private void SavePreferences()
@@ -2552,28 +2552,28 @@ namespace dDeltaSolutions.Spy
             node.InnerText = hasWindowClosedEvent.ToString();
             root.AppendChild(node);
 			
-			if (hasTextEditTextChangedEvent == true)
+			if (hasTextEditTextChangedEvent)
 			{
 				node = doc.CreateNode(XmlNodeType.Element, "TextEditTextChangedEvent", null);
 				node.InnerText = hasTextEditTextChangedEvent.ToString();
 				root.AppendChild(node);
 			}
 			
-			if (hasChangesEvent == true)
+			if (hasChangesEvent)
 			{
 				node = doc.CreateNode(XmlNodeType.Element, "ChangesEvent", null);
 				node.InnerText = hasChangesEvent.ToString();
 				root.AppendChild(node);
 			}
 			
-			if (hasNotificationEvent == true)
+			if (hasNotificationEvent)
 			{
 				node = doc.CreateNode(XmlNodeType.Element, "NotificationEvent", null);
 				node.InnerText = hasNotificationEvent.ToString();
 				root.AppendChild(node);
 			}
 			
-			if (hasActiveTextPositionChangedEvent == true)
+			if (hasActiveTextPositionChangedEvent)
 			{
 				node = doc.CreateNode(XmlNodeType.Element, "ActiveTextPositionChangedEvent", null);
 				node.InnerText = hasActiveTextPositionChangedEvent.ToString();
@@ -2586,19 +2586,19 @@ namespace dDeltaSolutions.Spy
             root.AppendChild(node);
             
             node = doc.CreateNode(XmlNodeType.Element, "Width", null);
-            node.InnerText = this.Width.ToString();
+            node.InnerText = Width.ToString();
             root.AppendChild(node);
             
             node = doc.CreateNode(XmlNodeType.Element, "Height", null);
-            node.InnerText = this.Height.ToString();
+            node.InnerText = Height.ToString();
             root.AppendChild(node);
             
             node = doc.CreateNode(XmlNodeType.Element, "Left", null);
-            node.InnerText = this.Left.ToString();
+            node.InnerText = Left.ToString();
             root.AppendChild(node);
             
             node = doc.CreateNode(XmlNodeType.Element, "Top", null);
-            node.InnerText = this.Top.ToString();
+            node.InnerText = Top.ToString();
             root.AppendChild(node);
             
             /*node = doc.CreateNode(XmlNodeType.Element, "ColWidth1", null);
@@ -2616,7 +2616,7 @@ namespace dDeltaSolutions.Spy
             doc.Save(prefFileName);
         }
         
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Window_Closing(object sender, CancelEventArgs e)
         {
             try
             {
@@ -2626,7 +2626,7 @@ namespace dDeltaSolutions.Spy
 			
 			if (listenerInstalled != null)
 			{
-				System.Threading.Tasks.Task.Run(() => UninstallListener()).Wait(1000);
+				Task.Run(() => UninstallListener()).Wait(1000);
 			}
         }
 		
@@ -2634,7 +2634,7 @@ namespace dDeltaSolutions.Spy
 		{
 			try
 			{
-				PropertySettings dlgPropSettings = new PropertySettings() { Owner = this };
+				PropertySettings dlgPropSettings = new PropertySettings { Owner = this };
 				if (dlgPropSettings.ShowDialog() == true)
 				{
 					RefreshTree();
@@ -2643,7 +2643,7 @@ namespace dDeltaSolutions.Spy
 			catch {}
 		}
 		
-		Timer timerTrack = null;
+		Timer timerTrack;
 		private void menuItemTrack_Click(object sender, RoutedEventArgs e)
 		{
 			try
@@ -2651,7 +2651,7 @@ namespace dDeltaSolutions.Spy
 				menuItemTrack.IsChecked = !menuItemTrack.IsChecked;
 				if (menuItemTrack.IsChecked)
 				{
-					if (menuItemPick.IsChecked == true)
+					if (menuItemPick.IsChecked)
 					{
 						menuItemPick.IsChecked = false;
 						selectButton.IsChecked = false;
@@ -2688,7 +2688,7 @@ namespace dDeltaSolutions.Spy
 				IUIAutomationElement element = uiAutomation.GetFocusedElement();
 				if (element != null)
 				{
-					if (SelectElement(element) == true && tvElements.IsFocused == false)
+					if (SelectElement(element) && tvElements.IsFocused == false)
 					{
 						tvElements.Focus();
 					}
@@ -2719,17 +2719,17 @@ namespace dDeltaSolutions.Spy
 				}
 				catch 
 				{
-					System.Windows.MessageBox.Show("Cannot get text. The element may not be available anymore.");
+					MessageBox.Show("Cannot get text. The element may not be available anymore.");
 				}
 			}
 		}
 		
 		private void OnShowContextMenu(object sender, RoutedEventArgs e)
 		{
-			TreeViewItem treeviewItem = this.tvElements.SelectedItem as TreeViewItem;
+			TreeViewItem treeviewItem = tvElements.SelectedItem as TreeViewItem;
             if (treeviewItem == null)
             {
-				System.Windows.MessageBox.Show("Select an element in the tree");
+				MessageBox.Show("Select an element in the tree");
                 return;
             }
 			
@@ -2742,7 +2742,7 @@ namespace dDeltaSolutions.Spy
 			IUIAutomationElement3 element3 = node.Element as IUIAutomationElement3;
 			if (element3 == null)
 			{
-				System.Windows.MessageBox.Show("IUIAutomationElement3 not supported");
+				MessageBox.Show("IUIAutomationElement3 not supported");
 			}
 			
 			try
@@ -2751,7 +2751,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
     }

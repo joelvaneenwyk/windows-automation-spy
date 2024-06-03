@@ -50,7 +50,7 @@ namespace dDeltaSolutions.Spy
 		public static bool hasRuntimeId = true;
 
         private List<CheckBox> allCheckBoxes = new List<CheckBox>();
-        private bool ignoreEvent = false;
+        private bool ignoreEvent;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -164,7 +164,7 @@ namespace dDeltaSolutions.Spy
 			hasProviderDescription = chkProviderDescription.IsChecked.Value;
 			hasRuntimeId = chkRuntimeId.IsChecked.Value;
             
-            this.DialogResult = true;
+            DialogResult = true;
         }
 
         private void chkCheckAll_Checked(object sender, RoutedEventArgs e)
@@ -212,7 +212,7 @@ namespace dDeltaSolutions.Spy
                 if (checkBox.IsChecked == false)
                 {
                     allChecked = false;
-					if (checkedAtLeastOne == true)
+					if (checkedAtLeastOne)
 					{
 						break;
 					}
@@ -223,13 +223,13 @@ namespace dDeltaSolutions.Spy
 				}
             }
 
-            if (allChecked == true)
+            if (allChecked)
             {
                 ignoreEvent = true;
                 chkCheckAll.IsChecked = true;
                 ignoreEvent = false;
             }
-			else if (checkedAtLeastOne == true)
+			else if (checkedAtLeastOne)
 			{
 				ignoreEvent = true;
                 chkCheckAll.IsChecked = null;

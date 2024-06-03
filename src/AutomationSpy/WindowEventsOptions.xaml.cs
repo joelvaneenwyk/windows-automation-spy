@@ -41,14 +41,14 @@ namespace dDeltaSolutions.Spy
         public bool hasStructureChangedEvent = true;
         public bool hasWindowClosedEvent = true;
 		
-		public bool hasTextEditTextChangedEvent = false;
-		public bool hasChangesEvent = false;
-		public bool hasNotificationEvent = false;
-		public bool hasActiveTextPositionChangedEvent = false;
+		public bool hasTextEditTextChangedEvent;
+		public bool hasChangesEvent;
+		public bool hasNotificationEvent;
+		public bool hasActiveTextPositionChangedEvent;
 
         public TreeScope eventsScope = TreeScope.TreeScope_Subtree;
         private List<CheckBox> allCheckBoxes = new List<CheckBox>();
-        private bool ignoreEvent = false;
+        private bool ignoreEvent;
         internal static List<int> evtProperties = new List<int>();
 		
 		public TextEditChangeType TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
@@ -139,669 +139,891 @@ namespace dDeltaSolutions.Spy
             ListBoxItem item = null;
             
             prop = UIA_PropertyIds.UIA_AcceleratorKeyPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_AccessKeyPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_AriaRolePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_AriaPropertiesPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_AutomationIdPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_BoundingRectanglePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ClassNamePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ClickablePointPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ControllerForPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ControlTypePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_CulturePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_DescribedByPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_FlowsToPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_FrameworkIdPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_HelpTextPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsContentElementPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsControlElementPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsDataValidForFormPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsEnabledPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsKeyboardFocusablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsOffscreenPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsPasswordPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsRequiredForFormPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ItemStatusPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ItemTypePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LabeledByPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LocalizedControlTypePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_NamePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_NativeWindowHandlePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_OrientationPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ProcessIdPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ProviderDescriptionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RuntimeIdPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsDockPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsExpandCollapsePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsGridPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsGridItemPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsInvokePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsMultipleViewPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsRangeValuePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsScrollPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsScrollItemPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsSelectionItemPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsSelectionPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsTablePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsTableItemPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsTextPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsTogglePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsTransformPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsValuePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsLegacyIAccessiblePatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsItemContainerPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_IsSynchronizedInputPatternAvailablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_DockDockPositionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridColumnCountPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridRowCountPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridItemColumnPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridItemColumnSpanPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridItemContainingGridPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridItemRowPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_GridItemRowSpanPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueMaximumPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueMinimumPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_RangeValueValuePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollHorizontalScrollPercentPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollHorizontalViewSizePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollVerticallyScrollablePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollVerticalScrollPercentPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ScrollVerticalViewSizePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_SelectionCanSelectMultiplePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_SelectionIsSelectionRequiredPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_SelectionSelectionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TableColumnHeadersPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TableRowHeadersPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TableRowOrColumnMajorPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ToggleToggleStatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TransformCanMovePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TransformCanResizePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_TransformCanRotatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_ValueValuePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowCanMaximizePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowCanMinimizePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowIsModalPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowIsTopmostPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId;
-            item = new ListBoxItem();
-            item.Content = PropertyToString(prop);
-            item.Tag = prop;
+            item = new ListBoxItem
+            {
+                Content = PropertyToString(prop),
+                Tag = prop
+            };
             propList.Items.Add(item);
             
             try
@@ -825,7 +1047,7 @@ namespace dDeltaSolutions.Spy
             }
         }
         
-        private bool ignoreCheck = false;
+        private bool ignoreCheck;
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
@@ -903,7 +1125,7 @@ namespace dDeltaSolutions.Spy
 				return;
 			}
 
-            this.DialogResult = true;
+            DialogResult = true;
         }
 
         private void chkCheckAll_Checked(object sender, RoutedEventArgs e)
@@ -980,7 +1202,7 @@ namespace dDeltaSolutions.Spy
                 if (checkBox.IsChecked == false)
                 {
                     allChecked = false;
-					if (checkedAtLeastOne == true)
+					if (checkedAtLeastOne)
 					{
 						break;
 					}
@@ -991,13 +1213,13 @@ namespace dDeltaSolutions.Spy
 				}
             }
 
-            if (allChecked == true)
+            if (allChecked)
             {
                 ignoreEvent = true;
                 chkCheckAll.IsChecked = true;
                 ignoreEvent = false;
             }
-			else if (checkedAtLeastOne == true)
+			else if (checkedAtLeastOne)
 			{
 				ignoreEvent = true;
                 chkCheckAll.IsChecked = null;
@@ -1025,22 +1247,22 @@ namespace dDeltaSolutions.Spy
 
         private void OnMore(object sender, RoutedEventArgs e)
         {
-            this.Width += (2*offset);
-            if (this.Left - offset < 0)
+            Width += (2*offset);
+            if (Left - offset < 0)
             {
-                this.Left = 0;
+                Left = 0;
             }
             else
             {
-                this.Left -= offset;
+                Left -= offset;
             }
             btnMore.Visibility = Visibility.Hidden;
         }
         
         private void OnLess(object sender, RoutedEventArgs e)
         {
-            this.Width -= (2*offset);
-            this.Left += offset;
+            Width -= (2*offset);
+            Left += offset;
             btnMore.Visibility = Visibility.Visible;
         }
         
@@ -1108,7 +1330,7 @@ namespace dDeltaSolutions.Spy
                 if (crtItem.IsSelected == false)
                 {
                     allSelected = false;
-					if (selectedAtLeastOne == true)
+					if (selectedAtLeastOne)
 					{
 						break;
 					}
@@ -1124,7 +1346,7 @@ namespace dDeltaSolutions.Spy
             {
                 chkSelectAll.IsChecked = true;
             }
-			else if (selectedAtLeastOne == true)
+			else if (selectedAtLeastOne)
 			{
 				chkSelectAll.IsChecked = null;
 			}
@@ -1137,7 +1359,7 @@ namespace dDeltaSolutions.Spy
         
         public static string PropertyToString(int property)
         {
-            string progname = dDeltaSolutions.Spy.MainWindow.uiAutomation.GetPropertyProgrammaticName(property);
+            string progname = MainWindow.uiAutomation.GetPropertyProgrammaticName(property);
             //progname.Replace("Identifiers", "");
             //progname.Replace("Property", "");
             return progname;

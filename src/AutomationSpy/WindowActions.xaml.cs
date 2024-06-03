@@ -27,7 +27,7 @@ namespace dDeltaSolutions.Spy
 			this.node = node;
         }
 		
-		private TreeNode node = null;
+		private TreeNode node;
 		
 		private void OnKeyDown(object sender, KeyEventArgs e)
 		{
@@ -169,8 +169,8 @@ namespace dDeltaSolutions.Spy
             IUIAutomationTextPattern textPattern = node.Element.GetCurrentPattern(UIA_PatternIds.UIA_TextPatternId) as IUIAutomationTextPattern;
 			if (textPattern != null)
 			{
-				this.Width += 125;
-                this.Height += 40;
+				Width += 125;
+                Height += 40;
 				
 				textTab.Visibility = Visibility.Visible;
 				textTab.Tag = textPattern;
@@ -236,7 +236,7 @@ namespace dDeltaSolutions.Spy
 				try
 				{
 					RECT rect;
-					if (GetWindowRect(node.Element.CurrentNativeWindowHandle, out rect) == true)
+					if (GetWindowRect(node.Element.CurrentNativeWindowHandle, out rect))
 					{
 						txtX.Text = rect.Left.ToString();
 						txtY.Text = rect.Top.ToString();
@@ -321,10 +321,12 @@ namespace dDeltaSolutions.Spy
 			if (tabCtrl.Items.Count == 0)
 			{
 				grid.Children.Remove(tabCtrl);
-				Label label = new Label();
-				label.Content = "No actions available";
-				label.Margin = new Thickness(50, 30, 0, 0);
-				grid.Children.Add(label);
+				Label label = new Label
+                {
+                    Content = "No actions available",
+                    Margin = new Thickness(50, 30, 0, 0)
+                };
+                grid.Children.Add(label);
 			}
 			else
 			{
@@ -346,7 +348,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -364,7 +366,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -382,7 +384,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -426,7 +428,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -450,7 +452,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -469,7 +471,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
         
@@ -523,7 +525,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(this, ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
         
@@ -540,7 +542,7 @@ namespace dDeltaSolutions.Spy
 			
             if (horizontalText != "" && double.TryParse(horizontalText, out horizontalPercent) == false)
             {
-                System.Windows.MessageBox.Show(this, "Horizontal Percent is not a valid number");
+                MessageBox.Show(this, "Horizontal Percent is not a valid number");
 				txtHorizontalPercent.Focus();
                 return;
             }
@@ -550,7 +552,7 @@ namespace dDeltaSolutions.Spy
 			
             if (verticalText != "" && double.TryParse(verticalText, out verticalPercent) == false)
             {
-                System.Windows.MessageBox.Show(this, "Vertical Percent is not a valid number");
+                MessageBox.Show(this, "Vertical Percent is not a valid number");
 				txtVerticalPercent.Focus();
                 return;
             }
@@ -558,7 +560,7 @@ namespace dDeltaSolutions.Spy
             if (horizontalPercent != UIA_ScrollPattern.UIA_ScrollPatternNoScroll && 
 				(horizontalPercent < 0 || horizontalPercent > 100))
             {
-                System.Windows.MessageBox.Show(this, "Horizontal Percent must be between 0 and 100");
+                MessageBox.Show(this, "Horizontal Percent must be between 0 and 100");
 				txtHorizontalPercent.Focus();
                 return;
             }
@@ -566,7 +568,7 @@ namespace dDeltaSolutions.Spy
             if (verticalPercent != UIA_ScrollPattern.UIA_ScrollPatternNoScroll && 
 				(verticalPercent < 0 || verticalPercent > 100))
             {
-                System.Windows.MessageBox.Show(this, "Vertical Percent must be between 0 and 100");
+                MessageBox.Show(this, "Vertical Percent must be between 0 and 100");
 				txtVerticalPercent.Focus();
                 return;
             }
@@ -577,7 +579,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
         }
 		
@@ -595,7 +597,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -613,7 +615,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -631,7 +633,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -649,7 +651,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -667,7 +669,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -688,7 +690,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -709,7 +711,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -729,7 +731,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -747,7 +749,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -775,7 +777,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -793,7 +795,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -811,7 +813,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -834,7 +836,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -852,7 +854,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -871,11 +873,11 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 				return;
 			}
 			
-			System.Windows.MessageBox.Show(this, "Succeeded");
+			MessageBox.Show(this, "Succeeded");
 		}
 		
 		private void OnTextMove(object sender, RoutedEventArgs e)
@@ -892,18 +894,18 @@ namespace dDeltaSolutions.Spy
 				int count = 0;
 				if (int.TryParse(txtCount.Text, out count) == false)
 				{
-					System.Windows.MessageBox.Show(this, "Count is not a valid integer");
+					MessageBox.Show(this, "Count is not a valid integer");
 					txtCount.Focus();
 					txtCount.SelectAll();
 					return;
 				}
 				
 				int moved = rangeItem.range.Move(unit, count);
-				System.Windows.MessageBox.Show(this, "This method returned: " + moved);
+				MessageBox.Show(this, "This method returned: " + moved);
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -922,23 +924,23 @@ namespace dDeltaSolutions.Spy
 				int count = 0;
 				if (int.TryParse(txtCountME.Text, out count) == false)
 				{
-					System.Windows.MessageBox.Show(this, "Count is not a valid integer");
+					MessageBox.Show(this, "Count is not a valid integer");
 					txtCountME.Focus();
 					txtCountME.SelectAll();
 					return;
 				}
 				
 				int moved = rangeItem.range.MoveEndpointByUnit(endpoint, unit, count);
-				System.Windows.MessageBox.Show(this, "This method returned: " + moved);
+				MessageBox.Show(this, "This method returned: " + moved);
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
 		private Brush defaultBrush;
-		private System.Windows.Forms.Timer timer = null;
+		private Timer timer;
 		private void PickFromScreen(object sender, RoutedEventArgs e)
 		{
 			try
@@ -950,7 +952,7 @@ namespace dDeltaSolutions.Spy
 					
 					if (timer == null)
 					{
-						timer = new System.Windows.Forms.Timer();
+						timer = new Timer();
 						timer.Interval = 1000;
 						timer.Tick += timer_Tick;
 					}
@@ -967,11 +969,11 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{ 
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
-		private int rangeCount = 0;
+		private int rangeCount;
 		void timer_Tick(object sender, EventArgs e)
 		{
 			try
@@ -984,7 +986,7 @@ namespace dDeltaSolutions.Spy
 					IUIAutomationTextPattern textPattern = textTab.Tag as IUIAutomationTextPattern;
 					if (textPattern != null)
 					{
-						System.Drawing.Point ptCursor = System.Windows.Forms.Cursor.Position;
+						Point ptCursor = System.Windows.Forms.Cursor.Position;
 						tagPOINT pt;
                         pt.x = ptCursor.X;
                         pt.y = ptCursor.Y;
@@ -993,7 +995,7 @@ namespace dDeltaSolutions.Spy
 						PickFromScreen(null, null);
 						
 						rangeCount++;
-						System.Windows.MessageBox.Show(this, "You picked a TextPatternRange named Range" + rangeCount + ". For this range you should call method ExpandToEnclosingUnit using TextUnit: Character, Word, Line, Paragraph or anything else to actually get something. Otherwise, you will get an empty TextPatternRange.");
+						MessageBox.Show(this, "You picked a TextPatternRange named Range" + rangeCount + ". For this range you should call method ExpandToEnclosingUnit using TextUnit: Character, Word, Line, Paragraph or anything else to actually get something. Otherwise, you will get an empty TextPatternRange.");
 						
 						TPRange tpRange = new TPRange("Range" + rangeCount, range);
 						cmbRanges.Items.Add(tpRange);
@@ -1004,7 +1006,7 @@ namespace dDeltaSolutions.Spy
 			catch { }
 		}
 		
-		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		private void Window_Closing(object sender, CancelEventArgs e)
 		{
 			if (timer != null)
 			{
@@ -1026,11 +1028,11 @@ namespace dDeltaSolutions.Spy
 			
 			try
 			{
-				System.Windows.MessageBox.Show(this, rangeItem.range.GetText(3000));
+				MessageBox.Show(this, rangeItem.range.GetText(3000));
 			}
 			catch (Exception ex)
 			{ 
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -1045,11 +1047,11 @@ namespace dDeltaSolutions.Spy
 			try
 			{
 				TreeNode node = new TreeNode(rangeItem.range.GetEnclosingElement());
-				System.Windows.MessageBox.Show(this, node.ToString());
+				MessageBox.Show(this, node.ToString());
 			}
 			catch (Exception ex)
 			{ 
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -1079,7 +1081,7 @@ namespace dDeltaSolutions.Spy
 			}
 			catch (Exception ex)
 			{
-				System.Windows.MessageBox.Show(this, ex.Message);
+				MessageBox.Show(this, ex.Message);
 			}
 		}
 		
@@ -1109,7 +1111,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(this, ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
         
@@ -1128,7 +1130,7 @@ namespace dDeltaSolutions.Spy
             }
             catch
             {
-                System.Windows.MessageBox.Show(this, "Flags field must be an integer");
+                MessageBox.Show(this, "Flags field must be an integer");
                 return;
             }
             
@@ -1138,7 +1140,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(this, ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
         
@@ -1156,7 +1158,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(this, ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
         
@@ -1174,7 +1176,7 @@ namespace dDeltaSolutions.Spy
             }
             catch (Exception ex)
             {
-                System.Windows.MessageBox.Show(this, ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
         
@@ -1206,7 +1208,7 @@ namespace dDeltaSolutions.Spy
             {}
         }*/
         
-        private IUIAutomationElement getItemElement = null;
+        private IUIAutomationElement getItemElement;
         
         private void OnGetItem(object sender, RoutedEventArgs e)
         {
@@ -1219,14 +1221,14 @@ namespace dDeltaSolutions.Spy
             int row = -1;
             if (int.TryParse(txtRow.Text, out row) == false)
             {
-                System.Windows.MessageBox.Show(this, "Row is not a valid integer number");
+                MessageBox.Show(this, "Row is not a valid integer number");
                 return;
             }
             
             int column = -1;
             if (int.TryParse(txtColumn.Text, out column) == false)
             {
-                System.Windows.MessageBox.Show(this, "Column is not a valid integer number");
+                MessageBox.Show(this, "Column is not a valid integer number");
                 return;
             }
             
@@ -1320,7 +1322,7 @@ namespace dDeltaSolutions.Spy
 	
 	public class ViewItem
 	{
-		public int id = 0;
+		public int id;
 		public string name = "";
 		
 		public ViewItem(int id, string name)
@@ -1338,7 +1340,7 @@ namespace dDeltaSolutions.Spy
 	public class TPRange
 	{
 		public string name = "";
-		public IUIAutomationTextRange range = null;
+		public IUIAutomationTextRange range;
 		
 		public TPRange(string name, IUIAutomationTextRange range)
 		{

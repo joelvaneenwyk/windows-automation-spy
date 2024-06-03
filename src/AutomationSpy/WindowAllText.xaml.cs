@@ -59,7 +59,7 @@ namespace dDeltaSolutions.Spy
 			
 			txbLabel.Visibility = Visibility.Visible;
 			DispatcherTimer dispatcherTimer = new DispatcherTimer();
-			dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+			dispatcherTimer.Tick += dispatcherTimer_Tick;
 			dispatcherTimer.Interval = TimeSpan.FromSeconds(5);
 			dispatcherTimer.Start();
 		}
