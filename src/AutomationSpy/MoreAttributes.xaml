@@ -1,7 +1,6 @@
 ﻿<Window x:Class="dDeltaSolutions.Spy.MoreAttributes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="Text Range attributes" Height="350" Width="550" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
     
     <Grid>

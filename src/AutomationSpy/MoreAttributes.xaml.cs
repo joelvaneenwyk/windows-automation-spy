@@ -8,7 +8,7 @@ namespace dDeltaSolutions.Spy
     /// <summary>
     /// Interaction logic for MoreAttributes.xaml
     /// </summary>
-    public partial class MoreAttributes : Window
+    public partial class MoreAttributes
     {
 		private ObservableCollection<InternalAttribute> attributes = new ObservableCollection<InternalAttribute>();
 		//private IUIAutomationTextRange TextRange = null;

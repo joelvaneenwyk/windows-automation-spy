@@ -32,7 +32,7 @@ namespace dDeltaSolutions.Spy
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IWin32Window
+    public partial class MainWindow : IWin32Window
     {
         public MainWindow()
         {
