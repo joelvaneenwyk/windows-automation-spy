@@ -1,52 +1,52 @@
 
 namespace dDeltaSolutions.Spy
 {
-	internal abstract class UIA_ControlTypeIds
-	{
-		public const int UIA_ButtonControlTypeId = 50000;
-		public const int UIA_CalendarControlTypeId = 50001;
-		public const int UIA_CheckBoxControlTypeId = 50002;
-		public const int UIA_ComboBoxControlTypeId = 50003;
-		public const int UIA_EditControlTypeId = 50004;
-		public const int UIA_HyperlinkControlTypeId = 50005;
-		public const int UIA_ImageControlTypeId = 50006;
-		public const int UIA_ListItemControlTypeId = 50007;
-		public const int UIA_ListControlTypeId = 50008;
-		public const int UIA_MenuControlTypeId = 50009;
-		public const int UIA_MenuBarControlTypeId = 50010;
-		public const int UIA_MenuItemControlTypeId = 50011;
-		public const int UIA_ProgressBarControlTypeId = 50012;
-		public const int UIA_RadioButtonControlTypeId = 50013;
-		public const int UIA_ScrollBarControlTypeId = 50014;
-		public const int UIA_SliderControlTypeId = 50015;
-		public const int UIA_SpinnerControlTypeId = 50016;
-		public const int UIA_StatusBarControlTypeId = 50017;
-		public const int UIA_TabControlTypeId = 50018;
-		public const int UIA_TabItemControlTypeId = 50019;
-		public const int UIA_TextControlTypeId = 50020;
-		public const int UIA_ToolBarControlTypeId = 50021;
-		public const int UIA_ToolTipControlTypeId = 50022;
-		public const int UIA_TreeControlTypeId = 50023;
-		public const int UIA_TreeItemControlTypeId = 50024;
-		public const int UIA_CustomControlTypeId = 50025;
-		public const int UIA_GroupControlTypeId = 50026;
-		public const int UIA_ThumbControlTypeId = 50027;
-		public const int UIA_DataGridControlTypeId = 50028;
-		public const int UIA_DataItemControlTypeId = 50029;
-		public const int UIA_DocumentControlTypeId = 50030;
-		public const int UIA_SplitButtonControlTypeId = 50031;
-		public const int UIA_WindowControlTypeId = 50032;
-		public const int UIA_PaneControlTypeId = 50033;
-		public const int UIA_HeaderControlTypeId = 50034;
-		public const int UIA_HeaderItemControlTypeId = 50035;
-		public const int UIA_TableControlTypeId = 50036;
-		public const int UIA_TitleBarControlTypeId = 50037;
-		public const int UIA_SeparatorControlTypeId = 50038;
-	}
-	
-	internal abstract class UIA_PropertyIds
-	{
-		public const int UIA_RuntimeIdPropertyId = 30000;
+    internal abstract class UIA_ControlTypeIds
+    {
+        public const int UIA_ButtonControlTypeId = 50000;
+        public const int UIA_CalendarControlTypeId = 50001;
+        public const int UIA_CheckBoxControlTypeId = 50002;
+        public const int UIA_ComboBoxControlTypeId = 50003;
+        public const int UIA_EditControlTypeId = 50004;
+        public const int UIA_HyperlinkControlTypeId = 50005;
+        public const int UIA_ImageControlTypeId = 50006;
+        public const int UIA_ListItemControlTypeId = 50007;
+        public const int UIA_ListControlTypeId = 50008;
+        public const int UIA_MenuControlTypeId = 50009;
+        public const int UIA_MenuBarControlTypeId = 50010;
+        public const int UIA_MenuItemControlTypeId = 50011;
+        public const int UIA_ProgressBarControlTypeId = 50012;
+        public const int UIA_RadioButtonControlTypeId = 50013;
+        public const int UIA_ScrollBarControlTypeId = 50014;
+        public const int UIA_SliderControlTypeId = 50015;
+        public const int UIA_SpinnerControlTypeId = 50016;
+        public const int UIA_StatusBarControlTypeId = 50017;
+        public const int UIA_TabControlTypeId = 50018;
+        public const int UIA_TabItemControlTypeId = 50019;
+        public const int UIA_TextControlTypeId = 50020;
+        public const int UIA_ToolBarControlTypeId = 50021;
+        public const int UIA_ToolTipControlTypeId = 50022;
+        public const int UIA_TreeControlTypeId = 50023;
+        public const int UIA_TreeItemControlTypeId = 50024;
+        public const int UIA_CustomControlTypeId = 50025;
+        public const int UIA_GroupControlTypeId = 50026;
+        public const int UIA_ThumbControlTypeId = 50027;
+        public const int UIA_DataGridControlTypeId = 50028;
+        public const int UIA_DataItemControlTypeId = 50029;
+        public const int UIA_DocumentControlTypeId = 50030;
+        public const int UIA_SplitButtonControlTypeId = 50031;
+        public const int UIA_WindowControlTypeId = 50032;
+        public const int UIA_PaneControlTypeId = 50033;
+        public const int UIA_HeaderControlTypeId = 50034;
+        public const int UIA_HeaderItemControlTypeId = 50035;
+        public const int UIA_TableControlTypeId = 50036;
+        public const int UIA_TitleBarControlTypeId = 50037;
+        public const int UIA_SeparatorControlTypeId = 50038;
+    }
+
+    internal abstract class UIA_PropertyIds
+    {
+        public const int UIA_RuntimeIdPropertyId = 30000;
         public const int UIA_BoundingRectanglePropertyId = 30001;
         public const int UIA_ProcessIdPropertyId = 30002;
         public const int UIA_ControlTypePropertyId = 30003;
@@ -157,24 +157,24 @@ namespace dDeltaSolutions.Spy
         public const int UIA_IsItemContainerPatternAvailablePropertyId = 30108;
         public const int UIA_IsVirtualizedItemPatternAvailablePropertyId = 30109;
         public const int UIA_IsSynchronizedInputPatternAvailablePropertyId = 30110;
-		
-		public const int UIA_OptimizeForVisualContentPropertyId = 30111;
-		public const int UIA_LiveSettingPropertyId = 30135;
-		public const int UIA_IsPeripheralPropertyId = 30150;
-		public const int UIA_PositionInSetPropertyId = 30152;
-		public const int UIA_SizeOfSetPropertyId = 30153;
-		public const int UIA_LevelPropertyId = 30154;
-		public const int UIA_AnnotationTypesPropertyId = 30155;
-		public const int UIA_LandmarkTypePropertyId = 30157;
-		public const int UIA_LocalizedLandmarkTypePropertyId = 30158;
-		public const int UIA_FullDescriptionPropertyId = 30159;
-		public const int UIA_HeadingLevelPropertyId = 30173;
-		public const int UIA_IsDialogPropertyId = 30174;
-	}
-	
-	internal abstract class UIA_PatternIds
-	{
-		public const int UIA_InvokePatternId = 10000;
+
+        public const int UIA_OptimizeForVisualContentPropertyId = 30111;
+        public const int UIA_LiveSettingPropertyId = 30135;
+        public const int UIA_IsPeripheralPropertyId = 30150;
+        public const int UIA_PositionInSetPropertyId = 30152;
+        public const int UIA_SizeOfSetPropertyId = 30153;
+        public const int UIA_LevelPropertyId = 30154;
+        public const int UIA_AnnotationTypesPropertyId = 30155;
+        public const int UIA_LandmarkTypePropertyId = 30157;
+        public const int UIA_LocalizedLandmarkTypePropertyId = 30158;
+        public const int UIA_FullDescriptionPropertyId = 30159;
+        public const int UIA_HeadingLevelPropertyId = 30173;
+        public const int UIA_IsDialogPropertyId = 30174;
+    }
+
+    internal abstract class UIA_PatternIds
+    {
+        public const int UIA_InvokePatternId = 10000;
         public const int UIA_SelectionPatternId = 10001;
         public const int UIA_ValuePatternId = 10002;
         public const int UIA_RangeValuePatternId = 10003;
@@ -196,21 +196,21 @@ namespace dDeltaSolutions.Spy
         public const int UIA_ItemContainerPatternId = 10019;
         public const int UIA_VirtualizedItemPatternId = 10020;
         public const int UIA_SynchronizedInputPatternId = 10021;
-		public const int UIA_ObjectModelPatternId = 10022;
-		public const int UIA_AnnotationPatternId = 10023;
-		public const int UIA_TextPattern2Id = 10024;
-		public const int UIA_StylesPatternId = 10025;
-		public const int UIA_SpreadsheetPatternId = 10026;
-		public const int UIA_SpreadsheetItemPatternId = 10027;
-		public const int UIA_TransformPattern2Id = 10028;
-		public const int UIA_TextChildPatternId = 10029;
-		public const int UIA_DragPatternId = 10030;
-		public const int UIA_DropTargetPatternId = 10031;
-		public const int UIA_TextEditPatternId = 10032;
-		public const int UIA_CustomNavigationPatternId = 10033;
-		public const int UIA_SelectionPattern2Id = 10034;
-	}
-    
+        public const int UIA_ObjectModelPatternId = 10022;
+        public const int UIA_AnnotationPatternId = 10023;
+        public const int UIA_TextPattern2Id = 10024;
+        public const int UIA_StylesPatternId = 10025;
+        public const int UIA_SpreadsheetPatternId = 10026;
+        public const int UIA_SpreadsheetItemPatternId = 10027;
+        public const int UIA_TransformPattern2Id = 10028;
+        public const int UIA_TextChildPatternId = 10029;
+        public const int UIA_DragPatternId = 10030;
+        public const int UIA_DropTargetPatternId = 10031;
+        public const int UIA_TextEditPatternId = 10032;
+        public const int UIA_CustomNavigationPatternId = 10033;
+        public const int UIA_SelectionPattern2Id = 10034;
+    }
+
     internal abstract class UIA_EventIds
     {
         public const int UIA_ToolTipOpenedEventId = 20000;
@@ -237,7 +237,7 @@ namespace dDeltaSolutions.Spy
         public const int UIA_InputReachedOtherElementEventId = 20021;
         public const int UIA_InputDiscardedEventId = 20022;
     }
-    
+
     internal abstract class UIA_TextAttributeIds
     {
         public const int UIA_AnimationStyleAttributeId = 40000;
@@ -271,51 +271,51 @@ namespace dDeltaSolutions.Spy
         public const int UIA_TextFlowDirectionsAttributeId = 40028;
         public const int UIA_UnderlineColorAttributeId = 40029;
         public const int UIA_UnderlineStyleAttributeId = 40030;
-		public const int UIA_AnnotationTypesAttributeId = 40031;
-		public const int UIA_AnnotationObjectsAttributeId = 40032;
-		public const int UIA_StyleNameAttributeId = 40033;
-		public const int UIA_StyleIdAttributeId = 40034;
-		public const int UIA_LinkAttributeId = 40035;
-		public const int UIA_IsActiveAttributeId = 40036;
-		public const int UIA_SelectionActiveEndAttributeId = 40037;
-		public const int UIA_CaretPositionAttributeId = 40038;
-		public const int UIA_CaretBidiModeAttributeId = 40039;
-		public const int UIA_LineSpacingAttributeId = 40040;
-		public const int UIA_BeforeParagraphSpacingAttributeId = 40041;
-		public const int UIA_AfterParagraphSpacingAttributeId = 40042;
-		public const int UIA_SayAsInterpretAsAttributeId = 40043;
+        public const int UIA_AnnotationTypesAttributeId = 40031;
+        public const int UIA_AnnotationObjectsAttributeId = 40032;
+        public const int UIA_StyleNameAttributeId = 40033;
+        public const int UIA_StyleIdAttributeId = 40034;
+        public const int UIA_LinkAttributeId = 40035;
+        public const int UIA_IsActiveAttributeId = 40036;
+        public const int UIA_SelectionActiveEndAttributeId = 40037;
+        public const int UIA_CaretPositionAttributeId = 40038;
+        public const int UIA_CaretBidiModeAttributeId = 40039;
+        public const int UIA_LineSpacingAttributeId = 40040;
+        public const int UIA_BeforeParagraphSpacingAttributeId = 40041;
+        public const int UIA_AfterParagraphSpacingAttributeId = 40042;
+        public const int UIA_SayAsInterpretAsAttributeId = 40043;
     }
-	
-	internal abstract class UIA_ScrollPattern
-	{
-		public const int UIA_ScrollPatternNoScroll = -1;
-	}
-	
-	internal static class UIA_HeadingLevelIds
-	{
-		public const int HeadingLevel_None = 80050;
-		public const int HeadingLevel1 = 80051;
-		public const int HeadingLevel2 = 80052;
-		public const int HeadingLevel3 = 80053;
-		public const int HeadingLevel4 = 80054;
-		public const int HeadingLevel5 = 80055;
-		public const int HeadingLevel6 = 80056;
-		public const int HeadingLevel7 = 80057;
-		public const int HeadingLevel8 = 80058;
-		public const int HeadingLevel9 = 80059;
-	}
-	
-	internal static class UIA_LandmarkTypeIds
-	{
-		public const int UIA_CustomLandmarkTypeId = 80000;
-		public const int UIA_FormLandmarkTypeId = 80001;
-		public const int UIA_MainLandmarkTypeId = 80002;
-		public const int UIA_NavigationLandmarkTypeId = 80003;
-		public const int UIA_SearchLandmarkTypeId = 80004;
-	}
-	
-	internal static class UIA_ChangeIds
-	{
-		public const int UIA_SummaryChangeId = 90000;
-	}
+
+    internal abstract class UIA_ScrollPattern
+    {
+        public const int UIA_ScrollPatternNoScroll = -1;
+    }
+
+    internal static class UIA_HeadingLevelIds
+    {
+        public const int HeadingLevel_None = 80050;
+        public const int HeadingLevel1 = 80051;
+        public const int HeadingLevel2 = 80052;
+        public const int HeadingLevel3 = 80053;
+        public const int HeadingLevel4 = 80054;
+        public const int HeadingLevel5 = 80055;
+        public const int HeadingLevel6 = 80056;
+        public const int HeadingLevel7 = 80057;
+        public const int HeadingLevel8 = 80058;
+        public const int HeadingLevel9 = 80059;
+    }
+
+    internal static class UIA_LandmarkTypeIds
+    {
+        public const int UIA_CustomLandmarkTypeId = 80000;
+        public const int UIA_FormLandmarkTypeId = 80001;
+        public const int UIA_MainLandmarkTypeId = 80002;
+        public const int UIA_NavigationLandmarkTypeId = 80003;
+        public const int UIA_SearchLandmarkTypeId = 80004;
+    }
+
+    internal static class UIA_ChangeIds
+    {
+        public const int UIA_SummaryChangeId = 90000;
+    }
 }

@@ -213,25 +213,25 @@ namespace dDeltaSolutions.Spy
 
             return "";
         }
-        
+
         [DllImport("oleacc.dll")]
         public static extern uint GetStateText(uint dwStateBit, [Out] StringBuilder lpszStateBit, uint cchStateBitMax);
-        
+
         public static Dictionary<uint, string> statesDict;
-        
+
         public static string GetStatesAsText(uint state)
         {
             if (state == 0)
             {
                 return "normal";
             }
-            
+
             if (statesDict == null)
             {
                 statesDict = new Dictionary<uint, string>();
                 InitStates();
             }
-            
+
             string states = "";
             foreach (uint crtState in statesDict.Keys)
             {
@@ -244,10 +244,10 @@ namespace dDeltaSolutions.Spy
                     states += statesDict[crtState];
                 }
             }
-            
+
             return states;
         }
-        
+
         private static void InitStates()
         {
             statesDict.Add(0x0, "normal");
@@ -284,66 +284,66 @@ namespace dDeltaSolutions.Spy
             statesDict.Add(0x20000000, "protected");
             //statesDict.Add(0x3FFFFFFF, "valid");
         }
-        
+
         [DllImport("user32.dll", SetLastError = true)]
         public static extern bool ScreenToClient(IntPtr hwnd, ref POINT lpPoint);
-        
+
         [DllImport("user32.dll")]
         public static extern IntPtr GetDC(IntPtr hWnd);
-        
-        [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleDC", SetLastError=true)]
+
+        [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleDC", SetLastError = true)]
         public static extern IntPtr CreateCompatibleDC([In] IntPtr hdc);
-        
+
         [DllImport("gdi32.dll", EntryPoint = "CreateCompatibleBitmap")]
         public static extern IntPtr CreateCompatibleBitmap([In] IntPtr hdc, int nWidth, int nHeight);
-        
+
         [DllImport("gdi32.dll", EntryPoint = "SelectObject")]
         public static extern IntPtr SelectObject([In] IntPtr hdc, [In] IntPtr hgdiobj);
-        
+
         [DllImport("gdi32.dll", EntryPoint = "BitBlt", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight, 
+        public static extern bool BitBlt([In] IntPtr hdc, int nXDest, int nYDest, int nWidth, int nHeight,
             [In] IntPtr hdcSrc, int nXSrc, int nYSrc, TernaryRasterOperations dwRop);
-            
+
         [DllImport("gdi32.dll", EntryPoint = "DeleteObject")]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool DeleteObject([In] IntPtr hObject);
-        
+
         [DllImport("gdi32.dll", EntryPoint = "DeleteDC")]
         public static extern bool DeleteDC([In] IntPtr hdc);
-        
+
         [DllImport("user32.dll")]
         public static extern bool ReleaseDC(IntPtr hWnd, IntPtr hDC);
-        
+
         //[DllImport("user32.dll")]
         //static extern IntPtr GetWindowDC(IntPtr hWnd);
-        
-        [DllImport("user32.dll", EntryPoint="GetWindowLong")]
+
+        [DllImport("user32.dll", EntryPoint = "GetWindowLong")]
         static extern IntPtr GetWindowLongPtr(IntPtr hWnd, int nIndex);
-        
+
         //[DllImport("user32.dll", SetLastError = true)]
         //public static extern bool GetWindowRect(IntPtr hwnd, out RECT lpRect);
-        
-        public enum TernaryRasterOperations : uint 
+
+        public enum TernaryRasterOperations : uint
         {
-            SRCCOPY     = 0x00CC0020,
-            SRCPAINT    = 0x00EE0086,
-            SRCAND      = 0x008800C6,
-            SRCINVERT   = 0x00660046,
-            SRCERASE    = 0x00440328,
-            NOTSRCCOPY  = 0x00330008,
+            SRCCOPY = 0x00CC0020,
+            SRCPAINT = 0x00EE0086,
+            SRCAND = 0x008800C6,
+            SRCINVERT = 0x00660046,
+            SRCERASE = 0x00440328,
+            NOTSRCCOPY = 0x00330008,
             NOTSRCERASE = 0x001100A6,
-            MERGECOPY   = 0x00C000CA,
-            MERGEPAINT  = 0x00BB0226,
-            PATCOPY     = 0x00F00021,
-            PATPAINT    = 0x00FB0A09,
-            PATINVERT   = 0x005A0049,
-            DSTINVERT   = 0x00550009,
-            BLACKNESS   = 0x00000042,
-            WHITENESS   = 0x00FF0062,
-            CAPTUREBLT  = 0x40000000 //only if WinVer >= 5.0.0 (see wingdi.h)
+            MERGECOPY = 0x00C000CA,
+            MERGEPAINT = 0x00BB0226,
+            PATCOPY = 0x00F00021,
+            PATPAINT = 0x00FB0A09,
+            PATINVERT = 0x005A0049,
+            DSTINVERT = 0x00550009,
+            BLACKNESS = 0x00000042,
+            WHITENESS = 0x00FF0062,
+            CAPTUREBLT = 0x40000000 //only if WinVer >= 5.0.0 (see wingdi.h)
         }
-        
+
         /*[StructLayout(LayoutKind.Sequential)]
         public struct RECT
         {
@@ -360,7 +360,7 @@ namespace dDeltaSolutions.Spy
                 this.Bottom = bottom;
             }
         }*/
-        
+
         [StructLayout(LayoutKind.Sequential)]
         public struct POINT
         {
@@ -385,16 +385,16 @@ namespace dDeltaSolutions.Spy
                 return new POINT(p.X, p.Y);
             }
         }
-        
+
         //static int GWL_STYLE = -16;
         //static long WS_CHILD = 0x40000000;
-        
+
         /*private static bool IsWindows10OrHigher()
 		{
 			return ((Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor >= 2) ||
                 Environment.OSVersion.Version.Major >= 7);
 		}*/
-        
+
         /*private static bool IsTopLevelWindow(IntPtr hWnd)
         {
             IntPtr stylePtr = GetWindowLongPtr(hWnd, GWL_STYLE);
@@ -405,7 +405,7 @@ namespace dDeltaSolutions.Spy
             long style = stylePtr.ToInt32();
             return ((style & WS_CHILD) == 0);
         }*/
-        
+
         /*private static Bitmap CreateWindowSnapshot(IntPtr hWnd, IUIAutomationElement element)
         {
             //System.Windows.MessageBox.Show("CreateWindowSnapshot");
@@ -466,7 +466,7 @@ namespace dDeltaSolutions.Spy
             ReleaseDC(hWnd, hdc);
             return bitmap;
         }*/
-        
+
         private static Bitmap CreateSnapshot(IntPtr hWnd, int left, int top, int right, int bottom)
         {
             POINT pt;
@@ -503,7 +503,7 @@ namespace dDeltaSolutions.Spy
             {
                 return null;
             }
-            if (BitBlt(hdcMem, 0, 0, width, height, hdc, pt.X, pt.Y, 
+            if (BitBlt(hdcMem, 0, 0, width, height, hdc, pt.X, pt.Y,
                 TernaryRasterOperations.SRCCOPY) == false)
             {
                 return null;
@@ -520,7 +520,7 @@ namespace dDeltaSolutions.Spy
             ReleaseDC(hWnd, hdc);
             return bitmap;
         }
-        
+
         /*private static IUIAutomationElement GetParentWindow(IUIAutomationElement element)
         {
             //IntPtr hWnd = element.CurrentNativeWindowHandle;
@@ -552,17 +552,17 @@ namespace dDeltaSolutions.Spy
             
             return null;
         }*/
-        
+
         internal static Bitmap CaptureElementToBitmap(IUIAutomationElement element)
         {
             try
             {
                 tagRECT rect = element.CurrentBoundingRectangle;
-                
+
                 // remove windows 10 extra space for top level windows ********
                 //bool isWindows10OrHigher = (Environment.OSVersion.Version.Major == 6 && Environment.OSVersion.Version.Minor >= 2) ||
                 //    Environment.OSVersion.Version.Major >= 7;
-                
+
                 //IntPtr hWnd = element.CurrentNativeWindowHandle;
                 //if (hWnd != IntPtr.Zero && element.CurrentControlType == UIA_ControlTypeIds.UIA_WindowControlTypeId && 
                 //    isWindows10OrHigher && IsTopLevelWindow(hWnd) /*IsWindows10OrHigher()*/ )
@@ -573,15 +573,15 @@ namespace dDeltaSolutions.Spy
                     rect.bottom -= 9;
                 }*/
                 // ************************************************************
-                
+
                 IntPtr hWndDesktop = MainWindow.uiAutomation.GetRootElement().CurrentNativeWindowHandle;
                 return CreateSnapshot(hWndDesktop, rect.left, rect.top, rect.right, rect.bottom);
             }
-            catch 
+            catch
             {
                 return null;
             }
-            
+
             /*if (element.CurrentControlType == 50009 || 
                 element.CurrentControlType == 50011)
             {
@@ -642,7 +642,7 @@ namespace dDeltaSolutions.Spy
                 return null;
             }*/
         }
-        
+
         public static void CaptureElementToFile(/*IUIAutomationElement element*/
             Bitmap bitmap, string fileName)
         {
@@ -658,7 +658,7 @@ namespace dDeltaSolutions.Spy
             {
                 element = MainWindow.uiAutomation.ControlViewWalker.GetParentElement(element);
             }*/
-            
+
             /*Bitmap bitmap = null;
             IntPtr hWnd = element.CurrentNativeWindowHandle;
             if (hWnd != IntPtr.Zero)
@@ -694,7 +694,7 @@ namespace dDeltaSolutions.Spy
                     }
                 }
             }*/
-            
+
             /*Bitmap bitmap = null;
             IntPtr hWnd = element.CurrentNativeWindowHandle;
             if (hWnd != IntPtr.Zero)
@@ -731,14 +731,14 @@ namespace dDeltaSolutions.Spy
                     hWnd = crtParent.CurrentNativeWindowHandle;
                 }
             }*/
-            
+
             /*Bitmap bitmap = CaptureElementToBitmap(element);
             if (bitmap == null)
             {
                 System.Windows.MessageBox.Show("Cannot capture element");
                 return;
             }*/
-            
+
             try
             {
                 ImageFormat format = ImageFormat.Bmp;
@@ -751,17 +751,17 @@ namespace dDeltaSolutions.Spy
                 {
                     format = ImageFormat.Png;
                 }
-                
+
                 bitmap.Save(fileName, format);
             }
-            catch 
+            catch
             {
                 MessageBox.Show("Cannot save image");
             }
             bitmap.Dispose();
         }
     }
-    
+
     enum Modes
     {
         Control,
@@ -823,7 +823,7 @@ namespace dDeltaSolutions.Spy
             internalElement = el;
             isRootElement = isRoot;
         }
-        
+
         public bool IsRoot
         {
             get
@@ -842,7 +842,7 @@ namespace dDeltaSolutions.Spy
                     processId = internalElement.CurrentProcessId;
                 }
                 catch
-                {}
+                { }
 
                 return (processId != 0);
             }
@@ -851,7 +851,7 @@ namespace dDeltaSolutions.Spy
         public override string ToString()
         {
             string returnString = string.Empty;
-            
+
             if (internalElement == null)
             {
                 return "";
@@ -865,63 +865,63 @@ namespace dDeltaSolutions.Spy
                 }
                 else
                 {*/
-                    /*if (internalElement == null)
+                /*if (internalElement == null)
+                {
+                    System.Windows.MessageBox.Show("null element");
+                }*/
+                string name = internalElement.CurrentName;
+
+                if (name == null)
+                {
+                    name = "";
+                }
+                else if (name.Length > 30)
+                {
+                    name = name.Substring(0, 30);
+                    name += "...";
+                }
+
+                //string localizedControlType = this.internalElement.CurrentLocalizedControlType;
+                string localizedControlType = null;
+                int controlType = internalElement.CurrentControlType;
+                //if (string.IsNullOrEmpty(localizedControlType))
+                //{
+                if (cacheTypes.ContainsKey(controlType))
+                {
+                    localizedControlType = cacheTypes[controlType];
+                }
+                else
+                {
+                    localizedControlType = Helper.ControlTypeIdToString(controlType);
+                    //localizedControlType = localizedControlType.Replace("UIA_", "").Replace("ControlTypeId", "").ToLower();
+                    if (localizedControlType != "")
                     {
-                        System.Windows.MessageBox.Show("null element");
+                        //localizedControlType = localizedControlType.Remove(0, 4).Replace("ControlTypeId", "");
+                        localizedControlType = localizedControlType.Remove(0, 4);
+                        localizedControlType = localizedControlType.Remove(localizedControlType.Length - 13);
+                    }
+
+                    cacheTypes.Add(controlType, localizedControlType);
+
+                    /*if (this.internalElement.CurrentControlType != UIA_ControlTypeIds.UIA_CustomControlTypeId)
+                    {
+                        System.Windows.MessageBox.Show("null or empty");
                     }*/
-                    string name = internalElement.CurrentName;
+                }
 
-                    if (name == null)
-                    {
-                        name = "";
-                    }
-                    else if (name.Length > 30)
-                    {
-                        name = name.Substring(0, 30);
-                        name += "...";
-                    }
-                    
-                    //string localizedControlType = this.internalElement.CurrentLocalizedControlType;
-					string localizedControlType = null;
-					int controlType = internalElement.CurrentControlType;
-                    //if (string.IsNullOrEmpty(localizedControlType))
-                    //{
-					if (cacheTypes.ContainsKey(controlType))
-					{
-						localizedControlType = cacheTypes[controlType];
-					}
-					else
-					{
-                        localizedControlType = Helper.ControlTypeIdToString(controlType);
-                        //localizedControlType = localizedControlType.Replace("UIA_", "").Replace("ControlTypeId", "").ToLower();
-						if (localizedControlType != "")
-						{
-							//localizedControlType = localizedControlType.Remove(0, 4).Replace("ControlTypeId", "");
-							localizedControlType = localizedControlType.Remove(0, 4);
-							localizedControlType = localizedControlType.Remove(localizedControlType.Length - 13);
-						}
-						
-						cacheTypes.Add(controlType, localizedControlType);
-						
-                        /*if (this.internalElement.CurrentControlType != UIA_ControlTypeIds.UIA_CustomControlTypeId)
-                        {
-                            System.Windows.MessageBox.Show("null or empty");
-                        }*/
-                    }
-
-                    name = "\"" + name + "\"";
-                    returnString = name + " (" + localizedControlType + ")";
+                name = "\"" + name + "\"";
+                returnString = name + " (" + localizedControlType + ")";
                 //}
             }
             catch (Exception ex)
-            { 
+            {
                 //System.Windows.MessageBox.Show(ex.Message);
             }
 
             return returnString;
         }
-		
-		private static Dictionary<int, string> cacheTypes = new Dictionary<int, string>();
+
+        private static Dictionary<int, string> cacheTypes = new Dictionary<int, string>();
 
         public IUIAutomationElement Element
         {
@@ -948,7 +948,7 @@ namespace dDeltaSolutions.Spy
             }
         }
     }
-    
+
     public enum AccRoles
     {
         ROLE_SYSTEM_ALERT = 8,

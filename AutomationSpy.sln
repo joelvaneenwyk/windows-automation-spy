@@ -13,8 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "{root}", "{root}", "{701D6D
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7EC9E4BF-CBA5-474D-A2FB-93BA93198581}"
+	ProjectSection(SolutionItems) = preProject
+		.github\dependabot.yml = .github\dependabot.yml
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1ED24778-4329-4C6D-B3AA-F9620403AA2C}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet-build.yml = .github\workflows\dotnet-build.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

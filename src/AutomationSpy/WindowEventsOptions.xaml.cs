@@ -40,19 +40,19 @@ namespace dDeltaSolutions.Spy
         public bool hasAutomationPropertyChangedEvent = true;
         public bool hasStructureChangedEvent = true;
         public bool hasWindowClosedEvent = true;
-		
-		public bool hasTextEditTextChangedEvent;
-		public bool hasChangesEvent;
-		public bool hasNotificationEvent;
-		public bool hasActiveTextPositionChangedEvent;
+
+        public bool hasTextEditTextChangedEvent;
+        public bool hasChangesEvent;
+        public bool hasNotificationEvent;
+        public bool hasActiveTextPositionChangedEvent;
 
         public TreeScope eventsScope = TreeScope.TreeScope_Subtree;
         private List<CheckBox> allCheckBoxes = new List<CheckBox>();
         private bool ignoreEvent;
         internal static List<int> evtProperties = new List<int>();
-		
-		public TextEditChangeType TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
-		public int ChangesCount = 1;
+
+        public TextEditChangeType TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
+        public int ChangesCount = 1;
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
@@ -79,12 +79,12 @@ namespace dDeltaSolutions.Spy
             chkAutomationPropertyChangedEv.IsChecked = hasAutomationPropertyChangedEvent;
             chkStructureChangedEv.IsChecked = hasStructureChangedEvent;
             chkWindowClosedEv.IsChecked = hasWindowClosedEvent;
-			
-			chkTextEditTextChangedEv.IsChecked = hasTextEditTextChangedEvent;
-			chkChangesEv.IsChecked = hasChangesEvent;
-			chkNotificationEv.IsChecked = hasNotificationEvent;
-			chkActiveTextPositionChangedEv.IsChecked = hasActiveTextPositionChangedEvent;
-            
+
+            chkTextEditTextChangedEv.IsChecked = hasTextEditTextChangedEvent;
+            chkChangesEv.IsChecked = hasChangesEvent;
+            chkNotificationEv.IsChecked = hasNotificationEvent;
+            chkActiveTextPositionChangedEv.IsChecked = hasActiveTextPositionChangedEvent;
+
             cmbScope.SelectedItem = eventsScope;
 
             allCheckBoxes.Add(chkAsyncContentLoadedEv);
@@ -110,34 +110,34 @@ namespace dDeltaSolutions.Spy
             allCheckBoxes.Add(chkAutomationPropertyChangedEv);
             allCheckBoxes.Add(chkStructureChangedEv);
             allCheckBoxes.Add(chkWindowClosedEv);
-			
-			//allCheckBoxes.Add(chkTextEditTextChangedEv);
-			//allCheckBoxes.Add(chkChangesEv);
-			//allCheckBoxes.Add(chkNotificationEv);
-			//allCheckBoxes.Add(chkActiveTextPositionChangedEv);
-			
-			if (TextEditChangeType == TextEditChangeType.TextEditChangeType_AutoCorrect)
-			{
-				cmbChangeType.SelectedIndex = 1;
-			}
-			else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_Composition)
-			{
-				cmbChangeType.SelectedIndex = 2;
-			}
-			else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_CompositionFinalized)
-			{
-				cmbChangeType.SelectedIndex = 3;
-			}
-			else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_AutoComplete)
-			{
-				cmbChangeType.SelectedIndex = 4;
-			}
-			txtChangesCount.Text = ChangesCount.ToString();
+
+            //allCheckBoxes.Add(chkTextEditTextChangedEv);
+            //allCheckBoxes.Add(chkChangesEv);
+            //allCheckBoxes.Add(chkNotificationEv);
+            //allCheckBoxes.Add(chkActiveTextPositionChangedEv);
+
+            if (TextEditChangeType == TextEditChangeType.TextEditChangeType_AutoCorrect)
+            {
+                cmbChangeType.SelectedIndex = 1;
+            }
+            else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_Composition)
+            {
+                cmbChangeType.SelectedIndex = 2;
+            }
+            else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_CompositionFinalized)
+            {
+                cmbChangeType.SelectedIndex = 3;
+            }
+            else if (TextEditChangeType == TextEditChangeType.TextEditChangeType_AutoComplete)
+            {
+                cmbChangeType.SelectedIndex = 4;
+            }
+            txtChangesCount.Text = ChangesCount.ToString();
 
             TestCheckAll();
             int prop = 0;
             ListBoxItem item = null;
-            
+
             prop = UIA_PropertyIds.UIA_AcceleratorKeyPropertyId;
             item = new ListBoxItem
             {
@@ -145,7 +145,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_AccessKeyPropertyId;
             item = new ListBoxItem
             {
@@ -153,7 +153,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_AriaRolePropertyId;
             item = new ListBoxItem
             {
@@ -161,7 +161,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_AriaPropertiesPropertyId;
             item = new ListBoxItem
             {
@@ -169,7 +169,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_AutomationIdPropertyId;
             item = new ListBoxItem
             {
@@ -177,7 +177,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_BoundingRectanglePropertyId;
             item = new ListBoxItem
             {
@@ -185,7 +185,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ClassNamePropertyId;
             item = new ListBoxItem
             {
@@ -193,7 +193,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ClickablePointPropertyId;
             item = new ListBoxItem
             {
@@ -201,7 +201,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ControllerForPropertyId;
             item = new ListBoxItem
             {
@@ -209,7 +209,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ControlTypePropertyId;
             item = new ListBoxItem
             {
@@ -217,7 +217,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_CulturePropertyId;
             item = new ListBoxItem
             {
@@ -225,7 +225,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_DescribedByPropertyId;
             item = new ListBoxItem
             {
@@ -233,7 +233,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_FlowsToPropertyId;
             item = new ListBoxItem
             {
@@ -241,7 +241,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_FrameworkIdPropertyId;
             item = new ListBoxItem
             {
@@ -249,7 +249,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_HasKeyboardFocusPropertyId;
             item = new ListBoxItem
             {
@@ -257,7 +257,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_HelpTextPropertyId;
             item = new ListBoxItem
             {
@@ -265,7 +265,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsContentElementPropertyId;
             item = new ListBoxItem
             {
@@ -273,7 +273,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsControlElementPropertyId;
             item = new ListBoxItem
             {
@@ -281,7 +281,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsDataValidForFormPropertyId;
             item = new ListBoxItem
             {
@@ -289,7 +289,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsEnabledPropertyId;
             item = new ListBoxItem
             {
@@ -297,7 +297,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsKeyboardFocusablePropertyId;
             item = new ListBoxItem
             {
@@ -305,7 +305,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsOffscreenPropertyId;
             item = new ListBoxItem
             {
@@ -313,7 +313,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsPasswordPropertyId;
             item = new ListBoxItem
             {
@@ -321,7 +321,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsRequiredForFormPropertyId;
             item = new ListBoxItem
             {
@@ -329,7 +329,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ItemStatusPropertyId;
             item = new ListBoxItem
             {
@@ -337,7 +337,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ItemTypePropertyId;
             item = new ListBoxItem
             {
@@ -345,7 +345,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LabeledByPropertyId;
             item = new ListBoxItem
             {
@@ -353,7 +353,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LocalizedControlTypePropertyId;
             item = new ListBoxItem
             {
@@ -361,7 +361,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_NamePropertyId;
             item = new ListBoxItem
             {
@@ -369,7 +369,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_NativeWindowHandlePropertyId;
             item = new ListBoxItem
             {
@@ -377,7 +377,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_OrientationPropertyId;
             item = new ListBoxItem
             {
@@ -385,7 +385,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ProcessIdPropertyId;
             item = new ListBoxItem
             {
@@ -393,7 +393,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ProviderDescriptionPropertyId;
             item = new ListBoxItem
             {
@@ -401,7 +401,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RuntimeIdPropertyId;
             item = new ListBoxItem
             {
@@ -409,7 +409,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsDockPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -417,7 +417,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsExpandCollapsePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -425,7 +425,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsGridPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -433,7 +433,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsGridItemPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -441,7 +441,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsInvokePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -449,7 +449,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsMultipleViewPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -457,7 +457,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsRangeValuePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -465,7 +465,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsScrollPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -473,7 +473,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsScrollItemPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -481,7 +481,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsSelectionItemPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -489,7 +489,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsSelectionPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -497,7 +497,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsTablePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -505,7 +505,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsTableItemPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -513,7 +513,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsTextPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -521,7 +521,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsTogglePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -529,7 +529,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsTransformPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -537,7 +537,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsValuePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -545,7 +545,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsWindowPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -553,7 +553,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsLegacyIAccessiblePatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -561,7 +561,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsItemContainerPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -569,7 +569,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsVirtualizedItemPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -577,7 +577,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_IsSynchronizedInputPatternAvailablePropertyId;
             item = new ListBoxItem
             {
@@ -585,7 +585,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_DockDockPositionPropertyId;
             item = new ListBoxItem
             {
@@ -593,7 +593,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ExpandCollapseExpandCollapseStatePropertyId;
             item = new ListBoxItem
             {
@@ -601,7 +601,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridColumnCountPropertyId;
             item = new ListBoxItem
             {
@@ -609,7 +609,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridRowCountPropertyId;
             item = new ListBoxItem
             {
@@ -617,7 +617,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridItemColumnPropertyId;
             item = new ListBoxItem
             {
@@ -625,7 +625,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridItemColumnSpanPropertyId;
             item = new ListBoxItem
             {
@@ -633,7 +633,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridItemContainingGridPropertyId;
             item = new ListBoxItem
             {
@@ -641,7 +641,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridItemRowPropertyId;
             item = new ListBoxItem
             {
@@ -649,7 +649,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_GridItemRowSpanPropertyId;
             item = new ListBoxItem
             {
@@ -657,7 +657,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_MultipleViewCurrentViewPropertyId;
             item = new ListBoxItem
             {
@@ -665,7 +665,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_MultipleViewSupportedViewsPropertyId;
             item = new ListBoxItem
             {
@@ -673,7 +673,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueIsReadOnlyPropertyId;
             item = new ListBoxItem
             {
@@ -681,7 +681,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueLargeChangePropertyId;
             item = new ListBoxItem
             {
@@ -689,7 +689,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueMaximumPropertyId;
             item = new ListBoxItem
             {
@@ -697,7 +697,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueMinimumPropertyId;
             item = new ListBoxItem
             {
@@ -705,7 +705,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueSmallChangePropertyId;
             item = new ListBoxItem
             {
@@ -713,7 +713,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_RangeValueValuePropertyId;
             item = new ListBoxItem
             {
@@ -721,7 +721,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollHorizontallyScrollablePropertyId;
             item = new ListBoxItem
             {
@@ -729,7 +729,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollHorizontalScrollPercentPropertyId;
             item = new ListBoxItem
             {
@@ -737,7 +737,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollHorizontalViewSizePropertyId;
             item = new ListBoxItem
             {
@@ -745,7 +745,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollVerticallyScrollablePropertyId;
             item = new ListBoxItem
             {
@@ -753,7 +753,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollVerticalScrollPercentPropertyId;
             item = new ListBoxItem
             {
@@ -761,7 +761,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ScrollVerticalViewSizePropertyId;
             item = new ListBoxItem
             {
@@ -769,7 +769,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_SelectionCanSelectMultiplePropertyId;
             item = new ListBoxItem
             {
@@ -777,7 +777,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_SelectionIsSelectionRequiredPropertyId;
             item = new ListBoxItem
             {
@@ -785,7 +785,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_SelectionSelectionPropertyId;
             item = new ListBoxItem
             {
@@ -793,7 +793,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_SelectionItemIsSelectedPropertyId;
             item = new ListBoxItem
             {
@@ -801,7 +801,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_SelectionItemSelectionContainerPropertyId;
             item = new ListBoxItem
             {
@@ -809,7 +809,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TableColumnHeadersPropertyId;
             item = new ListBoxItem
             {
@@ -817,7 +817,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TableRowHeadersPropertyId;
             item = new ListBoxItem
             {
@@ -825,7 +825,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TableRowOrColumnMajorPropertyId;
             item = new ListBoxItem
             {
@@ -833,7 +833,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TableItemColumnHeaderItemsPropertyId;
             item = new ListBoxItem
             {
@@ -841,7 +841,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TableItemRowHeaderItemsPropertyId;
             item = new ListBoxItem
             {
@@ -849,7 +849,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ToggleToggleStatePropertyId;
             item = new ListBoxItem
             {
@@ -857,7 +857,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TransformCanMovePropertyId;
             item = new ListBoxItem
             {
@@ -865,7 +865,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TransformCanResizePropertyId;
             item = new ListBoxItem
             {
@@ -873,7 +873,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_TransformCanRotatePropertyId;
             item = new ListBoxItem
             {
@@ -881,7 +881,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ValueIsReadOnlyPropertyId;
             item = new ListBoxItem
             {
@@ -889,7 +889,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_ValueValuePropertyId;
             item = new ListBoxItem
             {
@@ -897,7 +897,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowCanMaximizePropertyId;
             item = new ListBoxItem
             {
@@ -905,7 +905,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowCanMinimizePropertyId;
             item = new ListBoxItem
             {
@@ -913,7 +913,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowIsModalPropertyId;
             item = new ListBoxItem
             {
@@ -921,7 +921,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowIsTopmostPropertyId;
             item = new ListBoxItem
             {
@@ -929,7 +929,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowWindowInteractionStatePropertyId;
             item = new ListBoxItem
             {
@@ -937,7 +937,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_WindowWindowVisualStatePropertyId;
             item = new ListBoxItem
             {
@@ -945,7 +945,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleChildIdPropertyId;
             item = new ListBoxItem
             {
@@ -953,7 +953,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleNamePropertyId;
             item = new ListBoxItem
             {
@@ -961,7 +961,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleValuePropertyId;
             item = new ListBoxItem
             {
@@ -969,7 +969,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleDescriptionPropertyId;
             item = new ListBoxItem
             {
@@ -977,7 +977,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleRolePropertyId;
             item = new ListBoxItem
             {
@@ -985,7 +985,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleStatePropertyId;
             item = new ListBoxItem
             {
@@ -993,7 +993,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleHelpPropertyId;
             item = new ListBoxItem
             {
@@ -1001,7 +1001,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleKeyboardShortcutPropertyId;
             item = new ListBoxItem
             {
@@ -1009,7 +1009,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleSelectionPropertyId;
             item = new ListBoxItem
             {
@@ -1017,7 +1017,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             prop = UIA_PropertyIds.UIA_LegacyIAccessibleDefaultActionPropertyId;
             item = new ListBoxItem
             {
@@ -1025,7 +1025,7 @@ namespace dDeltaSolutions.Spy
                 Tag = prop
             };
             propList.Items.Add(item);
-            
+
             try
             {
                 ignoreCheck = true;
@@ -1038,7 +1038,7 @@ namespace dDeltaSolutions.Spy
                     }
                 }
                 ignoreCheck = false;
-                
+
                 CheckSelectedItems();
             }
             catch (Exception ex)
@@ -1046,7 +1046,7 @@ namespace dDeltaSolutions.Spy
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         private bool ignoreCheck;
 
         private void btnOK_Click(object sender, RoutedEventArgs e)
@@ -1074,14 +1074,14 @@ namespace dDeltaSolutions.Spy
             hasAutomationPropertyChangedEvent = chkAutomationPropertyChangedEv.IsChecked.Value;
             hasStructureChangedEvent = chkStructureChangedEv.IsChecked.Value;
             hasWindowClosedEvent = chkWindowClosedEv.IsChecked.Value;
-			
-			hasTextEditTextChangedEvent = chkTextEditTextChangedEv.IsChecked.Value;
-			hasChangesEvent = chkChangesEv.IsChecked.Value;
-			hasNotificationEvent = chkNotificationEv.IsChecked.Value;
-			hasActiveTextPositionChangedEvent = chkActiveTextPositionChangedEv.IsChecked.Value;
+
+            hasTextEditTextChangedEvent = chkTextEditTextChangedEv.IsChecked.Value;
+            hasChangesEvent = chkChangesEv.IsChecked.Value;
+            hasNotificationEvent = chkNotificationEv.IsChecked.Value;
+            hasActiveTextPositionChangedEvent = chkActiveTextPositionChangedEv.IsChecked.Value;
 
             eventsScope = (TreeScope)cmbScope.SelectedItem;
-            
+
             evtProperties.Clear();
             foreach (ListBoxItem crtItem in propList.Items)
             {
@@ -1092,38 +1092,38 @@ namespace dDeltaSolutions.Spy
                 int crtProperty = (int)crtItem.Tag;
                 evtProperties.Add(crtProperty);
             }
-			
-			int selectedIndex = cmbChangeType.SelectedIndex;
-			if (selectedIndex == 0)
-			{
-				TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
-			}
-			else if (selectedIndex == 1)
-			{
-				TextEditChangeType = TextEditChangeType.TextEditChangeType_AutoCorrect;
-			}
-			else if (selectedIndex == 2)
-			{
-				TextEditChangeType = TextEditChangeType.TextEditChangeType_Composition;
-			}
-			else if (selectedIndex == 3)
-			{
-				TextEditChangeType = TextEditChangeType.TextEditChangeType_CompositionFinalized;
-			}
-			else if (selectedIndex == 4)
-			{
-				TextEditChangeType = TextEditChangeType.TextEditChangeType_AutoComplete;
-			}
-			if (int.TryParse(txtChangesCount.Text, out ChangesCount) == false)
-			{
-				MessageBox.Show("Changes Count has to be an integer number");
-				return;
-			}
-			if (ChangesCount <= 0)
-			{
-				MessageBox.Show("Changes Count has to be positive and non-zero");
-				return;
-			}
+
+            int selectedIndex = cmbChangeType.SelectedIndex;
+            if (selectedIndex == 0)
+            {
+                TextEditChangeType = TextEditChangeType.TextEditChangeType_None;
+            }
+            else if (selectedIndex == 1)
+            {
+                TextEditChangeType = TextEditChangeType.TextEditChangeType_AutoCorrect;
+            }
+            else if (selectedIndex == 2)
+            {
+                TextEditChangeType = TextEditChangeType.TextEditChangeType_Composition;
+            }
+            else if (selectedIndex == 3)
+            {
+                TextEditChangeType = TextEditChangeType.TextEditChangeType_CompositionFinalized;
+            }
+            else if (selectedIndex == 4)
+            {
+                TextEditChangeType = TextEditChangeType.TextEditChangeType_AutoComplete;
+            }
+            if (int.TryParse(txtChangesCount.Text, out ChangesCount) == false)
+            {
+                MessageBox.Show("Changes Count has to be an integer number");
+                return;
+            }
+            if (ChangesCount <= 0)
+            {
+                MessageBox.Show("Changes Count has to be positive and non-zero");
+                return;
+            }
 
             DialogResult = true;
         }
@@ -1145,35 +1145,35 @@ namespace dDeltaSolutions.Spy
 
         private void CheckBoxChecked(object sender, RoutedEventArgs e)
         {
-			if (sender == chkTextEditTextChangedEv && cmbChangeType != null)
-			{
-				if (chkTextEditTextChangedEv.IsChecked == true)
-				{
-					txbLabel1.Foreground = Brushes.Black;
-					cmbChangeType.Foreground = Brushes.Black;
-					cmbChangeType.IsEnabled = true;
-				}
-				else
-				{
-					txbLabel1.Foreground = Brushes.Gray;
-					cmbChangeType.Foreground = Brushes.Gray;
-					cmbChangeType.IsEnabled = false;
-				}
-			}
-			else if (sender == chkChangesEv && txtChangesCount != null)
-			{
-				if (chkChangesEv.IsChecked == true)
-				{
-					txbLabel2.Foreground = Brushes.Black;
-					txtChangesCount.IsEnabled = true;
-				}
-				else
-				{
-					txbLabel2.Foreground = Brushes.Gray;
-					txtChangesCount.IsEnabled = false;
-				}
-			}
-		
+            if (sender == chkTextEditTextChangedEv && cmbChangeType != null)
+            {
+                if (chkTextEditTextChangedEv.IsChecked == true)
+                {
+                    txbLabel1.Foreground = Brushes.Black;
+                    cmbChangeType.Foreground = Brushes.Black;
+                    cmbChangeType.IsEnabled = true;
+                }
+                else
+                {
+                    txbLabel1.Foreground = Brushes.Gray;
+                    cmbChangeType.Foreground = Brushes.Gray;
+                    cmbChangeType.IsEnabled = false;
+                }
+            }
+            else if (sender == chkChangesEv && txtChangesCount != null)
+            {
+                if (chkChangesEv.IsChecked == true)
+                {
+                    txbLabel2.Foreground = Brushes.Black;
+                    txtChangesCount.IsEnabled = true;
+                }
+                else
+                {
+                    txbLabel2.Foreground = Brushes.Gray;
+                    txtChangesCount.IsEnabled = false;
+                }
+            }
+
             TestCheckAll();
         }
 
@@ -1190,7 +1190,7 @@ namespace dDeltaSolutions.Spy
             }
 
             bool allChecked = true;
-			bool checkedAtLeastOne = false;
+            bool checkedAtLeastOne = false;
 
             foreach (CheckBox checkBox in allCheckBoxes)
             {
@@ -1202,15 +1202,15 @@ namespace dDeltaSolutions.Spy
                 if (checkBox.IsChecked == false)
                 {
                     allChecked = false;
-					if (checkedAtLeastOne)
-					{
-						break;
-					}
+                    if (checkedAtLeastOne)
+                    {
+                        break;
+                    }
                 }
-				else
-				{
-					checkedAtLeastOne = true;
-				}
+                else
+                {
+                    checkedAtLeastOne = true;
+                }
             }
 
             if (allChecked)
@@ -1219,12 +1219,12 @@ namespace dDeltaSolutions.Spy
                 chkCheckAll.IsChecked = true;
                 ignoreEvent = false;
             }
-			else if (checkedAtLeastOne)
-			{
-				ignoreEvent = true;
+            else if (checkedAtLeastOne)
+            {
+                ignoreEvent = true;
                 chkCheckAll.IsChecked = null;
                 ignoreEvent = false;
-			}
+            }
             else
             {
                 ignoreEvent = true;
@@ -1242,12 +1242,12 @@ namespace dDeltaSolutions.Spy
         {
             CheckBoxChecked(sender, e);
         }
-        
+
         double offset = 140;
 
         private void OnMore(object sender, RoutedEventArgs e)
         {
-            Width += (2*offset);
+            Width += (2 * offset);
             if (Left - offset < 0)
             {
                 Left = 0;
@@ -1258,21 +1258,21 @@ namespace dDeltaSolutions.Spy
             }
             btnMore.Visibility = Visibility.Hidden;
         }
-        
+
         private void OnLess(object sender, RoutedEventArgs e)
         {
-            Width -= (2*offset);
+            Width -= (2 * offset);
             Left += offset;
             btnMore.Visibility = Visibility.Visible;
         }
-        
+
         private void chkSelectAll_Checked(object sender, RoutedEventArgs e)
         {
             if (ignoreCheck)
             {
                 return;
             }
-            
+
             try
             {
                 ignoreCheck = true;
@@ -1294,7 +1294,7 @@ namespace dDeltaSolutions.Spy
             {
                 return;
             }
-            
+
             try
             {
                 ignoreCheck = true;
@@ -1309,54 +1309,54 @@ namespace dDeltaSolutions.Spy
                 MessageBox.Show(ex.Message);
             }
         }
-        
+
         void OnSelChanged(object sender, SelectionChangedEventArgs args)
         {
             if (ignoreCheck)
             {
                 return;
             }
-            
+
             CheckSelectedItems();
         }
-        
+
         private void CheckSelectedItems()
         {
             bool allSelected = true;
-			bool selectedAtLeastOne = false;
-			
+            bool selectedAtLeastOne = false;
+
             foreach (ListBoxItem crtItem in propList.Items)
             {
                 if (crtItem.IsSelected == false)
                 {
                     allSelected = false;
-					if (selectedAtLeastOne)
-					{
-						break;
-					}
+                    if (selectedAtLeastOne)
+                    {
+                        break;
+                    }
                 }
-				else
-				{
-					selectedAtLeastOne = true;
-				}
+                else
+                {
+                    selectedAtLeastOne = true;
+                }
             }
-            
+
             ignoreCheck = true;
             if (allSelected)
             {
                 chkSelectAll.IsChecked = true;
             }
-			else if (selectedAtLeastOne)
-			{
-				chkSelectAll.IsChecked = null;
-			}
+            else if (selectedAtLeastOne)
+            {
+                chkSelectAll.IsChecked = null;
+            }
             else
             {
                 chkSelectAll.IsChecked = false;
             }
             ignoreCheck = false;
         }
-        
+
         public static string PropertyToString(int property)
         {
             string progname = MainWindow.uiAutomation.GetPropertyProgrammaticName(property);

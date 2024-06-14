@@ -37,17 +37,17 @@ namespace dDeltaSolutions.Spy
         public static bool hasIsKeyboardFocusable = true;
         public static bool hasIsOffscreen = true;
         public static bool hasIsPassword = true;
-		public static bool hasIsRequiredForForm = true;
-		public static bool hasItemStatus = true;
-		public static bool hasItemType = true;
-		public static bool hasLabeledBy = true;
-		public static bool hasLocalizedControlType = true;
-		public static bool hasName = true;
-		public static bool hasNativeWindowHandle = true;
-		public static bool hasOrientation = true;
-		public static bool hasProcessId = true;
-		public static bool hasProviderDescription = true;
-		public static bool hasRuntimeId = true;
+        public static bool hasIsRequiredForForm = true;
+        public static bool hasItemStatus = true;
+        public static bool hasItemType = true;
+        public static bool hasLabeledBy = true;
+        public static bool hasLocalizedControlType = true;
+        public static bool hasName = true;
+        public static bool hasNativeWindowHandle = true;
+        public static bool hasOrientation = true;
+        public static bool hasProcessId = true;
+        public static bool hasProviderDescription = true;
+        public static bool hasRuntimeId = true;
 
         private List<CheckBox> allCheckBoxes = new List<CheckBox>();
         private bool ignoreEvent;
@@ -77,17 +77,17 @@ namespace dDeltaSolutions.Spy
             chkIsKeyboardFocusable.IsChecked = hasIsKeyboardFocusable;
             chkIsOffscreen.IsChecked = hasIsOffscreen;
             chkIsPassword.IsChecked = hasIsPassword;
-			chkIsRequiredForForm.IsChecked = hasIsRequiredForForm;
-			chkItemStatus.IsChecked = hasItemStatus;
-			chkItemType.IsChecked = hasItemType;
-			chkLabeledBy.IsChecked = hasLabeledBy;
-			chkLocalizedControlType.IsChecked = hasLocalizedControlType;
-			chkName.IsChecked = hasName;
-			chkNativeWindowHandle.IsChecked = hasNativeWindowHandle;
-			chkOrientation.IsChecked = hasOrientation;
-			chkProcessId.IsChecked = hasProcessId;
-			chkProviderDescription.IsChecked = hasProviderDescription;
-			chkRuntimeId.IsChecked = hasRuntimeId;
+            chkIsRequiredForForm.IsChecked = hasIsRequiredForForm;
+            chkItemStatus.IsChecked = hasItemStatus;
+            chkItemType.IsChecked = hasItemType;
+            chkLabeledBy.IsChecked = hasLabeledBy;
+            chkLocalizedControlType.IsChecked = hasLocalizedControlType;
+            chkName.IsChecked = hasName;
+            chkNativeWindowHandle.IsChecked = hasNativeWindowHandle;
+            chkOrientation.IsChecked = hasOrientation;
+            chkProcessId.IsChecked = hasProcessId;
+            chkProviderDescription.IsChecked = hasProviderDescription;
+            chkRuntimeId.IsChecked = hasRuntimeId;
 
             allCheckBoxes.Add(chkAcceleratorKey);
             allCheckBoxes.Add(chkAccessKey);
@@ -112,17 +112,17 @@ namespace dDeltaSolutions.Spy
             allCheckBoxes.Add(chkIsKeyboardFocusable);
             allCheckBoxes.Add(chkIsOffscreen);
             allCheckBoxes.Add(chkIsPassword);
-			allCheckBoxes.Add(chkIsRequiredForForm);
-			allCheckBoxes.Add(chkItemStatus);
-			allCheckBoxes.Add(chkItemType);
-			allCheckBoxes.Add(chkLabeledBy);
-			allCheckBoxes.Add(chkLocalizedControlType);
-			allCheckBoxes.Add(chkName);
-			allCheckBoxes.Add(chkNativeWindowHandle);
-			allCheckBoxes.Add(chkOrientation);
-			allCheckBoxes.Add(chkProcessId);
-			allCheckBoxes.Add(chkProviderDescription);
-			allCheckBoxes.Add(chkRuntimeId);
+            allCheckBoxes.Add(chkIsRequiredForForm);
+            allCheckBoxes.Add(chkItemStatus);
+            allCheckBoxes.Add(chkItemType);
+            allCheckBoxes.Add(chkLabeledBy);
+            allCheckBoxes.Add(chkLocalizedControlType);
+            allCheckBoxes.Add(chkName);
+            allCheckBoxes.Add(chkNativeWindowHandle);
+            allCheckBoxes.Add(chkOrientation);
+            allCheckBoxes.Add(chkProcessId);
+            allCheckBoxes.Add(chkProviderDescription);
+            allCheckBoxes.Add(chkRuntimeId);
 
             TestCheckAll();
         }
@@ -152,18 +152,18 @@ namespace dDeltaSolutions.Spy
             hasIsKeyboardFocusable = chkIsKeyboardFocusable.IsChecked.Value;
             hasIsOffscreen = chkIsOffscreen.IsChecked.Value;
             hasIsPassword = chkIsPassword.IsChecked.Value;
-			hasIsRequiredForForm = chkIsRequiredForForm.IsChecked.Value;
-			hasItemStatus = chkItemStatus.IsChecked.Value;
-			hasItemType = chkItemType.IsChecked.Value;
-			hasLabeledBy = chkLabeledBy.IsChecked.Value;
-			hasLocalizedControlType = chkLocalizedControlType.IsChecked.Value;
-			hasName = chkName.IsChecked.Value;
-			hasNativeWindowHandle = chkNativeWindowHandle.IsChecked.Value;
-			hasOrientation = chkOrientation.IsChecked.Value;
-			hasProcessId = chkProcessId.IsChecked.Value;
-			hasProviderDescription = chkProviderDescription.IsChecked.Value;
-			hasRuntimeId = chkRuntimeId.IsChecked.Value;
-            
+            hasIsRequiredForForm = chkIsRequiredForForm.IsChecked.Value;
+            hasItemStatus = chkItemStatus.IsChecked.Value;
+            hasItemType = chkItemType.IsChecked.Value;
+            hasLabeledBy = chkLabeledBy.IsChecked.Value;
+            hasLocalizedControlType = chkLocalizedControlType.IsChecked.Value;
+            hasName = chkName.IsChecked.Value;
+            hasNativeWindowHandle = chkNativeWindowHandle.IsChecked.Value;
+            hasOrientation = chkOrientation.IsChecked.Value;
+            hasProcessId = chkProcessId.IsChecked.Value;
+            hasProviderDescription = chkProviderDescription.IsChecked.Value;
+            hasRuntimeId = chkRuntimeId.IsChecked.Value;
+
             DialogResult = true;
         }
 
@@ -200,7 +200,7 @@ namespace dDeltaSolutions.Spy
             }
 
             bool allChecked = true;
-			bool checkedAtLeastOne = false;
+            bool checkedAtLeastOne = false;
 
             foreach (CheckBox checkBox in allCheckBoxes)
             {
@@ -212,15 +212,15 @@ namespace dDeltaSolutions.Spy
                 if (checkBox.IsChecked == false)
                 {
                     allChecked = false;
-					if (checkedAtLeastOne)
-					{
-						break;
-					}
+                    if (checkedAtLeastOne)
+                    {
+                        break;
+                    }
                 }
-				else
-				{
-					checkedAtLeastOne = true;
-				}
+                else
+                {
+                    checkedAtLeastOne = true;
+                }
             }
 
             if (allChecked)
@@ -229,12 +229,12 @@ namespace dDeltaSolutions.Spy
                 chkCheckAll.IsChecked = true;
                 ignoreEvent = false;
             }
-			else if (checkedAtLeastOne)
-			{
-				ignoreEvent = true;
+            else if (checkedAtLeastOne)
+            {
+                ignoreEvent = true;
                 chkCheckAll.IsChecked = null;
                 ignoreEvent = false;
-			}
+            }
             else
             {
                 ignoreEvent = true;

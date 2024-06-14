@@ -17,40 +17,40 @@ namespace dDeltaSolutions.Spy
         private IUIAutomationElement element;
         private string tooltip;
         private string details = "";
-		private string elementString = "";
+        private string elementString = "";
 
         public Event(int eventId, IUIAutomationElement element)
         {
             this.EventId = eventId;
             this.element = element;
-            
+
             try
             {
-            	EventIdString = GetEventName(eventId); //ProgrammaticName;
+                EventIdString = GetEventName(eventId); //ProgrammaticName;
             }
             catch { }
             tooltip = EventIdString;
-			
-			try
-			{
-				elementString = GetStringFromElement(this.element);
-			}
-			catch { }
+
+            try
+            {
+                elementString = GetStringFromElement(this.element);
+            }
+            catch { }
         }
-		
-		public Event(string eventIdString, IUIAutomationElement element)
-		{
-			this.element = element;
-			this.EventIdString = eventIdString;
-			tooltip = eventIdString;
-			
-			try
-			{
-				elementString = GetStringFromElement(this.element);
-			}
-			catch { }
-		}
-        
+
+        public Event(string eventIdString, IUIAutomationElement element)
+        {
+            this.element = element;
+            this.EventIdString = eventIdString;
+            tooltip = eventIdString;
+
+            try
+            {
+                elementString = GetStringFromElement(this.element);
+            }
+            catch { }
+        }
+
         public string GetEventName(int eventId)
         {
             if (eventId == UIA_EventIds.UIA_ToolTipOpenedEventId)
@@ -163,8 +163,8 @@ namespace dDeltaSolutions.Spy
                 return "UIA_InputReachedOtherElementEvent";
             }
 
-            return eventId == UIA_EventIds.UIA_InputDiscardedEventId 
-                ? "UIA_InputDiscardedEvent" 
+            return eventId == UIA_EventIds.UIA_InputDiscardedEventId
+                ? "UIA_InputDiscardedEvent"
                 : eventId.ToString();
         }
 
@@ -191,10 +191,10 @@ namespace dDeltaSolutions.Spy
         public static string GetStringFromElement(IUIAutomationElement el)
         {
             string name = null;
-			if (el == null)
-			{
-				return "(null)";
-			}
+            if (el == null)
+            {
+                return "(null)";
+            }
 
             try
             {
@@ -211,81 +211,81 @@ namespace dDeltaSolutions.Spy
             {
                 name = name.Substring(0, 30) + "...";
             }
-			
-			int controlType = el.CurrentControlType;
-			if (controlType == UIA_ControlTypeIds.UIA_DataItemControlTypeId)
-			{
-				string firstText = GetFirstText(el);
-				if (firstText != null)
-				{
-					firstText = firstText.Trim();
-					if (firstText != "")
-					{
-						if (firstText.Length > 20)
-						{
-							firstText = firstText.Substring(0, 20);
-						}
-						name += (" <" + firstText + "...>");
-					}
-				}
-			}
+
+            int controlType = el.CurrentControlType;
+            if (controlType == UIA_ControlTypeIds.UIA_DataItemControlTypeId)
+            {
+                string firstText = GetFirstText(el);
+                if (firstText != null)
+                {
+                    firstText = firstText.Trim();
+                    if (firstText != "")
+                    {
+                        if (firstText.Length > 20)
+                        {
+                            firstText = firstText.Substring(0, 20);
+                        }
+                        name += (" <" + firstText + "...>");
+                    }
+                }
+            }
 
             name = "\"" + name + "\"";
 
             try
             {
-				string controlTypeName = null;
-				if (cacheTypeNames.ContainsKey(controlType))
-				{
-					cacheTypeNames.TryGetValue(controlType, out controlTypeName);
-				}
-				else
-				{
-					controlTypeName = Helper.ControlTypeIdToString(controlType);
-					if (controlTypeName != "")
-					{
-						controlTypeName = controlTypeName.Remove(0, 4);
-						controlTypeName = controlTypeName.Remove(controlTypeName.Length - 13);
-					}
-					
-					cacheTypeNames.TryAdd(controlType, controlTypeName);
-				}
-			
-				name = name + " (" + controlTypeName + ")";
+                string controlTypeName = null;
+                if (cacheTypeNames.ContainsKey(controlType))
+                {
+                    cacheTypeNames.TryGetValue(controlType, out controlTypeName);
+                }
+                else
+                {
+                    controlTypeName = Helper.ControlTypeIdToString(controlType);
+                    if (controlTypeName != "")
+                    {
+                        controlTypeName = controlTypeName.Remove(0, 4);
+                        controlTypeName = controlTypeName.Remove(controlTypeName.Length - 13);
+                    }
+
+                    cacheTypeNames.TryAdd(controlType, controlTypeName);
+                }
+
+                name = name + " (" + controlTypeName + ")";
             }
             catch { }
 
             return name;
         }
-		
-		private static ConcurrentDictionary<int, string> cacheTypeNames = 
-			new ConcurrentDictionary<int, string>();
-		
-		private static string GetFirstText(IUIAutomationElement el)
-		{
-			try
-			{
-				IUIAutomationCondition typeCondition = MainWindow.uiAutomation.CreatePropertyCondition(
-					UIA_PropertyIds.UIA_ControlTypePropertyId, UIA_ControlTypeIds.UIA_TextControlTypeId);
-				TreeScope scope = TreeScope.TreeScope_Descendants; //TreeScope_Children
 
-				IUIAutomationElementArray collection = el.FindAll(scope, typeCondition);
-				if (collection != null && collection.Length > 0)
-				{
-					IUIAutomationElement firstText = collection.GetElement(0);
-					if (firstText != null)
-					{
-						return firstText.CurrentName;
-					}
-				}
-				
-				return null;
-			}
-			catch 
-			{
-				return null;
-			}
-		}
+        private static ConcurrentDictionary<int, string> cacheTypeNames =
+            new ConcurrentDictionary<int, string>();
+
+        private static string GetFirstText(IUIAutomationElement el)
+        {
+            try
+            {
+                IUIAutomationCondition typeCondition = MainWindow.uiAutomation.CreatePropertyCondition(
+                    UIA_PropertyIds.UIA_ControlTypePropertyId, UIA_ControlTypeIds.UIA_TextControlTypeId);
+                TreeScope scope = TreeScope.TreeScope_Descendants; //TreeScope_Children
+
+                IUIAutomationElementArray collection = el.FindAll(scope, typeCondition);
+                if (collection != null && collection.Length > 0)
+                {
+                    IUIAutomationElement firstText = collection.GetElement(0);
+                    if (firstText != null)
+                    {
+                        return firstText.CurrentName;
+                    }
+                }
+
+                return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         public string Tooltip
         {
@@ -314,15 +314,15 @@ namespace dDeltaSolutions.Spy
 
         private void OnEvents(object sender, RoutedEventArgs e)
         {
-			try
-			{
-				OnEvents();
-			}
-			catch {}
-		}
-		
-		private void OnEvents()
-		{
+            try
+            {
+                OnEvents();
+            }
+            catch { }
+        }
+
+        private void OnEvents()
+        {
             TreeViewItem selectedItem = tvElements.SelectedItem as TreeViewItem;
             TreeNode node = null;
 
@@ -345,22 +345,22 @@ namespace dDeltaSolutions.Spy
                     MessageBox.Show(this, "The selected UI element is not available anymore");
                     return;
                 }
-				
-				try
-				{
-					if (node.Element.CurrentProcessId == Process.GetCurrentProcess().Id)
-					{
-						MessageBox.Show(this, "You shouldn't monitor events on Automation Spy window");
-						return;
-					}
-				}
-				catch { }
+
+                try
+                {
+                    if (node.Element.CurrentProcessId == Process.GetCurrentProcess().Id)
+                    {
+                        MessageBox.Show(this, "You shouldn't monitor events on Automation Spy window");
+                        return;
+                    }
+                }
+                catch { }
             }
 
             if (hasAsyncContentLoadedEvent == false && hasElementAddedToSelectionEvent == false &&
                 hasElementRemovedFromSelectionEvent == false && hasElementSelectedEvent == false &&
                 hasInvalidatedEvent == false && hasInvokedEvent == false &&
-                hasInputReachedTargetEvent == false && hasInputReachedOtherElementEvent == false && 
+                hasInputReachedTargetEvent == false && hasInputReachedOtherElementEvent == false &&
                 hasInputDiscardedEvent == false &&
                 hasLayoutInvalidatedEvent == false && hasMenuClosedEvent == false &&
                 hasMenuOpenedEvent == false && hasMenuModeStartEvent == false &&
@@ -369,7 +369,7 @@ namespace dDeltaSolutions.Spy
                 hasToolTipOpenedEvent == false && hasWindowOpenedEvent == false &&
                 hasAutomationFocusChangedEvent == false && hasAutomationPropertyChangedEvent == false &&
                 hasStructureChangedEvent == false && hasWindowClosedEvent == false && hasTextEditTextChangedEvent == false &&
-				hasChangesEvent == false && hasNotificationEvent == false && hasActiveTextPositionChangedEvent == false)
+                hasChangesEvent == false && hasNotificationEvent == false && hasActiveTextPositionChangedEvent == false)
             {
                 MessageBox.Show(this, "No event type is selected in the Events Settings dialog");
                 return;
@@ -384,13 +384,13 @@ namespace dDeltaSolutions.Spy
                 return;
             }
 
-			if (selectedTab != tabEvents && eventsPropButton.IsEnabled)
+            if (selectedTab != tabEvents && eventsPropButton.IsEnabled)
             {
                 tabCtrl.SelectedItem = tabEvents;
             }
 
             eventsPropButton.IsEnabled = !eventsPropButton.IsEnabled;
-			menuEventsSettings.IsEnabled = eventsPropButton.IsEnabled;
+            menuEventsSettings.IsEnabled = eventsPropButton.IsEnabled;
 
             if (selectButton.IsChecked == true)
             {
@@ -398,17 +398,17 @@ namespace dDeltaSolutions.Spy
                 OnSelectElement(selectButton, null);
             }
             selectButton.IsEnabled = eventsPropButton.IsEnabled;
-			menuItemPick.IsEnabled = eventsPropButton.IsEnabled;
-			
-			if (menuItemTrack.IsChecked)
-			{
-				menuItemTrack.IsChecked = false;
-				if (timerTrack != null)
-				{
-					timerTrack.Stop();
-				}
-			}
-			menuItemTrack.IsEnabled = eventsPropButton.IsEnabled;
+            menuItemPick.IsEnabled = eventsPropButton.IsEnabled;
+
+            if (menuItemTrack.IsChecked)
+            {
+                menuItemTrack.IsChecked = false;
+                if (timerTrack != null)
+                {
+                    timerTrack.Stop();
+                }
+            }
+            menuItemTrack.IsEnabled = eventsPropButton.IsEnabled;
 
             StackPanel panel = eventsButton.Content as StackPanel;
             Image img = null;
@@ -422,12 +422,12 @@ namespace dDeltaSolutions.Spy
             {
                 // Capturing
                 //Task.Run(() => InstallListener(node.Element));
-				InstallListener(node.Element);
+                InstallListener(node.Element);
 
                 eventsButton.ToolTip = "Stop capturing UI Automation events";
-				eventsMenu.Header = "Stop Capturing Events";
-				menuStartCapturing.Header = "Stop Capturing Events";
-				menuStartCapturing.ToolTip = "Stop capturing UI Automation events for the selected element";
+                eventsMenu.Header = "Stop Capturing Events";
+                menuStartCapturing.Header = "Stop Capturing Events";
+                menuStartCapturing.ToolTip = "Stop capturing UI Automation events for the selected element";
 
                 if (img != null)
                 {
@@ -437,14 +437,14 @@ namespace dDeltaSolutions.Spy
                 }
             }
             else
-            { 
+            {
                 // Not capturing
                 Task.Run(() => UninstallListener());
 
                 eventsButton.ToolTip = "Start capturing UI Automation events for the selected element";
-				eventsMenu.Header = "Start Capturing Events";
-				menuStartCapturing.Header = "Start Capturing Events";
-				menuStartCapturing.ToolTip = "Start capturing UI Automation events for the selected element";
+                eventsMenu.Header = "Start Capturing Events";
+                menuStartCapturing.Header = "Start Capturing Events";
+                menuStartCapturing.ToolTip = "Start capturing UI Automation events for the selected element";
 
                 if (img != null)
                 {
@@ -454,16 +454,16 @@ namespace dDeltaSolutions.Spy
                 }
             }
         }
-        
-        internal class UIA_AutomationEventHandler: IUIAutomationEventHandler
+
+        internal class UIA_AutomationEventHandler : IUIAutomationEventHandler
         {
             private MainWindow mainWindow;
-            
+
             public UIA_AutomationEventHandler(MainWindow mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
-            
+
             public void HandleAutomationEvent(IUIAutomationElement sender, int eventId)
             {
                 try
@@ -473,8 +473,8 @@ namespace dDeltaSolutions.Spy
                         return;
                     }
                 }
-                catch {}
-                
+                catch { }
+
                 Event ev = new Event(eventId, sender);
                 mainWindow.Dispatcher.Invoke(() =>
                 {
@@ -483,16 +483,16 @@ namespace dDeltaSolutions.Spy
                 });
             }
         }
-        
-        internal class UIA_AutomationFocusChangedEventHandler: IUIAutomationFocusChangedEventHandler
+
+        internal class UIA_AutomationFocusChangedEventHandler : IUIAutomationFocusChangedEventHandler
         {
             private MainWindow mainWindow;
-            
+
             public UIA_AutomationFocusChangedEventHandler(MainWindow mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
-            
+
             public void HandleFocusChangedEvent(IUIAutomationElement sender)
             {
                 try
@@ -502,8 +502,8 @@ namespace dDeltaSolutions.Spy
                         return;
                     }
                 }
-                catch {}
-                
+                catch { }
+
                 Event ev = new Event(UIA_EventIds.UIA_AutomationFocusChangedEventId, sender);
                 mainWindow.Dispatcher.Invoke(() =>
                 {
@@ -512,16 +512,16 @@ namespace dDeltaSolutions.Spy
                 });
             }
         }
-        
-        internal class UIA_AutomationStructureChangedEventHandler: IUIAutomationStructureChangedEventHandler
+
+        internal class UIA_AutomationStructureChangedEventHandler : IUIAutomationStructureChangedEventHandler
         {
             private MainWindow mainWindow;
-            
+
             public UIA_AutomationStructureChangedEventHandler(MainWindow mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
-            
+
             public void HandleStructureChangedEvent(IUIAutomationElement sender, StructureChangeType changeType, int[] runtimeId)
             {
                 try
@@ -531,8 +531,8 @@ namespace dDeltaSolutions.Spy
                         return;
                     }
                 }
-                catch {}
-                
+                catch { }
+
                 Event ev = new Event(UIA_EventIds.UIA_StructureChangedEventId, sender)
                 {
                     Details = "StructureChangeType: " + changeType + ", RuntimeId: [" +
@@ -546,16 +546,16 @@ namespace dDeltaSolutions.Spy
                 });
             }
         }
-        
-        internal class UIA_AutomationPropertyChangedEventHandler: IUIAutomationPropertyChangedEventHandler
+
+        internal class UIA_AutomationPropertyChangedEventHandler : IUIAutomationPropertyChangedEventHandler
         {
             private MainWindow mainWindow;
-            
+
             public UIA_AutomationPropertyChangedEventHandler(MainWindow mainWindow)
             {
                 this.mainWindow = mainWindow;
             }
-            
+
             public void HandlePropertyChangedEvent(IUIAutomationElement sender, int propertyId, object newValue)
             {
                 try
@@ -565,10 +565,10 @@ namespace dDeltaSolutions.Spy
                         return;
                     }
                 }
-                catch {}
-                
+                catch { }
+
                 Event ev = new Event(UIA_EventIds.UIA_AutomationPropertyChangedEventId, sender);
-                
+
                 string newValueStr = "";
                 if (newValue == null)
                 {
@@ -682,19 +682,19 @@ namespace dDeltaSolutions.Spy
                     {
                         if (type == typeof(string))
                         {
-							if (propertyId == UIA_PropertyIds.UIA_ValueValuePropertyId)
-							{
-								newValueStr = newValue.ToString();
-								if (newValueStr.Length > MAX_VALUE_LENGTH)
-								{
-									newValueStr = newValueStr.Substring(0, MAX_VALUE_LENGTH) + "...";
-								}
-								newValueStr = "\"" + newValueStr + "\"";
-							}
-							else
-							{
-								newValueStr = "\"" + newValue + "\"";
-							}
+                            if (propertyId == UIA_PropertyIds.UIA_ValueValuePropertyId)
+                            {
+                                newValueStr = newValue.ToString();
+                                if (newValueStr.Length > MAX_VALUE_LENGTH)
+                                {
+                                    newValueStr = newValueStr.Substring(0, MAX_VALUE_LENGTH) + "...";
+                                }
+                                newValueStr = "\"" + newValueStr + "\"";
+                            }
+                            else
+                            {
+                                newValueStr = "\"" + newValue + "\"";
+                            }
                         }
                         /*else if (type == typeof(double))
                         {
@@ -705,12 +705,12 @@ namespace dDeltaSolutions.Spy
                             newValueStr = newValue.ToString();
                         }
                     }
-                    
+
                     //newValueStr += ", Type: " + type.ToString();
                 }
-                
+
                 string propertyName = uiAutomation.GetPropertyProgrammaticName(propertyId);
-                
+
                 ev.Details = "Property: " + propertyName + ", New Value: " + newValueStr;
 
                 mainWindow.Dispatcher.Invoke(() =>
@@ -729,7 +729,7 @@ namespace dDeltaSolutions.Spy
 
         private void InstallListener(IUIAutomationElement element)
         {
-			crtProcessId = Process.GetCurrentProcess().Id;
+            crtProcessId = Process.GetCurrentProcess().Id;
 
             if (hasInvokedEvent || hasMenuOpenedEvent ||
                 hasMenuClosedEvent || hasElementAddedToSelectionEvent ||
@@ -737,7 +737,7 @@ namespace dDeltaSolutions.Spy
                 hasInvalidatedEvent || hasLayoutInvalidatedEvent ||
                 hasTextChangedEvent || hasTextSelectionChangedEvent ||
                 hasToolTipClosedEvent || hasToolTipOpenedEvent ||
-                hasWindowOpenedEvent || hasAsyncContentLoadedEvent || 
+                hasWindowOpenedEvent || hasAsyncContentLoadedEvent ||
                 hasWindowClosedEvent || hasInputReachedTargetEvent ||
                 hasInputReachedOtherElementEvent || hasInputDiscardedEvent ||
                 hasMenuModeStartEvent || hasMenuModeEndEvent)
@@ -822,7 +822,7 @@ namespace dDeltaSolutions.Spy
             {
                 try
                 {
-                    uiAutomation.AddAutomationEventHandler(UIA_EventIds.UIA_Text_TextChangedEventId, 
+                    uiAutomation.AddAutomationEventHandler(UIA_EventIds.UIA_Text_TextChangedEventId,
                         element, eventsScope, null, UIAeventHandler);
                 }
                 catch { }
@@ -962,66 +962,66 @@ namespace dDeltaSolutions.Spy
 
             }
             #endregion
-			
-			if (hasTextEditTextChangedEvent)
+
+            if (hasTextEditTextChangedEvent)
             {
                 try
                 {
-					IUIAutomation3 automation3 = uiAutomation as IUIAutomation3;
-					if (automation3 != null)
-					{
-						var uiAutomationTextEditTextChangedEventHandler = new UIAutomationTextEditTextChangedEventHandler(this);
-						automation3.AddTextEditTextChangedEventHandler(element, eventsScope, TextEditChangeType, null, 
-							uiAutomationTextEditTextChangedEventHandler);
-						//MessageBox.Show("TextEditTextChangedEventHandler installed");
-					}
+                    IUIAutomation3 automation3 = uiAutomation as IUIAutomation3;
+                    if (automation3 != null)
+                    {
+                        var uiAutomationTextEditTextChangedEventHandler = new UIAutomationTextEditTextChangedEventHandler(this);
+                        automation3.AddTextEditTextChangedEventHandler(element, eventsScope, TextEditChangeType, null,
+                            uiAutomationTextEditTextChangedEventHandler);
+                        //MessageBox.Show("TextEditTextChangedEventHandler installed");
+                    }
                 }
                 catch { }
             }
-			
-			if (hasChangesEvent)
+
+            if (hasChangesEvent)
             {
                 try
                 {
-					IUIAutomation4 automation4 = uiAutomation as IUIAutomation4;
-					if (automation4 != null)
-					{
-						var uiAutomationChangesEventHandler = new UIAutomationChangesEventHandler(this);
-						int changeTypes = UIA_ChangeIds.UIA_SummaryChangeId;
-						automation4.AddChangesEventHandler(element, eventsScope, ref changeTypes, ChangesCount, null, 
-							uiAutomationChangesEventHandler);
-						//MessageBox.Show("ChangesEventHandler installed");
-					}
+                    IUIAutomation4 automation4 = uiAutomation as IUIAutomation4;
+                    if (automation4 != null)
+                    {
+                        var uiAutomationChangesEventHandler = new UIAutomationChangesEventHandler(this);
+                        int changeTypes = UIA_ChangeIds.UIA_SummaryChangeId;
+                        automation4.AddChangesEventHandler(element, eventsScope, ref changeTypes, ChangesCount, null,
+                            uiAutomationChangesEventHandler);
+                        //MessageBox.Show("ChangesEventHandler installed");
+                    }
                 }
                 catch { }
             }
-			
-			if (hasNotificationEvent)
+
+            if (hasNotificationEvent)
             {
                 try
                 {
-					IUIAutomation5 automation5 = uiAutomation as IUIAutomation5;
-					if (automation5 != null)
-					{
-						var uiAutomationNotificationEventHandler = new UIAutomationNotificationEventHandler(this);
-						automation5.AddNotificationEventHandler(element, eventsScope, null, uiAutomationNotificationEventHandler);
-						//MessageBox.Show("NotificationEventHandler installed");
-					}
+                    IUIAutomation5 automation5 = uiAutomation as IUIAutomation5;
+                    if (automation5 != null)
+                    {
+                        var uiAutomationNotificationEventHandler = new UIAutomationNotificationEventHandler(this);
+                        automation5.AddNotificationEventHandler(element, eventsScope, null, uiAutomationNotificationEventHandler);
+                        //MessageBox.Show("NotificationEventHandler installed");
+                    }
                 }
                 catch { }
             }
-			
-			if (hasActiveTextPositionChangedEvent)
+
+            if (hasActiveTextPositionChangedEvent)
             {
                 try
                 {
-					IUIAutomation6 automation6 = uiAutomation as IUIAutomation6;
-					if (automation6 != null)
-					{
-						var uiAutomationActiveTextPositionChangedEventHandler = new UIAutomationActiveTextPositionChangedEventHandler(this);
-						automation6.AddActiveTextPositionChangedEventHandler(element, eventsScope, null, uiAutomationActiveTextPositionChangedEventHandler);
-						//MessageBox.Show("ActiveTextPositionChangedHandler installed");
-					}
+                    IUIAutomation6 automation6 = uiAutomation as IUIAutomation6;
+                    if (automation6 != null)
+                    {
+                        var uiAutomationActiveTextPositionChangedEventHandler = new UIAutomationActiveTextPositionChangedEventHandler(this);
+                        automation6.AddActiveTextPositionChangedEventHandler(element, eventsScope, null, uiAutomationActiveTextPositionChangedEventHandler);
+                        //MessageBox.Show("ActiveTextPositionChangedHandler installed");
+                    }
                 }
                 catch { }
             }
@@ -1031,19 +1031,19 @@ namespace dDeltaSolutions.Spy
 
         private void UninstallListener()
         {
-			listenerInstalled = false;
+            listenerInstalled = false;
             UIAeventHandler = null;
             UIAFocusChangedEventHandler = null;
             UIAPropChangedEventHandler = null;
             UIAStructureChangedEventHandler = null;
             try
             {
-            	uiAutomation.RemoveAllEventHandlers();
+                uiAutomation.RemoveAllEventHandlers();
             }
             catch { }
         }
-        
-		public static int crtProcessId;
+
+        public static int crtProcessId;
 
         private static string GetStringFromArray(Array array)
         {
@@ -1059,8 +1059,8 @@ namespace dDeltaSolutions.Spy
 
             return s;
         }
-		
-		/*private void MenuOpening(object sender, RoutedEventArgs e)
+
+        /*private void MenuOpening(object sender, RoutedEventArgs e)
 		{
 			if (this.eventsPropButton.IsEnabled == true)
 			{
@@ -1072,49 +1072,49 @@ namespace dDeltaSolutions.Spy
 			}
 		}*/
     }
-	
-	public class UIAutomationTextEditTextChangedEventHandler: IUIAutomationTextEditTextChangedEventHandler
-	{
-		private MainWindow mainWindow;
-		public UIAutomationTextEditTextChangedEventHandler(MainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-	
-		public void HandleTextEditTextChangedEvent(IUIAutomationElement sender, TextEditChangeType TextEditChangeType, string[] eventStrings)
-		{
-			Event ev = new Event("TextEditTextChangedEvent", sender);
-			string eventStringsConcat = null;
-			foreach (string eventString in eventStrings)
-			{
-				if (eventStringsConcat != null)
-				{
-					eventStringsConcat += ",";
-				}
-				eventStringsConcat += ("\"" + eventString + "\"");
-			}
-			ev.Details = "TextEditChangeType: " + TextEditChangeType + ", eventStrings: [" + eventStringsConcat + "]";
-		
-			mainWindow.Dispatcher.Invoke(() =>
+
+    public class UIAutomationTextEditTextChangedEventHandler : IUIAutomationTextEditTextChangedEventHandler
+    {
+        private MainWindow mainWindow;
+        public UIAutomationTextEditTextChangedEventHandler(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
+        public void HandleTextEditTextChangedEvent(IUIAutomationElement sender, TextEditChangeType TextEditChangeType, string[] eventStrings)
+        {
+            Event ev = new Event("TextEditTextChangedEvent", sender);
+            string eventStringsConcat = null;
+            foreach (string eventString in eventStrings)
+            {
+                if (eventStringsConcat != null)
+                {
+                    eventStringsConcat += ",";
+                }
+                eventStringsConcat += ("\"" + eventString + "\"");
+            }
+            ev.Details = "TextEditChangeType: " + TextEditChangeType + ", eventStrings: [" + eventStringsConcat + "]";
+
+            mainWindow.Dispatcher.Invoke(() =>
             {
                 //MessageBox.Show("HandleTextEditTextChangedEvent");
                 mainWindow.eventsCollection.Add(ev);
                 mainWindow.eventsListView.ScrollIntoView(ev);
             });
-		}
-	}
-	
-	public class UIAutomationChangesEventHandler: IUIAutomationChangesEventHandler
-	{
-		private MainWindow mainWindow;
-		public UIAutomationChangesEventHandler(MainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-	
-		public void HandleChangesEvent(IUIAutomationElement sender, ref UiaChangeInfo uiaChanges, int changesCount)
-		{
-			Event ev = new Event("ChangesEvent", sender)
+        }
+    }
+
+    public class UIAutomationChangesEventHandler : IUIAutomationChangesEventHandler
+    {
+        private MainWindow mainWindow;
+        public UIAutomationChangesEventHandler(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
+        public void HandleChangesEvent(IUIAutomationElement sender, ref UiaChangeInfo uiaChanges, int changesCount)
+        {
+            Event ev = new Event("ChangesEvent", sender)
             {
                 Details = "UiaChangeInfo.uiaId: " + uiaChanges.uiaId + ", UiaChangeInfo.payload: " + uiaChanges.payload +
                           ", UiaChangeInfo.extraInfo: " + uiaChanges.extraInfo + ", changesCount: " + changesCount
@@ -1125,21 +1125,21 @@ namespace dDeltaSolutions.Spy
                 mainWindow.eventsCollection.Add(ev);
                 mainWindow.eventsListView.ScrollIntoView(ev);
             });
-		}
-	}
-	
-	public class UIAutomationNotificationEventHandler: IUIAutomationNotificationEventHandler
-	{
-		private MainWindow mainWindow;
-		public UIAutomationNotificationEventHandler(MainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-	
-		public void HandleNotificationEvent(IUIAutomationElement sender, NotificationKind NotificationKind, 
-			NotificationProcessing NotificationProcessing, string displayString, string activityId)
-		{
-			Event ev = new Event("NotificationEvent", sender)
+        }
+    }
+
+    public class UIAutomationNotificationEventHandler : IUIAutomationNotificationEventHandler
+    {
+        private MainWindow mainWindow;
+        public UIAutomationNotificationEventHandler(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
+        public void HandleNotificationEvent(IUIAutomationElement sender, NotificationKind NotificationKind,
+            NotificationProcessing NotificationProcessing, string displayString, string activityId)
+        {
+            Event ev = new Event("NotificationEvent", sender)
             {
                 Details = "NotificationKind: " + NotificationKind + ", NotificationProcessing: " + NotificationProcessing +
                           ", displayString: \"" + displayString + "\", activityId: \"" + activityId + "\""
@@ -1150,26 +1150,26 @@ namespace dDeltaSolutions.Spy
                 mainWindow.eventsCollection.Add(ev);
                 mainWindow.eventsListView.ScrollIntoView(ev);
             });
-		}
-	}
-	
-	public class UIAutomationActiveTextPositionChangedEventHandler: IUIAutomationActiveTextPositionChangedEventHandler
-	{
-		private MainWindow mainWindow;
-		public UIAutomationActiveTextPositionChangedEventHandler(MainWindow mainWindow)
-		{
-			this.mainWindow = mainWindow;
-		}
-	
-		public void HandleActiveTextPositionChangedEvent(IUIAutomationElement sender, IUIAutomationTextRange range)
-		{
-			Event ev = new Event("ActiveTextPositionChangedEvent", sender);
-			
-			mainWindow.Dispatcher.Invoke(() =>
+        }
+    }
+
+    public class UIAutomationActiveTextPositionChangedEventHandler : IUIAutomationActiveTextPositionChangedEventHandler
+    {
+        private MainWindow mainWindow;
+        public UIAutomationActiveTextPositionChangedEventHandler(MainWindow mainWindow)
+        {
+            this.mainWindow = mainWindow;
+        }
+
+        public void HandleActiveTextPositionChangedEvent(IUIAutomationElement sender, IUIAutomationTextRange range)
+        {
+            Event ev = new Event("ActiveTextPositionChangedEvent", sender);
+
+            mainWindow.Dispatcher.Invoke(() =>
             {
                 mainWindow.eventsCollection.Add(ev);
                 mainWindow.eventsListView.ScrollIntoView(ev);
             });
-		}
-	}
+        }
+    }
 }
