@@ -7,12 +7,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "{root}", "{root}", "{701D6DFD-F557-460F-9280-A45F1F4B2368}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		build-release.cmd = build-release.cmd
+		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{7EC9E4BF-CBA5-474D-A2FB-93BA93198581}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{1ED24778-4329-4C6D-B3AA-F9620403AA2C}"
+EndProject
 Global
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {BD6FD489-C1E2-48B9-9AC7-B1F761B67511}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
 		Release|x64 = Release|x64
@@ -25,5 +29,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7EC9E4BF-CBA5-474D-A2FB-93BA93198581} = {701D6DFD-F557-460F-9280-A45F1F4B2368}
+		{1ED24778-4329-4C6D-B3AA-F9620403AA2C} = {7EC9E4BF-CBA5-474D-A2FB-93BA93198581}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BD6FD489-C1E2-48B9-9AC7-B1F761B67511}
 	EndGlobalSection
 EndGlobal
